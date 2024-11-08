@@ -104,7 +104,7 @@
                                                     <li><a href="blog-details-image.html">blog details image</a></li>
                                                 </ul> -->
                                             </li>
-                                            <li><a href="contact-us.html">Liên Hệ</a></li>
+                                            <li><a href="?act=form-lien-he">Liên Hệ</a></li>
                                         </ul>
                                     </nav>
                                     <!-- main menu navbar end -->

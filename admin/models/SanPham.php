@@ -59,62 +59,79 @@ class SanPham
         }
     }
 
-    // // xóa danh mục
-    //  public function deleteDanhMuc($id){
-    //     try {
-    //         //code...
-    //         $sql = 'DELETE FROM danh_mucs WHERE id= :id';
+    // xóa danh mục
+     public function deleteSanPham($id){
+        try {
+            //code...
+            $sql = 'DELETE FROM san_phams WHERE id= :id';
 
-    //         $stmt = $this->conn->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
             
-    //         $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':id', $id);
 
-    //         $stmt->execute();
+            $stmt->execute();
 
-    //         return true;
+            return true;
             
-    //     } catch (PDOException $e) {
-    //         echo 'Lỗi: '. $e->getMessage();
-    //     }
-    // }
-    // // sửa danh mục
-    // // lấy thông tin chi tiết
-    // public function getDetailData($id){
-    //     try {
-    //         //code...
-    //         $sql = 'SELECT * FROM danh_mucs WHERE id= :id';
+        } catch (PDOException $e) {
+            echo 'Lỗi: '. $e->getMessage();
+        }
+    }
+    // sửa danh mục
+    // lấy thông tin chi tiết
+    public function getDetailData($id){
+        try {
+            //code...
+            $sql = 'SELECT * FROM san_phams WHERE id= :id';
 
-    //         $stmt = $this->conn->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
             
-    //         $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':id', $id);
 
-    //         $stmt->execute();
+            $stmt->execute();
 
-    //         return $stmt->fetch();
+            return $stmt->fetch();
             
-    //     } catch (PDOException $e) {
-    //         echo 'Lỗi: '. $e->getMessage();
-    //     }
-    // }
-    // public function editDanhMuc($id,$tenDanhMuc,$trangThai){
-    //     try {
-    //         //code...
-    //         $sql = 'UPDATE  danh_mucs SET tenDanhMuc = :tenDanhMuc , trangThai = :trangThai WHERE id= :id';
+        } catch (PDOException $e) {
+            echo 'Lỗi: '. $e->getMessage();
+        }
+    }
+    public function editSanPham($id,$ten_san_pham,$danh_muc_id,$tac_gia,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai){
+        try {
+            //code...
+            var_dump('abc');
+            $sql = 'UPDATE  san_phams SET ten_san_pham = :ten_san_pham ,
+                                          danh_muc_id = :danh_muc_id ,
+                                          tac_gia = :tac_gia ,
+                                          gia_ban = :gia_ban ,
+                                          gia_khuyen_mai = :gia_khuyen_mai ,
+                                          so_luong = :so_luong ,
+                                          ngay_nhap = :ngay_nhap ,
+                                          mo_ta = :mo_ta ,
+                                          trang_thai = :trang_thai 
+                                          WHERE id= :id';
 
-    //         $stmt = $this->conn->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
 
-    //         $stmt->bindParam(':id',$id);
-    //         $stmt->bindParam(':tenDanhMuc',$tenDanhMuc);
-    //         $stmt->bindParam(':trangThai',$trangThai);
+            $stmt->bindParam(':id',$id);
+            $stmt->bindParam(':ten_san_pham',$ten_san_pham);
+            $stmt->bindParam(':danh_muc_id',$danh_muc_id);
+            $stmt->bindParam(':tac_gia',$tac_gia);
+            $stmt->bindParam(':gia_ban',$gia_ban);
+            $stmt->bindParam(':gia_khuyen_mai',$gia_khuyen_mai);
+            $stmt->bindParam(':so_luong',$so_luong);
+            $stmt->bindParam(':ngay_nhap',$ngay_nhap);
+            $stmt->bindParam(':mo_ta',$mo_ta);
+            $stmt->bindParam(':trang_thai',$trang_thai);
 
-    //         $stmt->execute();
+            $stmt->execute();
 
-    //         return true;
+            return true;
             
-    //     } catch (PDOException $e) {
-    //         echo 'Lỗi: '. $e->getMessage();
-    //     }
-    // }
+        } catch (PDOException $e) {
+            echo 'Lỗi: '. $e->getMessage();
+        }
+    }
 
 
 
