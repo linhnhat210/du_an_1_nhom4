@@ -90,7 +90,7 @@
                                                     </li>
                                                 </ul>
                                             </li> -->
-                                            <li><a href="blog-left-sidebar.html">Bài Viết</a>
+                                            <li><a href="?act=list-tin-tucs">Bài Viết</a>
                                                 <!-- <ul class="dropdown">
                                                     <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
                                                     <li><a href="blog-list-left-sidebar.html">blog list left sidebar</a></li>

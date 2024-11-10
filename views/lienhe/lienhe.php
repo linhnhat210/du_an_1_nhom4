@@ -35,6 +35,7 @@
 <body>
     <!-- Header -->
     <?php require_once 'views/layout/header.php'; ?>
+    
 
     <main>
         <!-- breadcrumb area start -->
@@ -68,10 +69,13 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="contact-message">
-                            <h4 class="contact-title">Hãy cho chúng tôi biết dự án của bạn</h4>
+                            <h4 class="contact-title">Nhập Thông Tin Liên Hệ</h4>
 
                             <!-- Form start -->
                             <form id="contact-form" action="?act=gui-thong-tin" method="POST" class="contact-form">
+                                <input type="hidden" id="datetime" name="datetime"><span id="datetime-display">
+                                <input type="hidden" name="trang_thai" id="trang_thai" value="0">
+
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <input name="ten_khach_hang" placeholder="Tên Khách Hàng *" type="text" required>
@@ -102,12 +106,12 @@
                             bàn tay con người</p>
                             <ul>
                                 <li><i class="fa fa-fax"></i> Địa chỉ : FPT Polytechnic,Trịnh Văn Bô,Nam Từ Liêm,Hà Nội</li>
-                                <li><i class="fa fa-phone"></i> +84873457862 </li>
-                                <li><i class="fa fa-envelope-o"></i> E-mail: mangaking@gmail.com</li>
+                                <li><i class="fa fa-phone"></i> +84867846910 </li>
+                                <li><i class="fa fa-envelope-o"></i> E-mail: linhncnph49464@gmail.com</li>
                             </ul>
                             <div class="working-time">
                                 <h6>Thời gian làm việc:</h6>
-                                <p><span>Thứ 2 - Thứ 7:</span>08AM – 22PM</p>
+                                <p><span>Thứ 2 - Thứ 7 :</span>08AM – 22PM</p>
                             </div>
                         </div>
                     </div>
@@ -116,6 +120,26 @@
         </div>
         <!-- contact area end -->
     </main>
+    <script>
+        // Hàm lấy thời gian hiện tại và định dạng thành YYYY-MM-DD HH:MM:SS
+        function setCurrentTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            document.getElementById("datetime").value = formattedTime;
+        }
+
+        // Gọi hàm để hiển thị thời gian khi tải trang
+        window.onload = setCurrentTime;
+
+
+    </script>
 
 
     <!-- footer -->

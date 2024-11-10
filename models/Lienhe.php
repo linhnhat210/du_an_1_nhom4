@@ -9,11 +9,11 @@ class Lienhe
     {
         $this->conn = connectDB();
     }
-    public function guilienhe($ten_khach_hang,$email,$so_dien_thoai,$tin_nhan){
+    public function guilienhe($ten_khach_hang,$email,$so_dien_thoai,$tin_nhan,$ngay_lien_he,$trang_thai){
         try {
             //code...
-            $sql = 'INSERT INTO  lien_hes (ten_khach_hang,	email,	so_dien_thoai,	tin_nhan)
-                    VALUES (:ten_khach_hang,	:email,	:so_dien_thoai,	:tin_nhan)';
+            $sql = "INSERT INTO lien_hes (ten_khach_hang, email, so_dien_thoai, tin_nhan, ngay_lien_he, trang_thai)
+                     VALUES (:ten_khach_hang, :email, :so_dien_thoai, :tin_nhan, :ngay_lien_he, :trang_thai)";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -21,7 +21,9 @@ class Lienhe
             $stmt->bindParam(':email',$email);
             $stmt->bindParam(':so_dien_thoai',$so_dien_thoai);
             $stmt->bindParam(':tin_nhan',$tin_nhan);
-
+            $stmt->bindParam(':ngay_lien_he',$ngay_lien_he);
+            $stmt->bindParam(':trang_thai',$trang_thai);
+            
             $stmt->execute();
 
             return true;

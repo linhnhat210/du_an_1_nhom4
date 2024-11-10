@@ -59,7 +59,7 @@
                         <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Danh mục sản phẩm</span>
                     </a>
                 </li>
-                                <li class="nav-item">
+                    <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=san-phams"  role="button" aria-expanded="false" aria-controls="sidebarSanPham">
                         <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Sản phẩm</span>
                     </a>
@@ -77,6 +77,21 @@
                             </li>
                         </ul>
                     </div> -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="?act=tin-tucs"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý Bài Viết</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="?act=lien-hes"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý liên hệ</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="?act=banners"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý Banners</span>
+                    </a>
                 </li>
                 
 

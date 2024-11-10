@@ -29,13 +29,29 @@ class SanPham
             echo 'Lỗi: '. $e->getMessage();
         }
     }
+    // tìm kiếm
+    public function searchSanPham($keyword)
+      {
+    $sql = "SELECT * FROM san_phams WHERE ten_san_pham LIKE ? ";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindValue(1, "%$keyword%");
+
+    try {
+        $stmt->execute();
+        $lienHes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $lienHes;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return []; // Return an empty array to avoid errors in the view
+    }
+      }
 
     //thêm sản phẩm
-    public function createSanPham($ten_san_pham,$danh_muc_id,$tac_gia,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai){
+    public function createSanPham($ten_san_pham,$danh_muc_id,$tac_gia,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai,$hinh_anh){
         try {
             //code...
-            $sql = 'INSERT INTO  san_phams (ten_san_pham,danh_muc_id,tac_gia,gia_ban,gia_khuyen_mai,so_luong,ngay_nhap,mo_ta,trang_thai)
-                    VALUES (:ten_san_pham,:danh_muc_id,:tac_gia,:gia_ban,:gia_khuyen_mai,:so_luong,:ngay_nhap,:mo_ta,:trang_thai)';
+            $sql = 'INSERT INTO  san_phams (ten_san_pham,danh_muc_id,tac_gia,gia_ban,gia_khuyen_mai,so_luong,ngay_nhap,mo_ta,trang_thai,hinh_anh)
+                    VALUES (:ten_san_pham,:danh_muc_id,:tac_gia,:gia_ban,:gia_khuyen_mai,:so_luong,:ngay_nhap,:mo_ta,:trang_thai,:hinh_anh)';
 
             $stmt = $this->conn->prepare($sql);
             
@@ -48,10 +64,34 @@ class SanPham
             $stmt->bindParam(':ngay_nhap',$ngay_nhap);
             $stmt->bindParam(':mo_ta',$mo_ta);
             $stmt->bindParam(':trang_thai',$trang_thai);
+            $stmt->bindParam(':hinh_anh',$hinh_anh);
 
 
             $stmt->execute();
+            // laays id sp vua them
+            return $this->conn->lastInsertId();
+            // return true;
+            
+        } catch (PDOException $e) {
+            echo 'Lỗi: '. $e->getMessage();
+        }
+    }
+        public function insertAlbumAnhSanPham($san_pham_id,$link_hinh_anh){
+        try {
+            //code...
+            $sql = 'INSERT INTO  hinh_anh_san_phams (san_pham_id,link_hinh_anh)
+                    VALUES (:san_pham_id,:link_hinh_anh)';
 
+            $stmt = $this->conn->prepare($sql);
+            
+
+
+            $stmt->execute([
+                'san_pham_id' => $san_pham_id,
+                'link_hinh_anh' => $link_hinh_anh,
+
+            ]);
+           
             return true;
             
         } catch (PDOException $e) {
@@ -93,6 +133,24 @@ class SanPham
             return $stmt->fetch();
             
         } catch (PDOException $e) {
+            echo 'Lỗi: '. $e->getMessage();
+        }
+    }
+    public function getListAnhSanPham($id){
+        try {
+            //code...
+            $sql = 'SELECT hinh_anh_san_phams WHERE san_pham_id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+            
+            $stmt->bindParam(':id', $id);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+
+        } catch (PDOException $e) {
+            //throw $th;
             echo 'Lỗi: '. $e->getMessage();
         }
     }

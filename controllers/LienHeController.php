@@ -11,6 +11,9 @@ class LienHeControler
     }
     public function guilienhe() {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
+            // var_dump($_POST);die;
+            $ngay_lien_he = $_POST['datetime'];
+            $trang_thai = $_POST['trang_thai'];
             $ten_khach_hang = $_POST["ten_khach_hang"];
             $email = $_POST["email"];
             $so_dien_thoai = $_POST["so_dien_thoai"];
@@ -37,9 +40,10 @@ class LienHeControler
         if(empty($errors)){
             // nếu không co lỗi thì thêm dữ liệu
             // thêm vào csdl
-            $this->modelLienhe->guilienhe($ten_khach_hang,$email,$so_dien_thoai,$tin_nhan);
-            unset($_SESSION['errors']);
-            header("Location: ?act=/");
+            // var_dump($ngay_lien_he);die;
+            $this->modelLienhe->guilienhe($ten_khach_hang,$email,$so_dien_thoai,$tin_nhan,$ngay_lien_he,$trang_thai);
+            // unset($_SESSION['errors']);
+            header("Location: ?act=form-lien-he");
             exit();
         }else{
             // nếu có lỗi thì nhập lại
