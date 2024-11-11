@@ -16,6 +16,23 @@ class KhuyenMai {
         
         return $stmt->fetchAll();
     }
+    public function searchKhuyenMai($keyword)
+    {
+  $sql = "SELECT * FROM khuyen_mais WHERE ma_khuyen_mai LIKE ?";
+  $stmt = $this->conn->prepare($sql);
+  $stmt->bindValue(1, "%$keyword%");
+
+  try {
+      $stmt->execute();
+      $khuyenMais = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $khuyenMais;
+  } catch (PDOException $e) {
+      echo "Error: " . $e->getMessage();
+      return []; // Return an empty array to avoid errors in the view
+  }
+    }
+      
+    
     public function getDetailData($id){
         try {
             //code...

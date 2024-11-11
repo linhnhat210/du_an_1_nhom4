@@ -46,13 +46,13 @@
                      <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                <h4 class="mb-sm-0">Quản Lý Sản Phẩm</h4>
+                                <h4 class="mb-sm-0">Quản Lý Banner</h4>
                                 
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
-                                        <li class="breadcrumb-item active">Sản Phẩm</li>
+                                        <li class="breadcrumb-item active">Banner</li>
                                     </ol>
                                 </div>
 
@@ -88,8 +88,8 @@
                                <!-- Striped Rows -->
                                <div class="card">
                                 <div class="card-header align-items-center d-flex">
-                                    <h4 class="card-title mb-0 flex-grow-1">Sản Phẩm</h4>
-                                     <a href="?act=form-them-banner" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Sản Phẩm</a>
+                                    <h4 class="card-title mb-0 flex-grow-1">Banner</h4>
+                                     <a href="?act=form-them-banner" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Banner</a>
 
                                 </div><!-- end card header -->
 

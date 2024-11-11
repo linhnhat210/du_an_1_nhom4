@@ -12,6 +12,23 @@ class KhuyenMaiController {
         $khuyenMais = $this->modelKhuyenMai->getAllKhuyenMai();
         require_once "./views/khuyenmai/list_khuyen_mai.php";
     }
+    public function search()
+     {
+         // lấy dữ liệu từ yêu cầu (request)
+         if($_SERVER["REQUEST_METHOD"] == "POST"){
+             $keyword = $_POST['keyword'];
+             $KhuyenMaimodel = new KhuyenMai();
+             $khuyenMais = $KhuyenMaimodel->searchKhuyenMai($keyword);
+ 
+             // var_dump($trangThai);
+         }
+ 
+         
+         $this->modelKhuyenMai->searchKhuyenMai($keyword);
+ 
+         // hiển thị kết quả tìm kiếm
+         require_once "./views/khuyenmai/list_khuyen_mai.php";
+     }
     
     public function create() {
         require_once './views/khuyenmai/add_khuyen_mai.php';
@@ -58,6 +75,7 @@ class KhuyenMaiController {
         if($ngay_bat_dau > $today){
             $trang_thai = 1 ; 
         }
+        $_SESSION['errors']=$errors;
 
 
         // Thêm dữ liệu

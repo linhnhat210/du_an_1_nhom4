@@ -82,30 +82,35 @@ match ($act) {
     'post-sua-tin-tuc'                          => (new TinTucController())->postedit(),
     'xoa-tin-tuc'                               => (new TinTucController())->destroy(),
     'search-tin-tuc'                            => (new TinTucController())->search(),
-      // route trạng thái đơn hàng
-     'trang-thai-don-hangs'                     => (new TrangThaiController())->index(),
-     'form-them-trang-thai-don-hang'            => (new TrangThaiController())->create(),
-     'post-them-trang-thai-don-hang'            => (new TrangThaiController())->postcreate(),
-    //  'form-sua-trang-thai-don-hang'          => (new TrangThaiController())->edit(),
-    //  'post-sua-trang-thai-don-hang'          => (new TrangThaiController())->postedit(),                     
-     'xoa-trang-thai-don-hang'                  => (new TrangThaiController())->destroy(),
-     'search-trang-thai-don-hang'               => (new TrangThaiController())->search(),
+    
+    // route trạng thái đơn hàng
+    'trang-thai-don-hangs'                      => (new TrangThaiController())->index(),
+    'form-them-trang-thai-don-hang'             => (new TrangThaiController())->create(),
+    'post-them-trang-thai-don-hang'             => (new TrangThaiController())->postcreate(),
+    //'form-sua-trang-thai-don-hang'            => (new TrangThaiController())->edit(),
+    //'post-sua-trang-thai-don-hang'            => (new TrangThaiController())->postedit(),                     
+    'xoa-trang-thai-don-hang'                   => (new TrangThaiController())->destroy(),
+    'search-trang-thai-don-hang'                => (new TrangThaiController())->search(),
     
     // route dơn hàng
     'don-hangs'                                 => (new DonHangController())->index(),
    'form-sua-don-hang'                          => (new DonHangController())->formEditDonHang(),
     'sua-don-hang'                              => (new DonHangController())->postEditDonHang(),
     'chi-tiet-don-hang'                         => (new DonHangController())->detailDonHang(),
+
     // route tài khoản 
     'nguoi-dungs'                               => (new NguoiDungController())->index(),
     'chi-tiet-nguoi-dung'                       => (new NguoiDungController())->getDetail(),
+    'search-nguoi-dung'                         => (new NguoiDungController())->search(),
 
+    // route  khuyến mãi
     'khuyen-mais'                               => (new KhuyenMaiController())->index(),
     'form-them-khuyen-mai'                      => (new KhuyenMaiController())->create(),
     'post-them-khuyen-mai'                      => (new KhuyenMaiController())->postcreate(),
     'form-sua-khuyen-mai'                       => (new KhuyenMaiController())->edit(),
     'post-sua-khuyen-mai'                       => (new KhuyenMaiController())->postedit(),
     'xoa-khuyen-mai'                            => (new KhuyenMaiController())->destroy(),
+    'search-khuyen-mai'                         => (new KhuyenMaiController())->search(),
     'khuyen-mai-cap-nhat-ngay'                  => (new KhuyenMaiController())->editTrangThai(),
 
 

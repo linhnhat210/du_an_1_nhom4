@@ -60,6 +60,24 @@
                         </div>
                     </div>
                     <!-- end page title -->
+                     <!-- Bắt đầu Form tìm kiếm -->
+                     <div class="row">
+                        <div class="col">
+                            <form action="?act=search-nguoi-dung" method="POST">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="text" name="keyword" class="form-control" placeholder="Tìm kiêm thông tin">
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Kết thúc Form tìm kiếm --> 
                     
 
                     <div class="row">
@@ -70,7 +88,7 @@
                                <div class="card">
                                 <div class="card-header align-items-center d-flex">
                                     <h4 class="card-title mb-0 flex-grow-1">Tài khoản người dùng</h4>
-                                     <a href="?act=form-them-danh-muc" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Người Dùng</a>
+                                     <!-- <a href="?act=form-them-danh-muc" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Người Dùng</a> -->
 
                                 </div><!-- end card header -->
 

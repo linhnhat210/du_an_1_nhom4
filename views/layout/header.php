@@ -11,7 +11,7 @@
                         <!-- start logo area -->
                         <div class="col-lg-2">
                             <div class="logo">
-                                <a href="index.html">
+                                <a href="index.php">
                                     <img src="assets/img/logo/KINGMANGA.png" alt="Brand Logo">
                                 </a>
                             </div>

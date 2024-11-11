@@ -46,13 +46,13 @@
                      <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                <h4 class="mb-sm-0">Quản Lý Sản Phẩm</h4>
+                                <h4 class="mb-sm-0">Quản Lý Mã Khuyến Mãi</h4>
                                 
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
-                                        <li class="breadcrumb-item active">Thêm Sản Phẩm</li>
+                                        <li class="breadcrumb-item active">Thêm Mã Khuyến Mãi</li>
                                     </ol>
                                 </div>
 
@@ -69,7 +69,7 @@
                                <!-- Striped Rows -->
  <div class="card">
                                 <div class="card-header align-items-center d-flex">
-                                    <h4 class="card-title mb-0 flex-grow-1">Thêm Sản Phẩm<p style="font-size:10px;">(Bắt buộc phải nhập ô có dấu *)</p></h4>
+                                    <h4 class="card-title mb-0 flex-grow-1">Thêm Mã Khuyến Mãi<p style="font-size:10px;">(Bắt buộc phải nhập ô có dấu *)</p></h4>
                                     
                                     
                                     

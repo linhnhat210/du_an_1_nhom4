@@ -85,7 +85,7 @@ class BannerController
         }else{
             // nếu có lỗi thì nhập lại
             $_SESSION['flash'] = true;
-            header("Location: ?act=form-them-banners");
+            header("Location: ?act=form-them-banner");
             exit();
         }
     }

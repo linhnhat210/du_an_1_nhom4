@@ -46,13 +46,13 @@
                      <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                <h4 class="mb-sm-0">Quản Lý Danh Mục Sản Phẩm</h4>
+                                <h4 class="mb-sm-0">Quản Lý Mã Khuyến Mãi</h4>
                                 
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
-                                        <li class="breadcrumb-item active">Danh Mục Sản Phẩm</li>
+                                        <li class="breadcrumb-item active">Khuyến Mãi</li>
                                     </ol>
                                 </div>
 
@@ -60,6 +60,24 @@
                         </div>
                     </div>
                     <!-- end page title -->
+                       <!-- Bắt đầu Form tìm kiếm -->
+                    <div class="row">
+                        <div class="col">
+                            <form action="?act=search-khuyen-mai" method="POST">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="text" name="keyword" class="form-control" placeholder="Tìm kiêm thông tin">
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Kết thúc Form tìm kiếm -->
                     
 
                     <div class="row">
@@ -69,7 +87,7 @@
                                <!-- Striped Rows -->
                                <div class="card">
                                 <div class="card-header align-items-center d-flex">
-                                    <h4 class="card-title mb-0 flex-grow-1">Danh Mục Sản Phẩm</h4>
+                                    <h4 class="card-title mb-0 flex-grow-1">Khuyến Mãi</h4>
                                      <a href="?act=form-them-khuyen-mai" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Mã Khuyến Mãi</a>
 
                                 </div><!-- end card header -->

@@ -41,5 +41,23 @@ class NguoiDung
             echo "lỗi" . $e->getMessage();
         }
     }
+     // Tìm kiếm 
+    public function searchNguoiDung($keyword)
+    {
+  $sql = "SELECT * FROM nguoi_dungs WHERE ten_nguoi_dung LIKE ?  OR email LIKE ? OR sdt LIKE ? ";
+  $stmt = $this->conn->prepare($sql);
+  $stmt->bindValue(1, "%$keyword%");
+  $stmt->bindValue(2, "%$keyword%");
+  $stmt->bindValue(3, "%$keyword%");
+
+  try {
+      $stmt->execute();
+      $nguoiDungs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $nguoiDungs;
+  } catch (PDOException $e) {
+      echo "Error: " . $e->getMessage();
+      return []; // Return an empty array to avoid errors in the view
+  }
+    }
     
 }
