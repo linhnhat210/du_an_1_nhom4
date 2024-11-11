@@ -56,12 +56,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=danh-mucs"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Danh mục sản phẩm</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Danh Mục Sản Phẩm</span>
                     </a>
                 </li>
                     <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=san-phams"  role="button" aria-expanded="false" aria-controls="sidebarSanPham">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Sản phẩm</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Sản Phẩm</span>
                     </a>
                     <!-- <div class="collapse menu-dropdown" id="sidebarDanhMuc">
                         <ul class="nav nav-sm flex-column">
@@ -80,37 +80,37 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=tin-tucs"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý Bài Viết</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Bài Viết</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=lien-hes"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý liên hệ</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Liên Hệ</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=banners"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý Banners</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Banner</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=trang-thai-don-hangs"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý trạng thái đơn hàng</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Trạng Thái Đơn Hàng</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=don-hangs"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý Đơn Hàng</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Đơn Hàng</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=nguoi-dungs"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý Người dùng</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Người Dùng</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=khuyen-mais"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
-                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Quản lý Khuyến Mãi</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Khuyến Mãi</span>
                     </a>
                 </li>
                 

@@ -46,6 +46,7 @@ match ($act) {
     'form-sua-danh-muc'                         => (new DanhMucController())->edit(),
     'post-sua-danh-muc'                         => (new DanhMucController())->postedit(),
     'xoa-danh-muc'                              => (new DanhMucController())->destroy(),                        
+    'search-danh-muc'                           => (new DanhMucController())->search(),
     
     
     // route sản phẩm
@@ -71,7 +72,8 @@ match ($act) {
     'form-sua-banner'                           => (new BannerController())->edit(),
     'post-sua-banner'                           => (new BannerController())->postedit(),
     'xoa-banner'                                => (new BannerController())->destroy(),
-
+    'search-banner'                             => (new BannerController())->search(),
+    
     // route tin tức
     'tin-tucs'                                  => (new TinTucController())->index(),
     'form-them-tin-tuc'                         => (new TinTucController())->create(),
@@ -79,6 +81,7 @@ match ($act) {
     'form-sua-tin-tuc'                          => (new TinTucController())->edit(),
     'post-sua-tin-tuc'                          => (new TinTucController())->postedit(),
     'xoa-tin-tuc'                               => (new TinTucController())->destroy(),
+    'search-tin-tuc'                            => (new TinTucController())->search(),
       // route trạng thái đơn hàng
      'trang-thai-don-hangs'                     => (new TrangThaiController())->index(),
      'form-them-trang-thai-don-hang'            => (new TrangThaiController())->create(),
@@ -86,6 +89,7 @@ match ($act) {
     //  'form-sua-trang-thai-don-hang'          => (new TrangThaiController())->edit(),
     //  'post-sua-trang-thai-don-hang'          => (new TrangThaiController())->postedit(),                     
      'xoa-trang-thai-don-hang'                  => (new TrangThaiController())->destroy(),
+     'search-trang-thai-don-hang'               => (new TrangThaiController())->search(),
     
     // route dơn hàng
     'don-hangs'                                 => (new DonHangController())->index(),
@@ -96,12 +100,13 @@ match ($act) {
     'nguoi-dungs'                               => (new NguoiDungController())->index(),
     'chi-tiet-nguoi-dung'                       => (new NguoiDungController())->getDetail(),
 
-    'khuyen-mais'                              => (new KhuyenMaiController())->index(),
-    'form-them-khuyen-mai'                        => (new KhuyenMaiController())->create(),
-    'post-them-khuyen-mai'                        => (new KhuyenMaiController())->postcreate(),
-    'form-sua-khuyen-mai'                        => (new KhuyenMaiController())->edit(),
-    'post-sua-khuyen-mai'                        => (new KhuyenMaiController())->postedit(),
-    'khuyen-mai-cap-nhat-ngay'                 => (new KhuyenMaiController())->updateStatus(),
+    'khuyen-mais'                               => (new KhuyenMaiController())->index(),
+    'form-them-khuyen-mai'                      => (new KhuyenMaiController())->create(),
+    'post-them-khuyen-mai'                      => (new KhuyenMaiController())->postcreate(),
+    'form-sua-khuyen-mai'                       => (new KhuyenMaiController())->edit(),
+    'post-sua-khuyen-mai'                       => (new KhuyenMaiController())->postedit(),
+    'xoa-khuyen-mai'                            => (new KhuyenMaiController())->destroy(),
+    'khuyen-mai-cap-nhat-ngay'                  => (new KhuyenMaiController())->editTrangThai(),
 
 
     

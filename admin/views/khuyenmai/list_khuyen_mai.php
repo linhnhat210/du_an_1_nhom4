@@ -119,7 +119,7 @@
                                                         </td>
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
-                                                                    <a href="?act=form-sua-danh-muc&khuyen_mai_id=<?= $khuyenMai['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                                                                    <a href="?act=form-sua-khuyen-mai&khuyen_mai_id=<?= $khuyenMai['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
                                                                     <form action="?act=xoa-khuyen-mai" method="POST"
                                                                      onsubmit="return confirm('Bạn có đồng ý xóa không')">
                                                                     <input type="hidden" name="khuyen_mai_id" value="<?= $khuyenMai['id'] ?>">
@@ -127,6 +127,14 @@
                                                                         <i class="ri-delete-bin-line"></i>
                                                                     </button>
                                                                     </form>
+                                                                     <form action="?act=khuyen-mai-cap-nhat-ngay" method="POST"
+                                                                     onsubmit="return confirm('Bạn có muốn cập nhật ngày không')">
+                                                                    <input type="hidden" name="khuyen_mai_id" value="<?= $khuyenMai['id'] ?>">
+                                                                    <input type="hidden" name="ngay_bat_dau" value="<?= $khuyenMai['ngay_bat_dau'] ?>">
+                                                                    <input type="hidden" name="ngay_ket_thuc" value="<?= $khuyenMai['ngay_ket_thuc'] ?>">
+                                                                    <button type="submit" class="btn btn-soft-success material-shadow-none" >
+                                                                           Cập Nhật Ngày
+                                                                    </button>
                                                                 </div>
                                                         </td>
                                                     </tr>
@@ -134,6 +142,8 @@
                                                     <?php endforeach; ?>
                                                 </tbody>
                                             </table>
+
+                                            </form>
                                         </div>
                                     </div>
                                    

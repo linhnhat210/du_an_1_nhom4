@@ -17,6 +17,24 @@ class BannerController
         $Banners = $this->modelBanner->getAllBanner();
         require_once "./views/banners/listbanner.php";
     }
+    
+     public function search()
+     {
+         // lấy dữ liệu từ yêu cầu (request)
+         if($_SERVER["REQUEST_METHOD"] == "POST"){
+             $keyword = $_POST['keyword'];
+             $Bannermodel = new Banner();
+             $Banners = $Bannermodel->searchBanner($keyword);
+ 
+         }
+ 
+         
+         $this->modelBanner->searchBanner($keyword);
+ 
+         // hiển thị kết quả tìm kiếm
+         require_once "./views/banners/listbanner.php";
+     }
+
     public function create(){
 
         require_once "./views/banners/add_banner.php";

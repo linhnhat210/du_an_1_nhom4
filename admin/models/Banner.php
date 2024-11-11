@@ -26,6 +26,23 @@ class Banner
             echo 'Lỗi: '. $e->getMessage();
         }
     }
+     // Tìm kiếm
+     public function searchBanner($keyword)
+     {
+   $sql = "SELECT * FROM banners WHERE ten_banner LIKE ? ";
+   $stmt = $this->conn->prepare($sql);
+   $stmt->bindValue(1, "%$keyword%");
+
+
+   try {
+       $stmt->execute();
+       $lienHes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+       return $lienHes;
+   } catch (PDOException $e) {
+       echo "Error: " . $e->getMessage();
+       return []; // Return an empty array to avoid errors in the view
+   }
+     }
     public function createBanner($ten_banner,$file_thumb){
         try {
             //code...

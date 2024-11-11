@@ -60,6 +60,25 @@
                         </div>
                     </div>
                     <!-- end page title -->
+
+                     <!-- Bắt đầu Form tìm kiếm -->
+                     <div class="row">
+                        <div class="col">
+                            <form action="?act=search-trang-thai-don-hang" method="POST">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="text" name="keyword" class="form-control" placeholder="Tìm kiêm thông tin">
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Kết thúc Form tìm kiếm -->
                     
 
                     <div class="row">

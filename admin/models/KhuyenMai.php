@@ -16,11 +16,28 @@ class KhuyenMai {
         
         return $stmt->fetchAll();
     }
+    public function getDetailData($id){
+        try {
+            //code...
+            $sql = 'SELECT * FROM khuyen_mais WHERE id= :id';
+
+            $stmt = $this->conn->prepare($sql);
+            
+            $stmt->bindParam(':id', $id);
+
+            $stmt->execute();
+
+            return $stmt->fetch();
+            
+        } catch (PDOException $e) {
+            echo 'Lỗi: '. $e->getMessage();
+        }
+    }
     
     public function createKhuyenMai($ma_khuyen_mai,$giam_phan_tram, $giam_toi_da, $ngay_bat_dau, $ngay_ket_thuc, $trang_thai) {
         
-        $sql = "INSERT INTO khuyen_mais (ma_khuyen_mai,giam_phan_tram, giam_toi_da, ngay_bat_dau, ngay_ket_thuc) 
-                  VALUES (:ma_khuyen_mai,:giam_phan_tram, :giam_toi_da, :ngay_bat_dau, :ngay_ket_thuc)";
+        $sql = "INSERT INTO khuyen_mais (ma_khuyen_mai,giam_phan_tram, giam_toi_da, ngay_bat_dau, ngay_ket_thuc,trang_thai) 
+                  VALUES (:ma_khuyen_mai,:giam_phan_tram, :giam_toi_da, :ngay_bat_dau, :ngay_ket_thuc,:trang_thai)";
         
         $stmt = $this->conn->prepare($sql);
 
@@ -29,17 +46,19 @@ class KhuyenMai {
         $stmt->bindParam(':giam_toi_da',$giam_toi_da);
         $stmt->bindParam(':ngay_bat_dau',$ngay_bat_dau);
         $stmt->bindParam(':ngay_ket_thuc',$ngay_ket_thuc);
+        $stmt->bindParam(':trang_thai',$trang_thai);
 
         $stmt->execute();
         return true;
     }
 
-    public function updateKhuyenMai($id, $ma_khuyen_mai,$giam_phan_tram, $giam_toi_da, $ngay_bat_dau, $ngay_ket_thuc) {
+    public function updateKhuyenMai($id, $ma_khuyen_mai,$giam_phan_tram, $giam_toi_da, $ngay_bat_dau, $ngay_ket_thuc,$trang_thai) {
         $sql = "UPDATE khuyen_mais SET ma_khuyen_mai = :ma_khuyen_mai,
                                          ngay_bat_dau = :ngay_bat_dau,
                                          ngay_ket_thuc = :ngay_ket_thuc,
                                          giam_phan_tram = :giam_phan_tram,
-                                         giam_toi_da = :giam_toi_da
+                                         giam_toi_da = :giam_toi_da,
+                                         trang_thai = :trang_thai
                                          WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
 
@@ -50,6 +69,7 @@ class KhuyenMai {
         $stmt->bindParam(':giam_toi_da',$giam_toi_da);
         $stmt->bindParam(':ngay_bat_dau',$ngay_bat_dau);
         $stmt->bindParam(':ngay_ket_thuc',$ngay_ket_thuc);
+        $stmt->bindParam(':trang_thai',$trang_thai);
         $stmt->execute();
         return true;
     }
@@ -62,11 +82,16 @@ class KhuyenMai {
         return true;
     }
 
-    public function updateStatus() {
-        $today = date('Y-m-d');
-        $this->conn->query("UPDATE khuyen_mais SET trang_thai = 'Chưa có hiệu lực' WHERE ngay_bat_dau > '$today'");
-        $this->conn->query("UPDATE khuyen_mais SET trang_thai = 'Có hiệu lực' WHERE ngay_bat_dau <= '$today' AND ngay_ket_thuc >= '$today'");
-        $this->conn->query("UPDATE khuyen_mais SET trang_thai = 'Hết hiệu lực' WHERE ngay_ket_thuc < '$today'");
+    public function editKhuyenMai($id,$trang_thai) {
+        $sql = "UPDATE khuyen_mais SET trang_thai = :trang_thai
+                                    WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+
+
+        $stmt->bindParam(':id',$id);
+        $stmt->bindParam(':trang_thai',$trang_thai);
+        $stmt->execute();
+        return true;
     }
     public function  __destruct()
     {

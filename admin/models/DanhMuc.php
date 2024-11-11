@@ -26,6 +26,21 @@ class DanhMuc
             echo 'Lỗi: '. $e->getMessage();
         }
     }
+       public function searchDanhMuc($keyword)
+    {
+  $sql = "SELECT * FROM danh_mucs WHERE ten_danh_muc LIKE ?";
+  $stmt = $this->conn->prepare($sql);
+  $stmt->bindValue(1, "%$keyword%");
+
+  try {
+      $stmt->execute();
+      $danhMucs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $danhMucs;
+  } catch (PDOException $e) {
+      echo "Error: " . $e->getMessage();
+      return []; // Return an empty array to avoid errors in the view
+  }
+    }
     // thêm danh mục
     public function createDanhMuc($ten_danh_muc,$trang_thai){
         try {

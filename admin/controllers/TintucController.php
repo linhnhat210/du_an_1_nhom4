@@ -14,6 +14,22 @@ class TintucController
         require_once "./views/tintuc/list_tin_tuc.php";
     }
 
+       //hàm tìm kiếm
+    public function search(){
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $keyword = $_POST['keyword'];
+            $modelTinTuc = new Tintuc();
+            $tinTucs = $modelTinTuc->searchTinTuc($keyword);
+
+            // var_dump($trangThai);
+        }
+
+        $this->modelTinTuc->searchTinTuc($keyword);
+
+        require_once "./views/tintuc/list_tin_tuc.php";
+    }
+
+
     // Hàm hiển thị form thêm tin tức
     public function create(){
         require_once "./views/tintuc/add_tin_tuc.php";

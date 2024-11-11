@@ -16,6 +16,23 @@ class DanhMucController
         // var_dump($danhMucs);
         require_once "./views/danhmuc/list_danh_muc.php";
     }
+    public function search()
+    {
+        // lấy dữ liệu từ yêu cầu (request)
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $keyword = $_POST['keyword'];
+            $DanhMucModel = new DanhMuc();
+            $danhMucs = $DanhMucModel->searchDanhMuc($keyword);
+
+            // var_dump($trangThai);
+        }
+
+        // tìm kiếm danh mục 
+        $this->modelDanhMuc->searchDanhMuc($keyword);
+
+        // hiển thị kết quả tìm kiếm
+        require_once "./views/danhmuc/list_danh_muc.php";
+    }
 
     // ham hien thi form them
     public function create(){

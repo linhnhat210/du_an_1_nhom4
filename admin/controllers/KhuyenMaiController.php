@@ -27,7 +27,6 @@ class KhuyenMaiController {
             $ngay_bat_dau = $_POST["ngay_bat_dau"];
             $ngay_ket_thuc = $_POST["ngay_ket_thuc"];
             $today = date("Y-m-d");
-            if($today)
         
             // var_dump($trangThai);
         }
@@ -46,8 +45,18 @@ class KhuyenMaiController {
         if(empty($ngay_bat_dau)){
             $errors["ngay_bat_dau"] = "Vui Lòng Chọn Ngày Bắt Đầu";
         }
+        if($ngay_bat_dau < $today ){
+            $errors["ngay_bat_dau"] = "Ngày Bắt Đầu Phải Lớn Hơn Ngày Hôm Nay";
+        }
+        
         if(empty($ngay_ket_thuc)){
             $errors["ngay_bat_dau"] = "Vui Lòng Chọn Ngày Kết Thúc";
+        }
+        if($ngay_bat_dau > $ngay_ket_thuc ){
+            $errors["ngay_bat_dau"] = "Ngày Kết Thúc Phải Lớn Hơn Ngày Bắt Đầu";
+        }
+        if($ngay_bat_dau > $today){
+            $trang_thai = 1 ; 
         }
 
 
@@ -55,7 +64,7 @@ class KhuyenMaiController {
         if(empty($errors)){
             // nếu không co lỗi thì thêm dữ liệu
             // thêm vào csdl
-            $this->modelKhuyenMai->createKhuyenMai($ma_khuyen_mai,$giam_phan_tram, $giam_toi_da, $ngay_bat_dau, $ngay_ket_thuc);
+            $this->modelKhuyenMai->createKhuyenMai($ma_khuyen_mai,$giam_phan_tram, $giam_toi_da, $ngay_bat_dau, $ngay_ket_thuc,$trang_thai);
             unset($_SESSION['errors']);
             header("Location: ?act=khuyen-mais");
             exit();
@@ -85,6 +94,8 @@ class KhuyenMaiController {
             $giam_toi_da = $_POST["giam_toi_da"];
             $ngay_bat_dau = $_POST["ngay_bat_dau"];
             $ngay_ket_thuc = $_POST["ngay_ket_thuc"];
+
+            $today = date("Y-m-d");
         
             // var_dump($trangThai);
         }
@@ -103,8 +114,17 @@ class KhuyenMaiController {
         if(empty($ngay_bat_dau)){
             $errors["ngay_bat_dau"] = "Vui Lòng Chọn Ngày Bắt Đầu";
         }
+
         if(empty($ngay_ket_thuc)){
             $errors["ngay_bat_dau"] = "Vui Lòng Chọn Ngày Kết Thúc";
+        }
+
+        if($ngay_bat_dau > $today){
+            $trang_thai = 1 ; 
+        } elseif($ngay_bat_dau < $today && $today < $ngay_ket_thuc){
+            $trang_thai = 2 ;
+        }else{
+            $trang_thai = 3 ;
         }
 
 
@@ -112,7 +132,7 @@ class KhuyenMaiController {
         if(empty($errors)){
             // nếu không co lỗi thì thêm dữ liệu
             // thêm vào csdl
-            $this->model->updateKhuyenMai($id, $ma_khuyen_mai,$giam_phan_tram, $giam_toi_da, $ngay_bat_dau, $ngay_ket_thuc);
+            $this->modelKhuyenMai->updateKhuyenMai($id, $ma_khuyen_mai,$giam_phan_tram, $giam_toi_da, $ngay_bat_dau, $ngay_ket_thuc,$trang_thai);
             unset($_SESSION['errors']);
             header("Location: ?act=khuyen-mais");
             exit();
@@ -125,20 +145,37 @@ class KhuyenMaiController {
         
     }
 
-    public function destroy($id) {
+    public function destroy() {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
         $id = $_POST["khuyen_mai_id"];
         // xóa danh mục
         $this->modelKhuyenMai->deleteKhuyenMai($id);
+        header("Location: ?act=khuyen_mais");
         exit();
             
         }
         
     }
-    public function updateStatus() {
-        $this->model->updateStatus();
-
+    public function editTrangThai(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $id = $_POST["khuyen_mai_id"];
+        $ngay_bat_dau = $_POST["ngay_bat_dau"];
+        $ngay_ket_thuc = $_POST["ngay_ket_thuc"];
+        $today = date("Y-m-d");
+        if($ngay_bat_dau > $today){
+            $trang_thai = 1 ; 
+        } elseif($ngay_bat_dau < $today && $today < $ngay_ket_thuc){
+            $trang_thai = 2 ;
+        }else{
+            $trang_thai = 3 ;
+        }
+        // var_dump($trang_thai);die;
+        $this->modelKhuyenMai->editKhuyenMai($id,$trang_thai);
         header("Location: ?act=khuyen-mais");
+        exit();
+        }
+
+
     }
 }
 ?>

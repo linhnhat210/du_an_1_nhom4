@@ -21,6 +21,23 @@ class Tintuc
             echo 'Lỗi: ' . $e->getMessage();
         }
     }
+        // Tìm kiếm
+    public function searchTinTuc($keyword){
+       
+            $sql = 'SELECT * FROM tin_tucs WHERE tieu_de LIKE ? OR noi_dung LIKE ?';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(1, "%$keyword%");
+            $stmt->bindValue(2, "%$keyword%");
+
+            try{
+                $stmt->execute();
+                $TinTucs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $TinTucs;
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                return []; // Return an empty array to avoid errors in the view
+            }
+    }
 
     // Thêm tin tức
     public function createTinTuc($tieu_de, $noi_dung,  $trang_thai,$file_thumb){

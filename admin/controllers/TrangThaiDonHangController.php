@@ -16,7 +16,23 @@ class TrangThaiController
         // var_dump($danhMucs);
         require_once "./views/trangthaidonhang/list_trang_thai_don_hang.php";
     }
+     public function search()
+    {
+        // lấy dữ liệu từ yêu cầu (request)
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $keyword = $_POST['keyword'];
+            $modelTrangThai = new TrangThai();
+            $trangThais = $modelTrangThai->searchTrangThaiDonHang($keyword);
 
+            // var_dump($trangThai);
+        }
+
+        
+        $this->modelTrangThai->searchTrangThaiDonHang($keyword);
+
+        // hiển thị kết quả tìm kiếm
+        require_once "./views/trangthaidonhang/list_trang_thai_don_hang.php";
+    }
     // ham hien thi form them
     public function create(){
         require_once "./views/trangthaidonhang/add_trang_thai_don_hang.php";

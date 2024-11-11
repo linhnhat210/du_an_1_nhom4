@@ -26,6 +26,22 @@ class TrangThai
             echo 'Lỗi: '. $e->getMessage();
         }
     }
+         // Tìm kiếm
+      public function searchTrangThaiDonHang($keyword)
+      {
+    $sql = "SELECT * FROM trang_thai_don_hangs WHERE ten_trang_thai LIKE ? ";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindValue(1, "%$keyword%");
+
+    try {
+        $stmt->execute();
+        $trangThais = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $trangThais;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return []; // Return an empty array to avoid errors in the view
+    }
+      }
     // thêm danh mục
     public function createTrangThai($ten_trang_thai){
         try {
