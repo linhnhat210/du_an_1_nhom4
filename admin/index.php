@@ -11,6 +11,10 @@ require_once 'controllers/SanPhamController.php';
 require_once 'controllers/DanhMuclienheController.php';
 require_once 'controllers/BannerController.php';
 require_once 'controllers/TintucController.php';
+require_once 'controllers/DonHangController.php';
+require_once 'controllers/NguoiDungController.php';
+require_once 'controllers/TrangThaiDonHangController.php';
+require_once 'controllers/KhuyenMaiController.php';
 
 // Require toàn bộ file Models
 require_once 'models/DanhMuc.php';
@@ -18,6 +22,10 @@ require_once 'models/SanPham.php';
 require_once 'models/Lienhe.php';
 require_once 'models/Banner.php';
 require_once 'models/Tintuc.php';
+require_once 'models/DonHang.php';
+require_once 'models/NguoiDung.php';
+require_once 'models/TrangThaiDonHang.php';
+require_once 'models/KhuyenMai.php';
 
 
 
@@ -32,38 +40,69 @@ match ($act) {
 
 
     // route danh mục
-    'danh-mucs'             => (new DanhMucController())->index(),
-    'form-them-danh-muc'    => (new DanhMucController())->create(),
-    'post-them-danh-muc'    => (new DanhMucController())->postcreate(),
-    'form-sua-danh-muc'     => (new DanhMucController())->edit(),
-    'post-sua-danh-muc'     => (new DanhMucController())->postedit(),
-    'xoa-danh-muc'          => (new DanhMucController())->destroy(),
+    'danh-mucs'                                 => (new DanhMucController())->index(),
+    'form-them-danh-muc'                        => (new DanhMucController())->create(),
+    'post-them-danh-muc'                        => (new DanhMucController())->postcreate(),
+    'form-sua-danh-muc'                         => (new DanhMucController())->edit(),
+    'post-sua-danh-muc'                         => (new DanhMucController())->postedit(),
+    'xoa-danh-muc'                              => (new DanhMucController())->destroy(),                        
+    
     
     // route sản phẩm
-    'san-phams'             => (new SanPhamController())->index(),
-    'form-them-san-pham'    => (new SanPhamController())->create(),
-    'post-them-san-pham'    => (new SanPhamController())->postcreate(),
-    'form-sua-san-pham'     => (new SanPhamController())->edit(),
-    'post-sua-san-pham'     => (new SanPhamController())->postedit(),
-    'xoa-san-pham'          => (new SanPhamController())->destroy(),
-    'search-san-pham'          => (new SanPhamController())->search(),
+    'san-phams'                                 => (new SanPhamController())->index(),
+    'form-them-san-pham'                        => (new SanPhamController())->create(),
+    'post-them-san-pham'                        => (new SanPhamController())->postcreate(),
+    'form-sua-san-pham'                         => (new SanPhamController())->edit(),
+    'post-sua-san-pham'                         => (new SanPhamController())->postedit(),
+    'xoa-san-pham'                              => (new SanPhamController())->destroy(),
+    'search-san-pham'                           => (new SanPhamController())->search(),
+
+
     // route liên hệ
-    'lien-hes'             => (new DanhMuclienheController())->index(),
-    'search-lien-he'             => (new DanhMuclienheController())->search(),
-    'form-sua-lien-he'     => (new DanhMuclienheController())->edit(),
-    'post-sua-lien-he'          => (new DanhMuclienheController())->postedit(),
+    'lien-hes'                                  => (new DanhMuclienheController())->index(),
+    'search-lien-he'                            => (new DanhMuclienheController())->search(),
+    'form-sua-lien-he'                          => (new DanhMuclienheController())->edit(),
+    'post-sua-lien-he'                          => (new DanhMuclienheController())->postedit(),
     
     // banners
-    'banners'             => (new BannerController())->index(),
-    'form-them-banner'             => (new BannerController())->create(),
-    'post-them-banner'             => (new BannerController())->postcreate(),
+    'banners'                                   => (new BannerController())->index(),
+    'form-them-banner'                          => (new BannerController())->create(),
+    'post-them-banner'                          => (new BannerController())->postcreate(),
+    'form-sua-banner'                           => (new BannerController())->edit(),
+    'post-sua-banner'                           => (new BannerController())->postedit(),
+    'xoa-banner'                                => (new BannerController())->destroy(),
 
-        // route tin tức
-    'tin-tucs'              => (new TinTucController())->index(),
-    'form-them-tin-tuc'     => (new TinTucController())->create(),
-    'post-them-tin-tuc'     => (new TinTucController())->postcreate(),
-    'form-sua-tin-tuc'      => (new TinTucController())->edit(),
-    'post-sua-tin-tuc'      => (new TinTucController())->postedit(),
-    'xoa-tin-tuc'           => (new TinTucController())->destroy(),
+    // route tin tức
+    'tin-tucs'                                  => (new TinTucController())->index(),
+    'form-them-tin-tuc'                         => (new TinTucController())->create(),
+    'post-them-tin-tuc'                         => (new TinTucController())->postcreate(),
+    'form-sua-tin-tuc'                          => (new TinTucController())->edit(),
+    'post-sua-tin-tuc'                          => (new TinTucController())->postedit(),
+    'xoa-tin-tuc'                               => (new TinTucController())->destroy(),
+      // route trạng thái đơn hàng
+     'trang-thai-don-hangs'                     => (new TrangThaiController())->index(),
+     'form-them-trang-thai-don-hang'            => (new TrangThaiController())->create(),
+     'post-them-trang-thai-don-hang'            => (new TrangThaiController())->postcreate(),
+    //  'form-sua-trang-thai-don-hang'          => (new TrangThaiController())->edit(),
+    //  'post-sua-trang-thai-don-hang'          => (new TrangThaiController())->postedit(),                     
+     'xoa-trang-thai-don-hang'                  => (new TrangThaiController())->destroy(),
+    
+    // route dơn hàng
+    'don-hangs'                                 => (new DonHangController())->index(),
+   'form-sua-don-hang'                          => (new DonHangController())->formEditDonHang(),
+    'sua-don-hang'                              => (new DonHangController())->postEditDonHang(),
+    'chi-tiet-don-hang'                         => (new DonHangController())->detailDonHang(),
+    // route tài khoản 
+    'nguoi-dungs'                               => (new NguoiDungController())->index(),
+    'chi-tiet-nguoi-dung'                       => (new NguoiDungController())->getDetail(),
+
+    'khuyen-mais'                              => (new KhuyenMaiController())->index(),
+    'form-them-khuyen-mai'                        => (new KhuyenMaiController())->create(),
+    'post-them-khuyen-mai'                        => (new KhuyenMaiController())->postcreate(),
+    'form-sua-khuyen-mai'                        => (new KhuyenMaiController())->edit(),
+    'post-sua-khuyen-mai'                        => (new KhuyenMaiController())->postedit(),
+    'khuyen-mai-cap-nhat-ngay'                 => (new KhuyenMaiController())->updateStatus(),
+
+
     
 };

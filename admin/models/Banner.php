@@ -47,6 +47,23 @@ class Banner
             echo 'Lỗi: '. $e->getMessage();
         }
     }
+         public function deleteBanner($id){
+        try {
+            //code...
+            $sql = 'DELETE FROM banners WHERE id= :id';
+
+            $stmt = $this->conn->prepare($sql);
+            
+            $stmt->bindParam(':id', $id);
+
+            $stmt->execute();
+
+            return true;
+            
+        } catch (PDOException $e) {
+            echo 'Lỗi: '. $e->getMessage();
+        }
+    }
 
     
     // huy ket noi csdl

@@ -20,6 +20,7 @@ class DanhMucController
     // ham hien thi form them
     public function create(){
         require_once "./views/danhmuc/add_danh_muc.php";
+        deleteSessionError();
     }
 
     // ham xu ly form them 
@@ -92,7 +93,7 @@ class DanhMucController
         }else{
             // nếu có lỗi thì nhập lại
             $_SESSION['errors'] = $errors;
-            header("Location: ?act=form-sua-danh-muc");
+            header("Location: ?act=form-sua-danh-muc&danh_muc_id=$id");
             exit();
         }
     }

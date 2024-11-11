@@ -46,13 +46,13 @@
                      <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                <h4 class="mb-sm-0">Quản Lý Sản Phẩm</h4>
+                                <h4 class="mb-sm-0">Quản Lý Trạng thái đơn hàng</h4>
                                 
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
-                                        <li class="breadcrumb-item active">Sản Phẩm</li>
+                                        <li class="breadcrumb-item active">Trạng Thái Đơn Hàng</li>
                                     </ol>
                                 </div>
 
@@ -60,24 +60,6 @@
                         </div>
                     </div>
                     <!-- end page title -->
-                                         <!-- Bắt đầu Form tìm kiếm -->
-                    <!-- <div class="row">
-                        <div class="col">
-                            <form action="?act=search-san-pham" method="POST">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <input type="text" name="keyword" class="form-control" placeholder="Tìm kiêm thông tin">
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <br> -->
-                    <!-- Kết thúc Form tìm kiếm -->
                     
 
                     <div class="row">
@@ -87,8 +69,8 @@
                                <!-- Striped Rows -->
                                <div class="card">
                                 <div class="card-header align-items-center d-flex">
-                                    <h4 class="card-title mb-0 flex-grow-1">Sản Phẩm</h4>
-                                     <a href="?act=form-them-banner" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Sản Phẩm</a>
+                                    <h4 class="card-title mb-0 flex-grow-1">Trạng Thái Đơn Hàng</h4>
+                                     <a href="?act=form-them-trang-thai-don-hang" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Trạng Thái Đơn Hàng</a>
 
                                 </div><!-- end card header -->
 
@@ -100,26 +82,22 @@
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">STT</th>
-                                                        <th scope="col">Tên Banner</th>
-                                                        <th scope="col">Ảnh Banner</th>
+                                                        <th scope="col">Tên Danh Mục</th>
+                                                        
                                                         <th scope="col">Thao Tác</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($Banners as $index => $Banner) : ?>
+                                                    <?php foreach ($trangThais as $index => $trangThai) : ?>
                                                     <tr>
                                                         <td class="fw-medium"><?= $index +1 ?></td>
-                                                        <td><?= $Banner["ten_banner"]?></td>
-                                                        <td>
-                                                            <img src="<?= BASE_URL . $Banner["hinh_anh"]?>" style="width:100px" alt="Chua co anh">
-                                                        </td>
+                                                        <td><?= $trangThai["ten_trang_thai"]?></td>
                                                         
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
-                                                                    <a href="?act=form-sua-san-pham&san_pham_id=<?= $sanPham['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
-                                                                    <form action="?act=xoa-banner" method="POST"
+                                                                    <form action="?act=xoa-trang-thai-don-hang" method="POST"
                                                                      onsubmit="return confirm('Bạn có đồng ý xóa không')">
-                                                                    <input type="hidden" name="banner_id" value="<?= $Banner['id'] ?>">
+                                                                    <input type="hidden" name="trang_thai_id" value="<?= $trangThai['id'] ?>">
                                                                     <button type="submit" class="link-danger fs-15" style="border:none;background:none;">
                                                                         <i class="ri-delete-bin-line"></i>
                                                                     </button>

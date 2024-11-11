@@ -46,13 +46,13 @@
                      <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                <h4 class="mb-sm-0">Quản Lý Sản Phẩm</h4>
+                                <h4 class="mb-sm-0">Quản Lý Người Dùng</h4>
                                 
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
-                                        <li class="breadcrumb-item active">Sản Phẩm</li>
+                                        <li class="breadcrumb-item active">Người Dùng</li>
                                     </ol>
                                 </div>
 
@@ -60,24 +60,6 @@
                         </div>
                     </div>
                     <!-- end page title -->
-                                         <!-- Bắt đầu Form tìm kiếm -->
-                    <!-- <div class="row">
-                        <div class="col">
-                            <form action="?act=search-san-pham" method="POST">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <input type="text" name="keyword" class="form-control" placeholder="Tìm kiêm thông tin">
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <br> -->
-                    <!-- Kết thúc Form tìm kiếm -->
                     
 
                     <div class="row">
@@ -87,8 +69,8 @@
                                <!-- Striped Rows -->
                                <div class="card">
                                 <div class="card-header align-items-center d-flex">
-                                    <h4 class="card-title mb-0 flex-grow-1">Sản Phẩm</h4>
-                                     <a href="?act=form-them-banner" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Sản Phẩm</a>
+                                    <h4 class="card-title mb-0 flex-grow-1">Tài khoản người dùng</h4>
+                                     <a href="?act=form-them-danh-muc" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Người Dùng</a>
 
                                 </div><!-- end card header -->
 
@@ -100,30 +82,38 @@
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">STT</th>
-                                                        <th scope="col">Tên Banner</th>
-                                                        <th scope="col">Ảnh Banner</th>
-                                                        <th scope="col">Thao Tác</th>
+                                                        <th scope="col">Tên Người Dùng</th>
+                                                        <th scope="col">Ảnh Đại Diện</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Số Điện Thoại</th>
+                                                        <th scope="col">Vai trò</th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($Banners as $index => $Banner) : ?>
+                                                    <?php foreach ($nguoiDungs as $index => $nguoiDung) : ?>
                                                     <tr>
                                                         <td class="fw-medium"><?= $index +1 ?></td>
-                                                        <td><?= $Banner["ten_banner"]?></td>
+                                                        <td><?= $nguoiDung["ten_nguoi_dung"]?></td>
                                                         <td>
-                                                            <img src="<?= BASE_URL . $Banner["hinh_anh"]?>" style="width:100px" alt="Chua co anh">
+                                                            <img src="<?= BASE_URL . $nguoiDung['avatar'] ?> " 
+                                                            width="100px" alt=""
+                                                            onerror="this.onerror=null; this.src=' https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'">
                                                         </td>
-                                                        
+                                                        <td><?= $nguoiDung["email"]?></td>
+                                                        <td><?= $nguoiDung["sdt"]?></td>
+                                                        <td>
+                                                            <?php $nguoiDung["vai_tro"] == 1 ? 'Admin' : 'Người dùng' ?>
+                                                        </td>
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
-                                                                    <a href="?act=form-sua-san-pham&san_pham_id=<?= $sanPham['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
-                                                                    <form action="?act=xoa-banner" method="POST"
-                                                                     onsubmit="return confirm('Bạn có đồng ý xóa không')">
-                                                                    <input type="hidden" name="banner_id" value="<?= $Banner['id'] ?>">
-                                                                    <button type="submit" class="link-danger fs-15" style="border:none;background:none;">
-                                                                        <i class="ri-delete-bin-line"></i>
-                                                                    </button>
-                                                                    </form>
+                                                                    <div class="btn-group">
+                                                                    <a href="<?='?act=chi-tiet-nguoi-dung&id_nguoi_dung=' . $nguoiDung['id'] ?>">
+                                                                    <button class="btn btn-primary"><i class="fa-regular fa-eye"></i></button>
+                                                                    </a>
+                                                                    </div>
+                                                                     <!-- <a href="?act=form-sua-danh-muc&danh_muc_id=" class="link-success fs-15"><i class="ri-edit-2-line"></i></a> -->
+                                                                    
                                                                 </div>
                                                         </td>
                                                     </tr>

@@ -17,6 +17,7 @@ class TintucController
     // Hàm hiển thị form thêm tin tức
     public function create(){
         require_once "./views/tintuc/add_tin_tuc.php";
+        deleteSessionError();
     }
 
     // Hàm xử lý form thêm tin tức
@@ -46,7 +47,7 @@ class TintucController
                 header("Location: ?act=tin-tucs");
                 exit();
             } else {
-                $_SESSION['errors'] = $errors;
+                $_SESSION['flash'] = true;
                 header("Location: ?act=form-them-tin-tuc");
                 exit();
             }
@@ -58,6 +59,7 @@ class TintucController
         $id = $_GET['tin_tuc_id'];
         $tinTuc = $this->modelTinTuc->getDetailData($id);
         require_once "./views/tintuc/edit_tin_tuc.php";
+        deleteSessionError();
     }
 
     // Hàm xử lý form sửa tin tức
@@ -86,7 +88,7 @@ class TintucController
                 header("Location: ?act=tin-tucs");
                 exit();
             } else {
-                $_SESSION['errors'] = $errors;
+                $_SESSION['flash'] = true;
                 header("Location: ?act=form-sua-tin-tuc");
                 exit();
             }

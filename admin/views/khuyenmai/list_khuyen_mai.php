@@ -46,13 +46,13 @@
                      <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                <h4 class="mb-sm-0">Quản Lý Sản Phẩm</h4>
+                                <h4 class="mb-sm-0">Quản Lý Danh Mục Sản Phẩm</h4>
                                 
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
-                                        <li class="breadcrumb-item active">Sản Phẩm</li>
+                                        <li class="breadcrumb-item active">Danh Mục Sản Phẩm</li>
                                     </ol>
                                 </div>
 
@@ -60,24 +60,6 @@
                         </div>
                     </div>
                     <!-- end page title -->
-                                         <!-- Bắt đầu Form tìm kiếm -->
-                    <!-- <div class="row">
-                        <div class="col">
-                            <form action="?act=search-san-pham" method="POST">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <input type="text" name="keyword" class="form-control" placeholder="Tìm kiêm thông tin">
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <br> -->
-                    <!-- Kết thúc Form tìm kiếm -->
                     
 
                     <div class="row">
@@ -87,8 +69,8 @@
                                <!-- Striped Rows -->
                                <div class="card">
                                 <div class="card-header align-items-center d-flex">
-                                    <h4 class="card-title mb-0 flex-grow-1">Sản Phẩm</h4>
-                                     <a href="?act=form-them-banner" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Sản Phẩm</a>
+                                    <h4 class="card-title mb-0 flex-grow-1">Danh Mục Sản Phẩm</h4>
+                                     <a href="?act=form-them-khuyen-mai" type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Thêm Mã Khuyến Mãi</a>
 
                                 </div><!-- end card header -->
 
@@ -100,26 +82,47 @@
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">STT</th>
-                                                        <th scope="col">Tên Banner</th>
-                                                        <th scope="col">Ảnh Banner</th>
+                                                        <th scope="col">Mã Khuyên Mãi</th>
+                                                        <th scope="col">Giá Trị (%)</th>
+                                                        <th scope="col">Giảm Tối Đa</th>
+                                                        <th scope="col">Ngày Bắt Đầu</th>
+                                                        <th scope="col">Ngày Kết Thúc</th>
+                                                        <th scope="col">Trạng Thái</th>
                                                         <th scope="col">Thao Tác</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($Banners as $index => $Banner) : ?>
+                                                    <?php foreach ($khuyenMais as $index => $khuyenMai) : ?>
                                                     <tr>
                                                         <td class="fw-medium"><?= $index +1 ?></td>
-                                                        <td><?= $Banner["ten_banner"]?></td>
+                                                        <td><?= $khuyenMai["ma_khuyen_mai"]?></td>                                                        
+                                                        <td><?= $khuyenMai["giam_phan_tram"]?></td>                                                        
+                                                        <td><?= $khuyenMai["giam_toi_da"]?></td>                                                        
+                                                        <td><?= $khuyenMai["ngay_bat_dau"]?></td>                                                        
+                                                        <td><?= $khuyenMai["ngay_ket_thuc"]?></td>                                                        
+
                                                         <td>
-                                                            <img src="<?= BASE_URL . $Banner["hinh_anh"]?>" style="width:100px" alt="Chua co anh">
+                                                            <?php
+                                                            if ($khuyenMai["trang_thai"] == 1){
+                                                            ?>
+                                                            <span class="badge bg-danger">Chưa Có Hiệu Lực</span>
+                                                            <?php
+                                                            }  elseif($khuyenMai["trang_thai"] == 2){
+                                                            ?>
+                                                            <span class="badge bg-success">Có hiệu lực</span>
+                                                            <?php } else{
+                                                            ?>
+                                                            <span class="badge bg-danger">Hết Hiệu Lực</span>
+                                                            <?php 
+                                                            }
+                                                            ?>
                                                         </td>
-                                                        
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
-                                                                    <a href="?act=form-sua-san-pham&san_pham_id=<?= $sanPham['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
-                                                                    <form action="?act=xoa-banner" method="POST"
+                                                                    <a href="?act=form-sua-danh-muc&khuyen_mai_id=<?= $khuyenMai['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                                                                    <form action="?act=xoa-khuyen-mai" method="POST"
                                                                      onsubmit="return confirm('Bạn có đồng ý xóa không')">
-                                                                    <input type="hidden" name="banner_id" value="<?= $Banner['id'] ?>">
+                                                                    <input type="hidden" name="khuyen_mai_id" value="<?= $khuyenMai['id'] ?>">
                                                                     <button type="submit" class="link-danger fs-15" style="border:none;background:none;">
                                                                         <i class="ri-delete-bin-line"></i>
                                                                     </button>

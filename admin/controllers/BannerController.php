@@ -71,6 +71,17 @@ class BannerController
             exit();
         }
     }
+        // ham xoa danh muc trong csdl
+    public function destroy(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $id = $_POST["banner_id"];
+            // xóa danh mục
+            $this->modelBanner->deleteBanner($id);
+            header("Location: ?act=banners");
+            exit();
+
+        }
+    }
 
 
    
