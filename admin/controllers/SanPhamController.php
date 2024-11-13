@@ -154,8 +154,8 @@ class SanPhamController
             // Lấy ra dữ liệu của sản phẩm
             $id = $_POST['id'] ?? '';
             // Truy vấn 
-            // $sanPhamOld = $this->modelSanPham->getDetailSanPham($san_pham_id);
-            // $old_file = $sanPhamOld['hinh_anh']; // Lấy ảnh cũ để phục vụ cho sửa ảnh
+            $sanPhamOld = $this->modelSanPham->getDetailSanPham($id);
+            $old_file = $sanPhamOld['hinh_anh'];
 
             $ten_san_pham = $_POST['ten_san_pham'] ?? '';
             $gia_ban = $_POST['gia_ban'] ?? '';
@@ -177,6 +177,7 @@ class SanPhamController
             $trang_thai = $_POST['trang_thai'] ?? '';
 
             $mo_ta = $_POST['mo_ta'];
+
 
             // $hinh_anh = $_FILES['hinh_anh'] ?? null;
 
@@ -208,19 +209,22 @@ class SanPhamController
 
             // Logic sửa ảnh
             if (isset($hinh_anh) && $hinh_anh['error'] == UPLOAD_ERR_OK) {
-                // upload file ảnh mới lên
-                $new_file = uploadFile($hinh_anh, '../uploads/');
-                if (!empty($old_file)) { // Nếu có ảnh cũ thì xóa đi
+                // upload ảnh mới lên
+                $new_file = uploadFile($hinh_anh, './uploads/');
+                if (!empty($old_file)){
+                    // Nếu có ảnh cũ thì xóa đi
                     deleteFile($old_file);
                 }
             } else {
                 $new_file = $old_file;
             }
 
+
             // Nếu k có lỗi thì sửa sản phẩm
             if (empty($errors)) {
-                $this->modelSanPham->editSanPham($id,$ten_san_pham,$danh_muc_id,$tac_gia,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai);
+                $this->modelSanPham->editSanPham($id,$ten_san_pham,$danh_muc_id,$tac_gia,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai,$new_file);
                 // Tạo thông báo xóa thành công
+                // var_dump($new_file);die;
                 $_SESSION['messInfo'] = 'Sửa sản phẩm thành công!';
                 header("Location: ?act=san-phams");
                 exit();
@@ -243,6 +247,24 @@ class SanPhamController
             header("Location: ?act=san-phams");
             exit();
 
+        }
+    }
+    public function detailSanPham()
+    {
+        // Hàm này dùng để hiển thị form nhập
+        // Lấy ra thông tin của sản phẩm cần sửa
+        $id = $_GET['san_pham_id'];
+        $sanPham = $this->modelSanPham->getDetailSanPham($id);
+        // var_dump($sanPham);die;
+        $listAnhSanPham =  $this->modelSanPham->getListAnhSanPham($id);
+        // var_dump($listAnhSanPham);die;
+        // $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
+
+        if ($sanPham) {
+            require_once './views/sanpham/detail_san_pham.php';
+        } else {
+            header("Location: ?act=san-phams");
+            exit();
         }
     }
 

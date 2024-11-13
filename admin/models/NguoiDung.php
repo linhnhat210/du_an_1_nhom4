@@ -42,6 +42,39 @@ class NguoiDung
         }
     }
      // Tìm kiếm 
+
+    public function getDonHangFromKhachHang($id_khach_hang){
+        try {
+            
+            $sql="SELECT don_hangs.id, don_hangs.ma_don_hang, don_hangs.nguoi_dung_id, don_hangs.ten_nguoi_nhan,
+                         don_hangs.email_nguoi_nhan, don_hangs.sdt_nguoi_nhan, don_hangs.dia_chi_nguoi_nhan, 
+                         don_hangs.ngay_dat, don_hangs.tong_tien, don_hangs.ghi_chu, 
+                         don_hangs.phuong_thuc_thanh_toan_id, don_hangs.trang_thai_id, 
+                         trang_thai_don_hangs.ten_trang_thai
+                         FROM don_hangs
+                         JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
+                         WHERE don_hangs.nguoi_dung_id = :nguoi_dung_id;";
+
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':nguoi_dung_id' => $id_khach_hang
+            ]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+
+        } catch (Exception $e) {
+            //throw $th;
+        }
+
+
+
+
+
+     }
     public function searchNguoiDung($keyword)
     {
   $sql = "SELECT * FROM nguoi_dungs WHERE ten_nguoi_dung LIKE ?  OR email LIKE ? OR sdt LIKE ? ";

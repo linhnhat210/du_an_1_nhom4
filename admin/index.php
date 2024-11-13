@@ -57,6 +57,7 @@ match ($act) {
     'post-sua-san-pham'                         => (new SanPhamController())->postedit(),
     'xoa-san-pham'                              => (new SanPhamController())->destroy(),
     'search-san-pham'                           => (new SanPhamController())->search(),
+    'chi-tiet-san-pham'                         => (new SanPhamController())->detailSanPham(),
 
 
     // route liên hệ

@@ -43,7 +43,7 @@
             $id_khach_hang = $_GET['id_nguoi_dung'];
             $nguoiDung = $this->modelNguoiDung->getDetailNguoiDung($id_khach_hang);
         
-            $listDonHang = $this->modelDonHang->getDonHangFromKhachHang($id_khach_hang);
+            $listDonHang = $this->modelNguoiDung->getDonHangFromKhachHang($id_khach_hang);
             // $listBinhLuan = $this->modelSanPham->getBinhLuanFromKhachHang($id_khach_hang);
         
             require_once './views/nguoidung/detai_nguoi_dung.php';

@@ -100,12 +100,10 @@
                                             <!-- <td><span class="badge text-gb-primary"></span></td> -->
                                             <td>
                                                 <div class="btn-group">
-                                                <a href="<?= '?act=chi-tiet-don-hang&id_don_hang=' . $donHang['id'] ?>">
-                                                    <button class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                                </a>
-                                                <a href="<?=  '?act=form-sua-don-hang&id_don_hang=' . $donHang['id'] ?>">
-                                                    <button class="btn btn-warning"><i class="fas fa-wrench"></i></button>
-                                                </a>
+                                                   <a style="margin-right:15px;" href="<?= '?act=chi-tiet-don-hang&id_don_hang=' . $donHang['id'] ?>" class="link-success fs-15"><i class="las la-eye"></i></a>
+                                                <a href="<?=  '?act=form-sua-don-hang&id_don_hang=' . $donHang['id'] ?>"  class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                                                    
+                                                
                                                 </div>
                                             </td>
                                             </tr>

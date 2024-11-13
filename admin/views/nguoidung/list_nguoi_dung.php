@@ -105,6 +105,7 @@
                                                         <th scope="col">Email</th>
                                                         <th scope="col">Số Điện Thoại</th>
                                                         <th scope="col">Vai trò</th>
+                                                        <th scope="col">Thao Tác</th>
                                                         
                                                     </tr>
                                                 </thead>
@@ -121,14 +122,12 @@
                                                         <td><?= $nguoiDung["email"]?></td>
                                                         <td><?= $nguoiDung["sdt"]?></td>
                                                         <td>
-                                                            <?php $nguoiDung["vai_tro"] == 1 ? 'Admin' : 'Người dùng' ?>
+                                                            <?= $nguoiDung["vai_tro"] == 1 ? 'Admin' : 'Người dùng' ?>
                                                         </td>
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
                                                                     <div class="btn-group">
-                                                                    <a href="<?='?act=chi-tiet-nguoi-dung&id_nguoi_dung=' . $nguoiDung['id'] ?>">
-                                                                    <button class="btn btn-primary"><i class="fa-regular fa-eye"></i></button>
-                                                                    </a>
+                                                                    <a href="<?='?act=chi-tiet-nguoi-dung&id_nguoi_dung=' . $nguoiDung['id'] ?>" class="link-success fs-15"><i class="las la-eye"></i></a>
                                                                     </div>
                                                                      <!-- <a href="?act=form-sua-danh-muc&danh_muc_id=" class="link-success fs-15"><i class="ri-edit-2-line"></i></a> -->
                                                                     

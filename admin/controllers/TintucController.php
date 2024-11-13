@@ -85,8 +85,21 @@ class TintucController
             $tieu_de = $_POST["tieu_de"];
             $noi_dung = $_POST["noi_dung"];
             $trang_thai = $_POST["trang_thai"];
-            $hinh_anh = $_FILES["hinh_anh"]["name"];
+            $hinh_anh = $_FILES["hinh_anh"];
 
+            $sanPhamOld = $this->modelTinTuc->getDetailData($id);
+            $old_file = $sanPhamOld['hinh_anh']; // Lấy ảnh cũ để phục vụ cho sửa ảnh
+
+            if (isset($hinh_anh) && $hinh_anh['error'] == UPLOAD_ERR_OK) {
+                // upload file ảnh mới lên
+                $new_file = uploadFile($hinh_anh, './uploads/');
+            if (!empty($old_file)) { // Nếu có ảnh cũ thì xóa đi
+                deleteFile($old_file);
+                }
+            } else {
+                $new_file = $old_file;
+            }
+            
             $errors = [];
             if (empty($tieu_de)) {
                 $errors["tieu_de"] = "Vui lòng nhập tiêu đề tin tức.";
@@ -94,12 +107,11 @@ class TintucController
             if (empty($noi_dung)) {
                 $errors["noi_dung"] = "Vui lòng nhập nội dung tin tức.";
             }
-
+            
             if (empty($errors)) {
-                if (!empty($hinh_anh)) {
-                    move_uploaded_file($_FILES["hinh_anh"]["tmp_name"], "./uploads/" . $hinh_anh);
-                }
-                $this->modelTinTuc->editTinTuc($id, $tieu_de, $noi_dung, $hinh_anh, $trang_thai);
+                // var_dump($new_file);die;
+                
+                $this->modelTinTuc->editTinTuc($id, $tieu_de, $noi_dung, $hinh_anh, $trang_thai, $new_file);
                 unset($_SESSION['errors']);
                 header("Location: ?act=tin-tucs");
                 exit();

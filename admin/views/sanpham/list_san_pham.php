@@ -61,7 +61,7 @@
                     </div>
                     <!-- end page title -->
                                          <!-- Bắt đầu Form tìm kiếm -->
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col">
                             <form action="?act=search-san-pham" method="POST">
                                 <div class="row">
@@ -76,7 +76,7 @@
                             </form>
                         </div>
                     </div>
-                    <br> -->
+                    <br>
                     <!-- Kết thúc Form tìm kiếm -->
                     
 
@@ -101,6 +101,7 @@
                                                     <tr>
                                                         <th scope="col">STT</th>
                                                         <th scope="col">Tên Sản Phẩm</th>
+                                                        <th scope="col">Tác Giả</th>
                                                         <th scope="col">Hình Ảnh</th>
                                                         <th scope="col">Giá Tiền</th>
                                                         <th scope="col">Danh Mục</th>
@@ -113,6 +114,7 @@
                                                     <tr>
                                                         <td class="fw-medium"><?= $index +1 ?></td>
                                                         <td><?= $sanPham["ten_san_pham"]?></td>
+                                                        <td><?= $sanPham["tac_gia"]?></td>
                                                         <td>
                                                             <img src="<?= BASE_URL . $sanPham["hinh_anh"]?>" style="width:100px" alt="Chua co anh">
                                                         </td>
@@ -132,6 +134,7 @@
                                                         </td>
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
+                                                                    <a href="?act=chi-tiet-san-pham&san_pham_id=<?= $sanPham['id']?>" class="link-success fs-15"><i class="las la-eye"></i></a>
                                                                     <a href="?act=form-sua-san-pham&san_pham_id=<?= $sanPham['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
                                                                     <form action="?act=xoa-san-pham" method="POST"
                                                                      onsubmit="return confirm('Bạn có đồng ý xóa không')">

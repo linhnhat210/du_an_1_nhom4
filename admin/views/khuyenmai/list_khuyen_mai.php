@@ -137,7 +137,7 @@
                                                         </td>
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
-                                                                    <a href="?act=form-sua-khuyen-mai&khuyen_mai_id=<?= $khuyenMai['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                                                                    <a href="?act=form-sua-khuyen-mai&khuyen_mai_id=<?= $khuyenMai['id'] ?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
                                                                     <form action="?act=xoa-khuyen-mai" method="POST"
                                                                      onsubmit="return confirm('Bạn có đồng ý xóa không')">
                                                                     <input type="hidden" name="khuyen_mai_id" value="<?= $khuyenMai['id'] ?>">
@@ -153,6 +153,7 @@
                                                                     <button type="submit" class="btn btn-soft-success material-shadow-none" >
                                                                            Cập Nhật Ngày
                                                                     </button>
+                                                                </form>
                                                                 </div>
                                                         </td>
                                                     </tr>
@@ -161,7 +162,6 @@
                                                 </tbody>
                                             </table>
 
-                                            </form>
                                         </div>
                                     </div>
                                    

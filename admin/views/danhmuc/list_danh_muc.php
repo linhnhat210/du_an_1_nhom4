@@ -123,7 +123,7 @@
                                                         </td>
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
-                                                                    <a href="?act=form-sua-danh-muc&danh_muc_id=<?= $danhMuc['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                                                                    <a href="?act=form-sua-danh-muc&danh_muc_id=<?= $danhMuc['id']?>" class="link-success fs-15 btn btn-success"  ><i class="ri-edit-2-line "style="color:white;"></i></a>
                                                                     <form action="?act=xoa-danh-muc" method="POST"
                                                                      onsubmit="return confirm('Bạn có đồng ý xóa không')">
                                                                     <input type="hidden" name="danh_muc_id" value="<?= $danhMuc['id'] ?>">

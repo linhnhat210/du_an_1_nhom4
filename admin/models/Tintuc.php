@@ -85,16 +85,18 @@ class Tintuc
     }
 
     // Sửa tin tức
-    public function editTinTuc($id, $tieu_de, $noi_dung, $hinh_anh, $trang_thai){
+    public function editTinTuc($id, $tieu_de, $noi_dung, $hinh_anh, $trang_thai, $new_file){
         try {
-            $sql = 'UPDATE tin_tucs SET tieu_de = :tieu_de, noi_dung = :noi_dung, hinh_anh = :hinh_anh, trang_thai = :trang_thai WHERE id = :id';
+            $sql = 'UPDATE tin_tucs 
+                    SET tieu_de = :tieu_de, noi_dung = :noi_dung, trang_thai = :trang_thai,  hinh_anh = :hinh_anh 
+                    WHERE id = :id';
             $stmt = $this->conn->prepare($sql);
 
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':tieu_de', $tieu_de);
             $stmt->bindParam(':noi_dung', $noi_dung);
-            $stmt->bindParam(':hinh_anh', $hinh_anh);
             $stmt->bindParam(':trang_thai', $trang_thai);
+            $stmt->bindParam(':hinh_anh', $new_file);
 
             $stmt->execute();
             return true;

@@ -32,17 +32,28 @@ class SanPham
     // tìm kiếm
     public function searchSanPham($keyword)
       {
-    $sql = "SELECT * FROM san_phams WHERE ten_san_pham LIKE ? ";
+    $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc
+            FROM san_phams
+            LEFT JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+            WHERE san_phams.ten_san_pham LIKE ?    
+               OR danh_mucs.ten_danh_muc LIKE ?
+               OR san_phams.tac_gia LIKE ?
+               OR san_phams.gia_ban LIKE ?";
     $stmt = $this->conn->prepare($sql);
+
     $stmt->bindValue(1, "%$keyword%");
+    $stmt->bindValue(2, "%$keyword%");
+    $stmt->bindValue(3, "%$keyword%");
+    $stmt->bindValue(4, "%$keyword%");
+
 
     try {
         $stmt->execute();
-        $lienHes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $lienHes;
+        $sanPhams = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $sanPhams;
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
-        return []; // Return an empty array to avoid errors in the view
+        return []; 
     }
       }
 
@@ -139,7 +150,9 @@ class SanPham
     public function getListAnhSanPham($id){
         try {
             //code...
-            $sql = 'SELECT hinh_anh_san_phams WHERE san_pham_id = :id';
+            $sql = 'SELECT * FROM hinh_anh_san_phams WHERE san_pham_id = :id';
+
+            
 
             $stmt = $this->conn->prepare($sql);
             
@@ -154,10 +167,27 @@ class SanPham
             echo 'Lỗi: '. $e->getMessage();
         }
     }
-    public function editSanPham($id,$ten_san_pham,$danh_muc_id,$tac_gia,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai){
+    public function getDetailSanPham($id)
+    {
+        try {
+            $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc
+            FROM san_phams
+            INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+            WHERE san_phams.id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':id' => $id]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+    public function editSanPham($id,$ten_san_pham,$danh_muc_id,$tac_gia,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai,$new_file){
         try {
             //code...
-            var_dump('abc');
+      
             $sql = 'UPDATE  san_phams SET ten_san_pham = :ten_san_pham ,
                                           danh_muc_id = :danh_muc_id ,
                                           tac_gia = :tac_gia ,
@@ -166,8 +196,10 @@ class SanPham
                                           so_luong = :so_luong ,
                                           ngay_nhap = :ngay_nhap ,
                                           mo_ta = :mo_ta ,
-                                          trang_thai = :trang_thai 
+                                          trang_thai = :trang_thai ,
+                                          hinh_anh = :hinh_anh
                                           WHERE id= :id';
+                                                // var_dump($new_file);die;
 
             $stmt = $this->conn->prepare($sql);
 
@@ -181,6 +213,7 @@ class SanPham
             $stmt->bindParam(':ngay_nhap',$ngay_nhap);
             $stmt->bindParam(':mo_ta',$mo_ta);
             $stmt->bindParam(':trang_thai',$trang_thai);
+            $stmt->bindParam(':hinh_anh',$new_file);
 
             $stmt->execute();
 

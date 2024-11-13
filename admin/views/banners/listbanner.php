@@ -117,7 +117,7 @@
                                                         
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
-                                                                    <a href="?act=form-sua-san-pham&san_pham_id=<?= $sanPham['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
+                                                                    <!-- <a href="?act=form-sua-san-pham&san_pham_id=<?= $sanPham['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a> -->
                                                                     <form action="?act=xoa-san-pham" method="POST"
                                                                      onsubmit="return confirm('Bạn có đồng ý xóa không')">
                                                                     <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">

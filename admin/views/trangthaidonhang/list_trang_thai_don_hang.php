@@ -100,8 +100,8 @@
                                             <table class="table table-striped table-nowrap align-middle mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">STT</th>
-                                                        <th scope="col">Tên Danh Mục</th>
+                                                        <th scope="col">ID</th>
+                                                        <th scope="col">Tên Trạng Thái</th>
                                                         
                                                         <th scope="col">Thao Tác</th>
                                                     </tr>
@@ -109,7 +109,7 @@
                                                 <tbody>
                                                     <?php foreach ($trangThais as $index => $trangThai) : ?>
                                                     <tr>
-                                                        <td class="fw-medium"><?= $index +1 ?></td>
+                                                        <td class="fw-medium"><?= $trangThai["id"]?></td>
                                                         <td><?= $trangThai["ten_trang_thai"]?></td>
                                                         
                                                         <td>

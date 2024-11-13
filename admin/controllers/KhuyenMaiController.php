@@ -56,6 +56,9 @@ class KhuyenMaiController {
         if(empty($giam_phan_tram)){
             $errors["giam_phan_tram"] = "Vui Lòng Nhập % Giảm Giá";
         }
+        if($giam_phan_tram >= 100){
+            $errors["giam_phan_tram"] = "Giá trị của mã phải bé hơn 100%";
+        }
         if(empty($giam_toi_da)){
             $errors["giam_toi_da"] = "Vui Lòng Nhập Giảm Tối Đa";
         }
@@ -71,6 +74,7 @@ class KhuyenMaiController {
         }
         if($ngay_bat_dau > $ngay_ket_thuc ){
             $errors["ngay_bat_dau"] = "Ngày Kết Thúc Phải Lớn Hơn Ngày Bắt Đầu";
+            $errors["ngay_ket_thuc"] = "Ngày Kết Thúc Phải Lớn Hơn Ngày Bắt Đầu";
         }
         if($ngay_bat_dau > $today){
             $trang_thai = 1 ; 
@@ -126,15 +130,23 @@ class KhuyenMaiController {
         if(empty($giam_phan_tram)){
             $errors["giam_phan_tram"] = "Vui Lòng Nhập % Giảm Giá";
         }
+        if($giam_phan_tram >= 100){
+            $errors["giam_phan_tram"] = "Giá trị của mã phải bé hơn 100%";
+        }
         if(empty($giam_toi_da)){
             $errors["giam_toi_da"] = "Vui Lòng Nhập Giảm Tối Đa";
         }
         if(empty($ngay_bat_dau)){
             $errors["ngay_bat_dau"] = "Vui Lòng Chọn Ngày Bắt Đầu";
         }
+        
 
         if(empty($ngay_ket_thuc)){
             $errors["ngay_bat_dau"] = "Vui Lòng Chọn Ngày Kết Thúc";
+        }
+        if($ngay_bat_dau > $ngay_ket_thuc ){
+            $errors["ngay_bat_dau"] = "Ngày Kết Thúc Phải Lớn Hơn Ngày Bắt Đầu";
+            $errors["ngay_ket_thuc"] = "Ngày Kết Thúc Phải Lớn Hơn Ngày Bắt Đầu";
         }
 
         if($ngay_bat_dau > $today){
@@ -177,6 +189,7 @@ class KhuyenMaiController {
     public function editTrangThai(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
         $id = $_POST["khuyen_mai_id"];
+        // var_dump($id);die;
         $ngay_bat_dau = $_POST["ngay_bat_dau"];
         $ngay_ket_thuc = $_POST["ngay_ket_thuc"];
         $today = date("Y-m-d");

@@ -77,28 +77,28 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên người nhận</label>
-                                    <input type="text" class="form-control" name="ten_nguoi_nhan" value="<?= $donHang['ten_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
+                                    <input type="text" readonly class="form-control" name="ten_nguoi_nhan" value="<?= $donHang['ten_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
                                     <?php if (isset($errors['ten_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['ten_nguoi_nhan'] ?></p>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Số điện thoại</label>
-                                    <input type="text" class="form-control" name="sdt_nguoi_nhan" value="<?= $donHang['sdt_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
+                                    <input type="text" readonly class="form-control" name="sdt_nguoi_nhan" value="<?= $donHang['sdt_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
                                     <?php if (isset($errors['sdt_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['sdt_nguoi_nhan'] ?></p>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="text" class="form-control" name="email_nguoi_nhan" value="<?= $donHang['email_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
+                                    <input type="text" readonly class="form-control" name="email_nguoi_nhan" value="<?= $donHang['email_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
                                     <?php if (isset($errors['email_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['email_nguoi_nhan'] ?></p>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Địa chỉ</label>
-                                    <input type="text" class="form-control" name="dia_chi_nguoi_nhan" value="<?= $donHang['dia_chi_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
+                                    <input type="text" readonly class="form-control" name="dia_chi_nguoi_nhan" value="<?= $donHang['dia_chi_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
                                     <?php if (isset($errors['dia_chi_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['dia_chi_nguoi_nhan'] ?></p>
                                     <?php } ?>
@@ -107,7 +107,7 @@
 
                                 <div class="form-group">
                                     <label>Ghi chú</label>
-                                    <textarea name="ghi_chu" id="" class="form-control" placeholder="Nhập mô tả"><?= $donHang['ghi_chu'] ?></textarea>
+                                    <textarea readonly name="ghi_chu" id="" class="form-control" placeholder="Nhập mô tả"><?= $donHang['ghi_chu'] ?></textarea>
                                 </div>
                                 <hr>
                                 <div class="form-group">

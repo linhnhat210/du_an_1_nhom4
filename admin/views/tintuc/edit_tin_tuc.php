@@ -77,7 +77,7 @@
                                             <label for="trang_thai" class="form-label">Trạng Thái(*)</label>
                                             <select name="trang_thai" class="form-select">
                                                 <option value="1" <?= $tinTuc['trang_thai'] == 1 ? 'selected' : '' ?>>Hiển Thị</option>
-                                                <option value="2" <?= $tinTuc['trang_thai'] == 2 ? 'selected' : '' ?>>Ẩn</option>
+                                                <option value="2" <?= $tinTuc['trang_thai'] == 2 ? 'selected' : '' ?>>Không Hiển Thị</option>
                                             </select>
                                         </div>
 
