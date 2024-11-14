@@ -116,7 +116,7 @@
                                                         <td><?= $sanPham["ten_san_pham"]?></td>
                                                         <td><?= $sanPham["tac_gia"]?></td>
                                                         <td>
-                                                            <img src="<?= BASE_URL . $sanPham["hinh_anh"]?>" style="width:100px" alt="Chua co anh">
+                                                            <img src="<?= BASE_URL . $sanPham["hinh_anh"]?>" style="width:100px;height:100px" alt="Chua co anh">
                                                         </td>
                                                         <td><?= $sanPham["gia_ban"]?></td>
                                                         <td><?= $sanPham["ten_danh_muc"]?></td>

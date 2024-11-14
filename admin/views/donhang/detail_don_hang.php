@@ -158,8 +158,9 @@
                                             <tr>
                                             <th>#</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Đơn giá</th>
                                             <th>Số lượng</th>
+                                            <th>Đơn giá</th>
+                                            <th>Giảm giá</th>
                                             <th>Thành tiền</th>
                                             </tr>
                                         </thead>
@@ -169,8 +170,9 @@
                                             <tr>
                                                 <td><?= ++$key ?></td>
                                                 <td><?= $sanPham['ten_san_pham'] ?></td>
-                                                <td><?= $sanPham['don_gia'] ?></td>
                                                 <td><?= $sanPham['so_luong'] ?></td>
+                                                <td><?= $sanPham['don_gia'] ?></td>
+                                                <td><?= $sanPham['giam_gia'] ?></td>
                                                 <td><?= $sanPham['thanh_tien'] ?></td>
                                             </tr>
                                             <?php $tong_tien += $sanPham['thanh_tien']; ?>

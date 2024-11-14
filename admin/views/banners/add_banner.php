@@ -84,7 +84,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label for="citynameInput" class="form-label">Tên Banner</label>
-                                                        <input type="text" class="form-control" placeholder="Nhập vào tên sản phẩm(*)" name="ten_banner">
+                                                        <input type="text" class="form-control" placeholder="Nhập vào tên Banner(*)" name="ten_banner">
                                                    
                                                         <span class="text-danger">
                                                             <?= !empty($_SESSION["errors"]["ten_banner"]) ?  $_SESSION["errors"]["ten_banner"] : '' ?>

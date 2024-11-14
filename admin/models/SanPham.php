@@ -152,8 +152,6 @@ class SanPham
             //code...
             $sql = 'SELECT * FROM hinh_anh_san_phams WHERE san_pham_id = :id';
 
-            
-
             $stmt = $this->conn->prepare($sql);
             
             $stmt->bindParam(':id', $id);
@@ -165,6 +163,58 @@ class SanPham
         } catch (PDOException $e) {
             //throw $th;
             echo 'Lỗi: '. $e->getMessage();
+        }
+    }
+public function updateSanPham($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
+    {
+        try {
+            $sql = 'UPDATE san_phams SET
+            ten_san_pham = :ten_san_pham,
+            gia_ban = :gia_ban,
+            gia_khuyen_mai = :gia_khuyen_mai,
+            so_luong = :so_luong,
+            ngay_nhap = :ngay_nhap,
+            danh_muc_id = :danh_muc_id,
+            trang_thai = :trang_thai,
+            mo_ta = :mo_ta,
+            hinh_anh = :hinh_anh
+            WHERE id = :id';
+            // var_dump($hinh_anh);die;
+
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id',$san_pham_id);
+            $stmt->bindParam(':ten_san_pham',$ten_san_pham);
+            $stmt->bindParam(':danh_muc_id',$danh_muc_id);
+            $stmt->bindParam(':gia_ban',$gia_san_pham);
+            $stmt->bindParam(':gia_khuyen_mai',$gia_khuyen_mai);
+            $stmt->bindParam(':so_luong',$so_luong);
+            $stmt->bindParam(':ngay_nhap',$ngay_nhap);
+            $stmt->bindParam(':mo_ta',$mo_ta);
+            $stmt->bindParam(':hinh_anh',$hinh_anh);
+            $stmt->bindParam(':trang_thai',$trang_thai);
+
+            $stmt->execute();
+
+            // Lấy id sản phẩm vừa thêm
+            return true;
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+
+    public function getDetailAnhSanPham($id)
+    {
+        try {
+            $sql = 'SELECT * FROM hinh_anh_san_phams WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':id' => $id]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
         }
     }
     public function getDetailSanPham($id)
@@ -184,46 +234,7 @@ class SanPham
             echo "lỗi" . $e->getMessage();
         }
     }
-    public function editSanPham($id,$ten_san_pham,$danh_muc_id,$tac_gia,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai,$new_file){
-        try {
-            //code...
-      
-            $sql = 'UPDATE  san_phams SET ten_san_pham = :ten_san_pham ,
-                                          danh_muc_id = :danh_muc_id ,
-                                          tac_gia = :tac_gia ,
-                                          gia_ban = :gia_ban ,
-                                          gia_khuyen_mai = :gia_khuyen_mai ,
-                                          so_luong = :so_luong ,
-                                          ngay_nhap = :ngay_nhap ,
-                                          mo_ta = :mo_ta ,
-                                          trang_thai = :trang_thai ,
-                                          hinh_anh = :hinh_anh
-                                          WHERE id= :id';
-                                                // var_dump($new_file);die;
-
-            $stmt = $this->conn->prepare($sql);
-
-            $stmt->bindParam(':id',$id);
-            $stmt->bindParam(':ten_san_pham',$ten_san_pham);
-            $stmt->bindParam(':danh_muc_id',$danh_muc_id);
-            $stmt->bindParam(':tac_gia',$tac_gia);
-            $stmt->bindParam(':gia_ban',$gia_ban);
-            $stmt->bindParam(':gia_khuyen_mai',$gia_khuyen_mai);
-            $stmt->bindParam(':so_luong',$so_luong);
-            $stmt->bindParam(':ngay_nhap',$ngay_nhap);
-            $stmt->bindParam(':mo_ta',$mo_ta);
-            $stmt->bindParam(':trang_thai',$trang_thai);
-            $stmt->bindParam(':hinh_anh',$new_file);
-
-            $stmt->execute();
-
-            return true;
-            
-        } catch (PDOException $e) {
-            echo 'Lỗi: '. $e->getMessage();
-        }
-    }
-
+    
 
 
     // huy ket noi csdl

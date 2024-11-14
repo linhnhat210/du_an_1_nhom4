@@ -51,3 +51,10 @@ function deleteSessionError(){
 function formatDate($date){
     return date("d-m-Y", strtotime($date));
 }
+function checkLoginAdmin(){
+    if(!isset($_SESSION['user_admin'])){ // không có session thì redirect về trang login
+       require_once './views/login/form_login_admin.php';
+        // header("Location:" . BASE_URL_ADMIN . '?act=login-admin');
+        exit;
+    }
+}

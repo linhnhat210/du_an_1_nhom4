@@ -109,7 +109,7 @@
                                             </tr>
                                         <?php endforeach ?>
                                         </tbody>
-                                        <tfoot>
+                                        <!-- <tfoot>
                                         <tr>
                                             <th>STT</th>
                                             <th>Mã đơn hàng</th>
@@ -119,7 +119,7 @@
                                             <th>Tổng tiền</th>
                                             <th>Trạng thái</th>
                                         </tr>
-                                        </tfoot>
+                                        </tfoot> -->
                                     </table>
                                 </div>
                             </div><!-- end card -->

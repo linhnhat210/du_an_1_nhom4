@@ -82,39 +82,39 @@
 
                   <div class="container my-5">
     <div class="row">
-        <!-- Phần ảnh sản phẩm -->
-        <div class="col-12 col-md-6">
-            <div id="productCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <!-- Ảnh chính -->
-                    <div class="carousel-item active">
-                        <img src="<?=  BASE_URL . $sanPham['hinh_anh'] ?>" class="d-block w-100" alt="Product Image" style="height: 400px; object-fit: cover;border-radius:10px">
-                    </div>
-                    <!-- Ảnh nhỏ hơn trong $listAnhSanPham -->
-                    <?php foreach ($listAnhSanPham as $anhSP) : ?>
-                        <div class="carousel-item">
-                            <img src=" <?= BASE_URL . $anhSP['link_hinh_anh'] ?>" class="d-block w-100" alt="Product Thumbnail" style="height: 400px; object-fit: cover;">
-                        </div>
-                    <?php endforeach ?>
+     <!-- Phần ảnh sản phẩm -->
+<div class="col-12 col-md-6">
+    <div id="productCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Ảnh chính -->
+            <div class="carousel-item active">
+                <img id="mainImage" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="d-block w-100" alt="Product Image" style="height: 400px; object-fit: cover; border-radius:10px;">
+            </div>
+            <!-- Ảnh nhỏ hơn trong $listAnhSanPham -->
+            <?php foreach ($listAnhSanPham as $anhSP) : ?>
+                <div class="carousel-item">
+                    <img src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" class="d-block w-100" alt="Product Thumbnail" style="height: 400px; object-fit: cover;">
                 </div>
-                <!-- Điều hướng ảnh -->
-                <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-            <!-- Ảnh thu nhỏ -->
-            <div class="mt-3 d-flex justify-content-center">
-                 <img src="<?=  BASE_URL . $sanPham['hinh_anh'] ?>" class="product-thumbnail img-thumbnail mr-2" alt="Thumbnail" style="width: 60px; height: 60px; object-fit: cover;">
-                <?php foreach ($listAnhSanPham as $key => $anhSP) : ?>
-                    <img src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" class="product-thumbnail img-thumbnail mr-2 <?= $key == 0 ? 'border-primary' : '' ?>" alt="Thumbnail" style="width: 60px; height: 60px; object-fit: cover;"  onclick="changeMainImage('<?= $anhSP['link_hinh_anh'] ?>')">
-                <?php endforeach ?>
-            </div>
+            <?php endforeach ?>
         </div>
+    <!-- Điều hướng ảnh -->
+    <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev" onclick="event.preventDefault(); navigateCarousel(-1)">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next" onclick="event.preventDefault(); navigateCarousel(1)">
+         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+         <span class="sr-only">Next</span>
+    </a>
+    </div>
+    <!-- Ảnh thu nhỏ -->
+    <div class="mt-3 d-flex justify-content-center">
+        <img id="thumb-0" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="product-thumbnail img-thumbnail mr-2 border-primary" alt="Thumbnail" style="width: 60px; height: 60px; object-fit: cover;" onclick="changeMainImage('<?= BASE_URL . $sanPham['hinh_anh'] ?>', 0)">
+        <?php foreach ($listAnhSanPham as $key => $anhSP) : ?>
+            <img id="thumb-<?= $key + 1 ?>" src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" class="product-thumbnail img-thumbnail mr-2" alt="Thumbnail" style="width: 60px; height: 60px; object-fit: cover;" onclick="changeMainImage('<?= BASE_URL . $anhSP['link_hinh_anh'] ?>', <?= $key + 1 ?>)">
+        <?php endforeach ?>
+    </div>
+</div>
         
         <!-- Phần thông tin sản phẩm -->
         <div class="col-12 col-md-6">
@@ -215,19 +215,39 @@
     ?>
 
     <script>
-        function changeMainImage(imageUrl) {
-    // Tìm ảnh lớn bằng ID và thay đổi thuộc tính src của nó
-    document.getElementById("mainProductImage").src = imageUrl;
+ let currentImageIndex = 0;
+    const totalImages = <?= count($listAnhSanPham) + 1 ?>;
 
-    // Thêm border cho ảnh thu nhỏ được chọn
-    const thumbnails = document.querySelectorAll('.product-thumbnail');
-    thumbnails.forEach(thumbnail => {
-        thumbnail.classList.remove('border-primary');
-        if (thumbnail.src === imageUrl) {
-            thumbnail.classList.add('border-primary');
+    // Hàm thay đổi ảnh chính
+    function changeMainImage(imageUrl, index) {
+        document.getElementById('mainImage').src = imageUrl;
+        updateThumbnailBorder(index);
+        currentImageIndex = index;
+    }
+
+    // Hàm cập nhật viền của ảnh thu nhỏ
+    function updateThumbnailBorder(index) {
+        for (let i = 0; i < totalImages; i++) {
+            document.getElementById('thumb-' + i).classList.remove('border-primary');
         }
-    });
-}
+        document.getElementById('thumb-' + index).classList.add('border-primary');
+    }
+
+    // Hàm điều hướng ảnh
+    function navigateCarousel(direction) {
+        currentImageIndex += direction;
+
+        // Kiểm tra nếu quá giới hạn số lượng ảnh
+        if (currentImageIndex < 0) {
+            currentImageIndex = totalImages - 1;
+        } else if (currentImageIndex >= totalImages) {
+            currentImageIndex = 0;
+        }
+
+        // Cập nhật ảnh chính và viền của ảnh thu nhỏ
+        const mainImageUrl = document.getElementById('thumb-' + currentImageIndex).src;
+        changeMainImage(mainImageUrl, currentImageIndex);
+    }
     </script>
 
 </body>

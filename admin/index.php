@@ -32,6 +32,10 @@ require_once 'models/KhuyenMai.php';
 // Route
 $act = $_GET['act'] ?? '/';
 
+if ($act !== 'login-admin' && $act !== 'check-login-admin' ) {
+  checkLoginAdmin();
+}
+
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
 match ($act) {
@@ -53,8 +57,8 @@ match ($act) {
     'san-phams'                                 => (new SanPhamController())->index(),
     'form-them-san-pham'                        => (new SanPhamController())->create(),
     'post-them-san-pham'                        => (new SanPhamController())->postcreate(),
-    'form-sua-san-pham'                         => (new SanPhamController())->edit(),
-    'post-sua-san-pham'                         => (new SanPhamController())->postedit(),
+    'form-sua-san-pham'                         => (new SanPhamController())->formEditSanPham(),
+    'post-sua-san-pham'                         => (new SanPhamController())->postEditSanPham(),
     'xoa-san-pham'                              => (new SanPhamController())->destroy(),
     'search-san-pham'                           => (new SanPhamController())->search(),
     'chi-tiet-san-pham'                         => (new SanPhamController())->detailSanPham(),
@@ -113,6 +117,16 @@ match ($act) {
     'xoa-khuyen-mai'                            => (new KhuyenMaiController())->destroy(),
     'search-khuyen-mai'                         => (new KhuyenMaiController())->search(),
     'khuyen-mai-cap-nhat-ngay'                  => (new KhuyenMaiController())->editTrangThai(),
+
+
+
+    // login
+    // check login
+      'login-admin' =>(new NguoiDungController())->formLogin(),
+      'check-login-admin' =>(new NguoiDungController())->login(),
+
+
+
 
 
     

@@ -111,7 +111,7 @@
                                                                         <td><?= $nguoiDung['dia_chi'] ?? '' ?></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Trạng thái:</th>
+                                                                        <th>Vai Trò:</th>
                                                                         <td><?= $nguoiDung['vai_tro'] == 1 ? 'Admin' : 'Client' ?></td>
                                                                     </tr>
                                                                 </tbody>
@@ -129,7 +129,7 @@
                                                                             <th>Tên người nhân</th>
                                                                             <th>Số điện thoại</th>
                                                                             <th>Ngày đặt</th>
-                                                                            <th>Danh mục</th>
+                                                                            <th>Tổng Tiền</th>
                                                                             <th>Trạng thái</th>
                                                                             <th>Thao tác</th>
                                                                         </tr>
