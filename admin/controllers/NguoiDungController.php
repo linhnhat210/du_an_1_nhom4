@@ -70,24 +70,31 @@
                 $user = $this->modelNguoiDung->checkLogin($email, $mat_khau);
                 
                 // var_dump($user);die;
-                if($user['email'] == $email ){ // trường hợp đăng nhập thành công
-                    // lưu thông tin vào session 
-                    $_SESSION['user_admin'] = $user;
-                    header("Location: /base_du_an_1/admin/" );
-                    exit;
-        
+
+                if($user){
+
+                    if($user['email'] == $email ){ // trường hợp đăng nhập thành công
+                        // lưu thông tin vào session 
+                        $_SESSION['user_admin'] = $user;
+                        header("Location: /base_du_an_1/admin/" );
+                        exit;
+            
+                    
+            
+                    }
                 }else{
-                    // lỗi thì lưu lỗi vào session
-                    $_SESSION['error'] = $user;
-                    // var_dump($_SESSION['error']); die;
-        
-                    $_SESSION['flash'] = true ;
-        
-                    header("Location:?act=login-admin");
-        
-                    exit;
-        
+                   
+                        // lỗi thì lưu lỗi vào session
+                        $_SESSION['error'] = $user;
+                        // var_dump($_SESSION['error']); die;
+            
+                        $_SESSION['flash'] = true ;
+            
+                        header("Location:?act=login-admin");
+            
+                        exit;
                 }
+                
         
         
             }
