@@ -202,6 +202,22 @@ public function updateSanPham($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_k
             echo "lỗi" . $e->getMessage();
         }
     }
+        public function destroyAnhSanPham($id)
+    {
+        try {
+            $sql = 'DELETE FROM hinh_anh_san_phams WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
 
     public function getDetailAnhSanPham($id)
     {
@@ -230,6 +246,24 @@ public function updateSanPham($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_k
             $stmt->execute([':id' => $id]);
 
             return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+    public function getBinhLuanFromSanPham($id){
+        try {
+            //code...
+            $sql ='SELECT 
+                binh_luans.*, 
+                nguoi_dungs.ten_nguoi_dung AS ten_nguoi_dung
+            FROM binh_luans
+            INNER JOIN nguoi_dungs ON binh_luans.nguoi_dung_id = nguoi_dungs.id
+            WHERE binh_luans.san_pham_id = :id';
+              $stmt = $this->conn->prepare($sql);
+
+              $stmt->execute([':id' => $id]);
+  
+              return $stmt->fetchAll();
         } catch (Exception $e) {
             echo "lỗi" . $e->getMessage();
         }

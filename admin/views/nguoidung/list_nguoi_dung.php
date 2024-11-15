@@ -115,8 +115,8 @@
                                                         <td class="fw-medium"><?= $index +1 ?></td>
                                                         <td><?= $nguoiDung["ten_nguoi_dung"]?></td>
                                                         <td>
-                                                            <img src="<?= BASE_URL . $nguoiDung['avatar'] ?> " 
-                                                            width="100px" alt=""
+                                                            <img style="border-radius:50%;" src="<?= BASE_URL . $nguoiDung['avatar'] ?> " 
+                                                            width="100px" height="100px" alt=""
                                                             onerror="this.onerror=null; this.src=' https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'">
                                                         </td>
                                                         <td><?= $nguoiDung["email"]?></td>

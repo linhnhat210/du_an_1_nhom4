@@ -96,6 +96,10 @@ class donHang
     public function updateDonHang($id, $ten_nguoi_nhan, $sdt_nguoi_nhan, $email_nguoi_nhan, $dia_chi_nguoi_nhan, $ghi_chu, $trang_thai_id)
     {
         try {
+            $ngayHienTai = date('Y-m-d');
+            if($trang_thai_id == 7){
+                $ngay_nhan = $ngayHienTai;
+            }
             // var_dump($id);die;
             $sql = 'UPDATE don_hangs SET
             ten_nguoi_nhan = :ten_nguoi_nhan,
@@ -103,7 +107,8 @@ class donHang
             email_nguoi_nhan = :email_nguoi_nhan,
             dia_chi_nguoi_nhan = :dia_chi_nguoi_nhan,
             ghi_chu = :ghi_chu,
-            trang_thai_id = :trang_thai_id
+            trang_thai_id = :trang_thai_id,
+            ngay_nhan = :ngay_nhan
             WHERE id = :id';
             // var_dump($sql);die;
 
@@ -116,6 +121,7 @@ class donHang
             $stmt->bindParam(':dia_chi_nguoi_nhan',$dia_chi_nguoi_nhan);
             $stmt->bindParam(':ghi_chu',$ghi_chu);
             $stmt->bindParam(':trang_thai_id',$trang_thai_id);
+            $stmt->bindParam(':ngay_nhan',$ngay_nhan);
            
 
             $stmt->execute();

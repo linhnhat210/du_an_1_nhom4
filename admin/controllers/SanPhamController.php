@@ -274,7 +274,7 @@ class SanPhamController
                     deleteFile($old_file);
                 } else {
                     // Thêm ảnh mới
-$this->modelSanPham->insertAlbumAnhSanPham($san_pham_id, $file_info['file']);
+            $this->modelSanPham->insertAlbumAnhSanPham($san_pham_id, $file_info['file']);
                 }
             }
             // Xủa lý xóa ảnh
@@ -288,7 +288,7 @@ $this->modelSanPham->insertAlbumAnhSanPham($san_pham_id, $file_info['file']);
                     deleteFile($anhSP['link_hinh_anh']);
                 }
             }
-            header("Location: ?act=form-sua-san-pham&san_pham_id= " . $san_pham_id);
+            header("Location: ?act=san-phams");
             exit();
         }
     }
@@ -313,7 +313,7 @@ $this->modelSanPham->insertAlbumAnhSanPham($san_pham_id, $file_info['file']);
         // var_dump($sanPham);die;
         $listAnhSanPham =  $this->modelSanPham->getListAnhSanPham($id);
         // var_dump($listAnhSanPham);die;
-        // $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
+        $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
 
         if ($sanPham) {
             require_once './views/sanpham/detail_san_pham.php';
@@ -322,6 +322,7 @@ $this->modelSanPham->insertAlbumAnhSanPham($san_pham_id, $file_info['file']);
             exit();
         }
     }
+    
 
 }
 

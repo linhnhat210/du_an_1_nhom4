@@ -73,6 +73,7 @@
 
                         <form action="<?='?act=sua-don-hang' ?>" method="POST" enctype="multipart/form-data">
                             <input type="text" name="id_don_hang" value="<?= $donHang['id'] ?>" hidden>
+                            
 
                             <div class="card-body">
                                 <div class="form-group">
@@ -116,17 +117,27 @@
                                         <?php foreach ($listTrangThaiDonHang as $trangThai) : ?>
                                             <option
                                                 <?php
-                                                if (
-                                                    $donHang['trang_thai_id'] > $trangThai['id']
-                                                    || $donHang['trang_thai_id'] == 9
-                                                    || $donHang['trang_thai_id'] == 10
-                                                    || $donHang['trang_thai_id'] == 11
-                                                ) {
-                                                    echo 'disabled';
+                                                // Kiểm tra nếu trạng thái đơn hàng là 6
+                                                if ($donHang['trang_thai_id'] == 6) {
+                                                    // Nếu trạng thái hiện tại là 6, chỉ cho phép chọn trạng thái id = 8
+                                                    if ($trangThai['id'] != 8) {
+                                                        echo 'disabled';
+                                                    }
+                                                } else {
+                                                    // Kiểm tra điều kiện ban đầu của bạn
+                                                    if (
+                                                        $donHang['trang_thai_id'] > $trangThai['id'] ||
+                                                        $donHang['trang_thai_id'] == 7 ||
+                                                        $donHang['trang_thai_id'] == 8
+                                                    ) {
+                                                        echo 'disabled';
+                                                    }
                                                 }
                                                 ?>
-                                                <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?> value="<?= $trangThai['id'] ?>">
-                                                <?= $trangThai['ten_trang_thai'] ?></option>
+                                                <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?> 
+                                                value="<?= $trangThai['id'] ?>">
+                                                <?= $trangThai['ten_trang_thai'] ?>
+                                            </option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>

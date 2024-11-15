@@ -94,33 +94,15 @@ class NguoiDung
     }
 
     
-    public function checkLogin($email, $mat_khau) {
+    public function checkLogin($email) {
         try {
             $sql = "SELECT * FROM nguoi_dungs WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':email' => $email]);
-            $user = $stmt->fetch();
+             
+            return $stmt->fetch();; // Trả về toàn bộ thông tin người dùng
     
-            if ($user) {
-                // Kiểm tra mật khẩu
-                // if (password_verify($mat_khau, $user['mat_khau'])) {
-                if ($mat_khau === $user['mat_khau']) {
-                    // Kiểm tra vai trò và trạng thái
-                    if ($user['vai_tro'] == 1) {
-                        if ($user['trang_thai'] == 1) {
-                            return $user; // Trả về toàn bộ thông tin người dùng
-                        } else {
-                            return 'Tài khoản đã bị cấm';
-                        }
-                    } else {
-                        return 'Tài khoản không có quyền đăng nhập';
-                    }
-                } else {
-                    return 'Mật khẩu không chính xác';
-                }
-            } else {
-                return 'Email không tồn tại';
-            }
+            
         } catch (Exception $e) {
             return 'Lỗi khi kết nối đến cơ sở dữ liệu: ' . $e->getMessage();
         }

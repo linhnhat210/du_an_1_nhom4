@@ -153,7 +153,7 @@
                      <!-- /.card -->
                      </div>
 <div class="card-body p-0">
-    <form action="<?= '?act=sua-album-anh-san-pham' ?>" method="POST" enctype="multipart/form-data">
+    <form action="?act=sua-album-anh-san-pham" method="POST" enctype="multipart/form-data">
         <div class="table-responsive">
             <table id="faqs" class="table table-hover table-bordered align-middle mb-0">
                 <thead style="background-color: #ccffcc;"> <!-- Xanh lá mạ -->
@@ -168,7 +168,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                    <input type="hidden" name="san_pham_id" value="<?=$sanPham['id']?>">
                     <input type="hidden" id="img_delete" name="img_delete">
                     <?php foreach ($listAnhSanPham as $key => $value) : ?>
                         <tr id="faqs-row-<?= $key ?>">
@@ -228,7 +228,7 @@ function addRow() {
         <td></td>
         <td><input type="file" name="img_array[]" class="form-control"></td>
         <td>
-            <button class="badge badge-danger" type="button" onclick="removeRow('faqs-row-${rowCount}')">
+            <button class="badge badge-danger" style="color:black;" type="button" onclick="removeRow('faqs-row-${rowCount}')">
                 <i class="fa fa-trash"></i> Delete
             </button>
         </td>`;

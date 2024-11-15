@@ -78,83 +78,137 @@
                     </div>
                     <br> -->
                     <!-- Kết thúc Form tìm kiếm -->
-                    
+   
+                    <div class="card">
+                        <div class="card-header align-items-center d-flex">
+                            <div class="container my-5">
+                                <div class="row">
+                                    <!-- Phần ảnh sản phẩm -->
+                                    <div class="col-12 col-md-6">
+                                        <div id="productCarousel" class="carousel slide shadow-sm rounded" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <!-- Ảnh chính -->
+                                                <div class="carousel-item active">
+                                                    <img id="mainImage" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="d-block w-100 rounded" alt="Product Image" style="height: 400px; object-fit: cover;">
+                                                </div>
+                                                <!-- Ảnh nhỏ hơn trong $listAnhSanPham -->
+                                                <?php foreach ($listAnhSanPham as $anhSP) : ?>
+                                                    <div class="carousel-item">
+                                                        <img src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" class="d-block w-100 rounded" alt="Product Thumbnail" style="height: 400px; object-fit: cover;">
+                                                    </div>
+                                                <?php endforeach ?>
+                                            </div>
+                                            <!-- Điều hướng ảnh -->
+                                            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev" onclick="event.preventDefault(); navigateCarousel(-1)">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next" onclick="event.preventDefault(); navigateCarousel(1)">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                        <!-- Ảnh thu nhỏ -->
+                                        <div class="mt-3 d-flex justify-content-center">
+                                            <img id="thumb-0" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="product-thumbnail img-thumbnail mr-2 border-primary" alt="Thumbnail" style="width: 60px; height: 60px; object-fit: cover;" onclick="changeMainImage('<?= BASE_URL . $sanPham['hinh_anh'] ?>', 0)">
+                                            <?php foreach ($listAnhSanPham as $key => $anhSP) : ?>
+                                                <img id="thumb-<?= $key + 1 ?>" src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" class="product-thumbnail img-thumbnail mr-2" alt="Thumbnail" style="width: 60px; height: 60px; object-fit: cover;" onclick="changeMainImage('<?= BASE_URL . $anhSP['link_hinh_anh'] ?>', <?= $key + 1 ?>)">
+                                            <?php endforeach ?>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Phần thông tin sản phẩm -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="card shadow-sm p-4" style="background-color: #ffffff;">
+                                            <h3 class="card-title text-primary mb-3"><?= $sanPham['ten_san_pham'] ?></h3>
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="col-6">Tác Giả</th>
+                                                        <td><?= $sanPham['tac_gia'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Giá tiền</th>
+                                                        <td class="text-danger font-weight-bold"><?= $sanPham['gia_ban'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Gía khuyến mãi</th>
+                                                        <td class="text-success font-weight-bold"><?= $sanPham['gia_khuyen_mai'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Số lượng</th>
+                                                        <td><?= $sanPham['so_luong'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Lượt xem</th>
+                                                        <td><?= $sanPham['luot_xem'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Ngày nhập</th>
+                                                        <td><?= $sanPham['ngay_nhap'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Danh mục</th>
+                                                        <td><?= $sanPham['ten_danh_muc'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Trạng thái</th>
+                                                        <td class="<?= $sanPham['trang_thai'] == 1 ? 'text-success' : 'text-danger' ?>">
+                                                            <?= $sanPham['trang_thai'] == 1 ? 'Còn bán' : 'Dừng bán' ?>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Mô tả</th>
+                                                        <td class="text-muted"><?= $sanPham['mo_ta'] ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>        
+                    </div>
 
-                  <div class="container my-5">
-    <div class="row">
-     <!-- Phần ảnh sản phẩm -->
-<div class="col-12 col-md-6">
-    <div id="productCarousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <!-- Ảnh chính -->
-            <div class="carousel-item active">
-                <img id="mainImage" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="d-block w-100" alt="Product Image" style="height: 400px; object-fit: cover; border-radius:10px;">
-            </div>
-            <!-- Ảnh nhỏ hơn trong $listAnhSanPham -->
-            <?php foreach ($listAnhSanPham as $anhSP) : ?>
-                <div class="carousel-item">
-                    <img src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" class="d-block w-100" alt="Product Thumbnail" style="height: 400px; object-fit: cover;">
-                </div>
-            <?php endforeach ?>
-        </div>
-    <!-- Điều hướng ảnh -->
-    <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev" onclick="event.preventDefault(); navigateCarousel(-1)">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next" onclick="event.preventDefault(); navigateCarousel(1)">
-         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-         <span class="sr-only">Next</span>
-    </a>
-    </div>
-    <!-- Ảnh thu nhỏ -->
-    <div class="mt-3 d-flex justify-content-center">
-        <img id="thumb-0" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="product-thumbnail img-thumbnail mr-2 border-primary" alt="Thumbnail" style="width: 60px; height: 60px; object-fit: cover;" onclick="changeMainImage('<?= BASE_URL . $sanPham['hinh_anh'] ?>', 0)">
-        <?php foreach ($listAnhSanPham as $key => $anhSP) : ?>
-            <img id="thumb-<?= $key + 1 ?>" src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" class="product-thumbnail img-thumbnail mr-2" alt="Thumbnail" style="width: 60px; height: 60px; object-fit: cover;" onclick="changeMainImage('<?= BASE_URL . $anhSP['link_hinh_anh'] ?>', <?= $key + 1 ?>)">
-        <?php endforeach ?>
-    </div>
-</div>
-        
-        <!-- Phần thông tin sản phẩm -->
-        <div class="col-12 col-md-6">
-            <div class="card shadow-sm p-4">
-                <h3 class="card-title text-primary"><?= $sanPham['ten_san_pham'] ?></h3>
-                <hr>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Tác Giả: <span><?= $sanPham['tac_gia'] ?></span></li>
-                    <li class="list-group-item">Giá tiền: <span class="text-danger font-weight-bold"><?= $sanPham['gia_ban'] ?></span></li>
-                    <li class="list-group-item">Gía khuyến mãi: <span class="text-success font-weight-bold"><?= $sanPham['gia_khuyen_mai'] ?></span></li>
-                    <li class="list-group-item">Số lượng: <span><?= $sanPham['so_luong'] ?></span></li>
-                    <li class="list-group-item">Lượt xem: <span><?= $sanPham['luot_xem'] ?></span></li>
-                    <li class="list-group-item">Ngày nhập: <span><?= $sanPham['ngay_nhap'] ?></span></li>
-                    <li class="list-group-item">Danh mục: <span><?= $sanPham['ten_danh_muc'] ?></span></li>
-                    <li class="list-group-item">Trạng thái: <span class="<?= $sanPham['trang_thai'] == 1 ? 'text-success' : 'text-danger' ?>"><?= $sanPham['trang_thai'] == 1 ? 'Còn bán' : 'Dừng bán' ?></span></li>
-                    <li class="list-group-item">Mô tả: <p class="text-muted mt-2"><?= $sanPham['mo_ta'] ?></p></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+
+
           <hr>
-          <h2>Bình luận của sản phẩm</h2>
-          <div>
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>STT</th>
-                  <th>Người bình luận</th>
-                  <th>Nội dung</th>
-                  <th>Ngày bình luận</th>
-                  <th>Trạng thái</th>
-                  <th>Thao tác</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-              </tbody>
-            </table>
-          </div>
+          <div class="card">
+          <div class="card-header align-items-center">
+              <h2>Bình luận của sản phẩm</h2>
+              <div>
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>Người bình luận</th>
+                      <th>Nội dung</th>
+                      <th>Ngày bình luận</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php if (!empty($listBinhLuan)) : ?>
+                    <?php foreach ($listBinhLuan as $key => $binhluan) :?>
+                    <tr>
+                        <td><?= $key + 1?></td>
+                        
+                        <td><?= $binhluan['ten_nguoi_dung']?></td>
+                        <td><?= $binhluan['noi_dung']?></td>
+                        <td><?= $binhluan['ngay_binh_luan']?></td>
+                        
+                        
+                    </tr>
+                    <?php endforeach;?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="6" class="text-center">Sản phẩm chưa có bình luận nào.</td>
+                        </tr>
+                    <?php endif; ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            </div>
         </div>
                         </div>
 

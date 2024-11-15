@@ -67,40 +67,64 @@
                 
                 // xử lý kiểm tra thông tin đăng nhập 
                 
-                $user = $this->modelNguoiDung->checkLogin($email, $mat_khau);
+                $user = $this->modelNguoiDung->checkLogin($email);
                 
-                // var_dump($user);die;
+                // var_dump($user['avatar']);die;
+                
 
-                if($user){
-
-                    if($user['email'] == $email ){ // trường hợp đăng nhập thành công
-                        // lưu thông tin vào session 
-                        $_SESSION['user_admin'] = $user;
-                        header("Location: /base_du_an_1/admin/" );
+            if ($user['email'] == $email ) {
+                // Kiểm tra mật khẩu
+                // if (password_verify($mat_khau, $user['mat_khau'])) {
+                if ($mat_khau === $user['mat_khau']) {
+                    // Kiểm tra vai trò và trạng thái
+                    if ($user['vai_tro'] == 1) {
+                        if ($user['trang_thai'] == 1) {
+                            $_SESSION['user_admin'] = $user;
+                            header("Location: /base_du_an_1/admin/" );
+                            exit;
+                        }else{
+                            $_SESSION['error'] = 'Tài khoản đã bị cấm';
+                            $_SESSION['flash'] = true ;
+                            header("Location:?act=login-admin");
+                            exit;
+            
+                        }
+                    }else{
+                        $_SESSION['error'] = 'Tài khoản không có quyền đăng nhập';
+                        $_SESSION['flash'] = true ;
+                        header("Location:?act=login-admin");
                         exit;
+                    }
+                }else{
+                    $_SESSION['error'] = 'Mật khẩu không chính xác';
+                        $_SESSION['flash'] = true ;
+                        header("Location:?act=login-admin");
+                        exit;
+                }
+            }else{
+                $_SESSION['error'] = 'Email không tồn tại';
+                        $_SESSION['flash'] = true ;
+                        header("Location:?act=login-admin");
+                        exit;
+            }
+
+
             
                     
             
-                    }
-                }else{
+
                    
                         // lỗi thì lưu lỗi vào session
-                        $_SESSION['error'] = $user;
+                         $user;
                         // var_dump($_SESSION['error']); die;
             
-                        $_SESSION['flash'] = true ;
-            
-                        header("Location:?act=login-admin");
-            
-                        exit;
-                }
+
+            }
                 
         
         
-            }
+    }
             
-        }
+}
 
     
-
-}

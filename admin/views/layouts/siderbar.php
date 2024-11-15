@@ -63,6 +63,7 @@
                     <a class="nav-link menu-link" href="?act=san-phams"  role="button" aria-expanded="false" aria-controls="sidebarSanPham">
                         <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Sản Phẩm</span>
                     </a>
+
                     <!-- <div class="collapse menu-dropdown" id="sidebarDanhMuc">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
@@ -88,6 +89,12 @@
                         <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Người Dùng</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="?act=binh-luans"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Bình Luận</span>
+                    </a>
+                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=trang-thai-don-hangs"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
                         <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Trạng Thái Đơn Hàng</span>

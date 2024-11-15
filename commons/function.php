@@ -51,6 +51,18 @@ function deleteSessionError(){
 function formatDate($date){
     return date("d-m-Y", strtotime($date));
 }
+// Upload - Update album ảnh
+function uploadFileAlbum($file, $folderUpload, $key) {
+    $pathStorage = $folderUpload . time() . $file['name'][$key];
+
+    $from = $file['tmp_name'][$key];
+    $to = PATH_ROOT . $pathStorage;
+
+    if(move_uploaded_file($from, $to)){
+        return $pathStorage;
+    }
+    return null;
+}
 function checkLoginAdmin(){
     if(!isset($_SESSION['user_admin'])){ // không có session thì redirect về trang login
        require_once './views/login/form_login_admin.php';

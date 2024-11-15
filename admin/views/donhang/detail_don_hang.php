@@ -35,6 +35,7 @@
 /* Table styling */
 .table {
     width: 100%;
+    height:100%;
     border-collapse: collapse;
     margin-bottom: 20px;
     /* border-radius: 30px; */
@@ -54,9 +55,13 @@
 
 /* Header background color */
 .table thead {
-    background-color: #f1f1f1;
+    background-color: #a2ffe2;
     color: #333;
     font-weight: bold;
+}
+.table-responsive{
+    border: 1px solid #f1f1f1;
+    /* border-radius:10px; */
 }
 
 /* Additional styling for alert messages */
@@ -77,6 +82,7 @@
     color: #555;
     text-align: right;
     padding-right: 20px;
+    }
     </style>
 
     <!-- CSS -->
@@ -221,7 +227,7 @@
 
             <!-- Order Summary Table -->
             <div class="table-responsive">
-                <table class="table summary-table">
+                <table class="table product-table">
                     <tr>
                         <th>Thành tiền:</th>
                         <td><?= number_format($tong_tien, 0, ',', '.') ?>đ</td>

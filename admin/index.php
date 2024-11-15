@@ -15,8 +15,10 @@ require_once 'controllers/DonHangController.php';
 require_once 'controllers/NguoiDungController.php';
 require_once 'controllers/TrangThaiDonHangController.php';
 require_once 'controllers/KhuyenMaiController.php';
+require_once 'controllers/BinhLuanController.php';
 
 // Require toàn bộ file Models
+require_once 'models/Dashboard.php';
 require_once 'models/DanhMuc.php';
 require_once 'models/SanPham.php';
 require_once 'models/Lienhe.php';
@@ -26,6 +28,7 @@ require_once 'models/DonHang.php';
 require_once 'models/NguoiDung.php';
 require_once 'models/TrangThaiDonHang.php';
 require_once 'models/KhuyenMai.php';
+require_once 'models/BinhLuan.php';
 
 
 
@@ -62,6 +65,7 @@ match ($act) {
     'xoa-san-pham'                              => (new SanPhamController())->destroy(),
     'search-san-pham'                           => (new SanPhamController())->search(),
     'chi-tiet-san-pham'                         => (new SanPhamController())->detailSanPham(),
+    'sua-album-anh-san-pham'                    => (new SanPhamController())->postEditAnhSanPham(),
 
 
     // route liên hệ
@@ -124,6 +128,12 @@ match ($act) {
     // check login
       'login-admin' =>(new NguoiDungController())->formLogin(),
       'check-login-admin' =>(new NguoiDungController())->login(),
+
+
+      
+      // route bình luận
+      'binh-luans'                               => (new BinhLuanController())->index(),
+      'xoa-binh-luan'                            => (new BinhLuanController())->destroy()
 
 
 

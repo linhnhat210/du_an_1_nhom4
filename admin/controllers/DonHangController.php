@@ -60,16 +60,18 @@ class DonHangController
             // Lấy ra dữ liệu
             // Lấy a dữ liệu cũ của sản phẩm
             $don_hang_id = $_POST['id_don_hang'] ?? '';
-            // var_dump($don_hang_id);die;
-
+            $ghi_chu = $_POST['ghi_chu'] ?? '';
+            $trang_thai_id = $_POST['trang_thai_id'] ?? '';
 
             $ten_nguoi_nhan = $_POST['ten_nguoi_nhan'] ?? '';
             // var_dump($ten_nguoi_nhan);die;
             $sdt_nguoi_nhan = $_POST['sdt_nguoi_nhan'] ?? '';
             $email_nguoi_nhan = $_POST['email_nguoi_nhan'] ?? '';
             $dia_chi_nguoi_nhan = $_POST['dia_chi_nguoi_nhan'] ?? '';
-            $ghi_chu = $_POST['ghi_chu'] ?? '';
-            $trang_thai_id = $_POST['trang_thai_id'] ?? '';
+
+            
+
+            
             
 
             // Tạo 1 mảng trống để chứa dữ liệu

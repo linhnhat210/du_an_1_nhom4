@@ -88,7 +88,7 @@
                                                             <td class="fw-medium"><?= $index + 1 ?></td>
                                                             <td><?= $tinTuc["tieu_de"] ?></td>
                                                             <td>
-                                                                <img src="<?= BASE_URL . $tinTuc['hinh_anh'] ?>" style="width:100px;" alt="Hình ảnh tin tức">
+                                                                <img src="<?= BASE_URL . $tinTuc['hinh_anh'] ?>" style="width:100px;height:100px" alt="Hình ảnh tin tức">
                                                             </td>
                                                             <td><?= substr($tinTuc["noi_dung"], 0, 50) ?>...</td>
                                                             <td>
