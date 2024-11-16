@@ -209,7 +209,47 @@
               </div>
             </div>
             </div>
+            
+        
+        <hr>
+          <div class="card">
+          <div class="card-header align-items-center">
+              <h2>Đánh giá của sản phẩm</h2>
+              <div>
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>Người Đánh giá</th>
+                      <th>Nội dung</th>
+                      <th>Ngày Đánh Giá</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php if (!empty($listDanhGia)) : ?>
+                    <?php foreach ($listDanhGia as $key => $danhgia) :?>
+                    <tr>
+                        <td><?= $key + 1?></td>
+                        
+                        <td><?= $danhgia['ten_nguoi_dung']?></td>
+                        <td><?= $danhgia['danh_gia']?></td>
+                        <td><?= $danhgia['ngay_danh_gia']?></td>
+                        
+                        
+                    </tr>
+                    <?php endforeach;?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="6" class="text-center">Sản phẩm chưa có đánh giá nào.</td>
+                        </tr>
+                    <?php endif; ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            </div>
         </div>
+                        </div>
                         </div>
 
                 </div>

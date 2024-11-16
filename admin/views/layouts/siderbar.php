@@ -94,6 +94,11 @@
                         <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Bình Luận</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="?act=danh-gias"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">
+                        <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Đánh Giá</span>
+                    </a>
+                </li>
                 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="?act=trang-thai-don-hangs"  role="button" aria-expanded="false" aria-controls="sidebarDanhMuc">

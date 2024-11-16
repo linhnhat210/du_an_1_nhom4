@@ -75,6 +75,48 @@ class NguoiDung
 
 
      }
+     public function getBinhLuanFromKhachHang($id){
+        try {
+            //code...
+            $sql ='SELECT binh_luans.*, 
+                    san_phams.ten_san_pham,
+                    san_phams.hinh_anh
+                    FROM binh_luans
+                    INNER JOIN san_phams 
+                    ON binh_luans.san_pham_id = san_phams.id
+                    WHERE binh_luans.nguoi_dung_id = :id';
+
+            
+              $stmt = $this->conn->prepare($sql);
+
+              $stmt->execute([':id' => $id]);
+  
+              return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+     public function getDanhGiaFromKhachHang($id){
+        try {
+            //code...
+            $sql ='SELECT danh_gias.*, 
+                    san_phams.ten_san_pham,
+                    san_phams.hinh_anh
+                    FROM danh_gias
+                    INNER JOIN san_phams 
+                    ON danh_gias.san_pham_id = san_phams.id
+                    WHERE danh_gias.nguoi_dung_id = :id';
+
+            
+              $stmt = $this->conn->prepare($sql);
+
+              $stmt->execute([':id' => $id]);
+  
+              return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
     public function searchNguoiDung($keyword)
     {
   $sql = "SELECT * FROM nguoi_dungs WHERE ten_nguoi_dung LIKE ?  OR email LIKE ? OR sdt LIKE ? ";

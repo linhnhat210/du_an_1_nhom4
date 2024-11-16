@@ -17,7 +17,9 @@ class Dashboard
         try {
             //code...
             $ngayHienTai = date('Y-m-d'); // Lấy ngày hiện tại
-            $sql = "SELECT SUM(tong_tien) AS tong_thu_nhap FROM don_hangs WHERE DATE(ngay_dat) = :ngay_hien_tai";
+            $sql = "SELECT SUM(tong_tien) AS tong_thu_nhap 
+                    FROM don_hangs 
+                    WHERE ngay_nhan = :ngay_hien_tai AND trang_thai_id = 7";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(['ngay_hien_tai' => $ngayHienTai]);
@@ -30,10 +32,13 @@ class Dashboard
         }
         
     }
+
+
     public function demSoLuongDonHangHomNay() {
         try {
             
             $ngayHienTai = date('Y-m-d'); // Ngày hiện tại
+            // echo $ngayHienTai;die;
             $sql = "SELECT COUNT(*) AS so_luong_don_hang FROM don_hangs WHERE DATE(ngay_dat) = :ngay_hien_tai";
 
             $stmt = $this->conn->prepare($sql);
@@ -64,6 +69,139 @@ class Dashboard
             echo 'Lỗi: '. $e->getMessage();
 
         }
+    }
+        
+     public function thongKeTongDonHangCaNam() {
+        try {
+             
+            $sql = "SELECT COUNT(*) AS tong_so_luong_don_hang 
+            FROM don_hangs 
+            WHERE trang_thai_id = 7 ";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $ketQua = $stmt->fetch();
+            return $ketQua['tong_so_luong_don_hang'] ?? 0;
+                
+
+        } catch (PDOException $e) {
+            //throw $th;
+            echo 'Lỗi: '. $e->getMessage();
+
+        }
+
+    }
+     public function thongKeTongDonHangHoanTra() {
+        try {
+             
+            $sql = "SELECT COUNT(*) AS tong_so_luong_don_hang 
+            FROM don_hangs 
+            WHERE trang_thai_id = 8";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $ketQua = $stmt->fetch();
+            return $ketQua['tong_so_luong_don_hang'] ?? 0;
+                
+
+        } catch (PDOException $e) {
+            //throw $th;
+            echo 'Lỗi: '. $e->getMessage();
+
+        }
+
+    }
+    public function thongKeTongTienCaNam() {
+        try {
+            $nam = date('Y'); 
+            $sql = "SELECT SUM(tong_tien) AS tong_thu_nhap_nam
+            FROM don_hangs 
+            WHERE trang_thai_id = 7";
+            
+                    
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $ketQua = $stmt->fetch();
+            
+            return $ketQua['tong_thu_nhap_nam'] ?? 0;
+                
+
+        } catch (PDOException $e) {
+            //throw $th;
+            echo 'Lỗi: '. $e->getMessage();
+
+        }
+
+    }
+    public function thongKeHoanTien() {
+        try {
+            $nam = date('Y'); 
+            $sql = "SELECT SUM(tong_tien) AS hoan_tien
+            FROM don_hangs 
+            WHERE YEAR(ngay_dat) = :nam AND trang_thai_id = 8";
+            
+                    
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['nam' => $nam]);
+            $ketQua = $stmt->fetch();
+            
+            return $ketQua['hoan_tien'] ?? 0;
+                
+
+        } catch (PDOException $e) {
+            //throw $th;
+            echo 'Lỗi: '. $e->getMessage();
+
+        }
+
+    }
+    public function thongKeSanPham() {
+        try {
+             
+            $sql = "SELECT COUNT(*) AS tong_so_luong_san_pham 
+                    FROM san_phams;
+                    ";
+            
+                    
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $ketQua = $stmt->fetch();
+            
+            return $ketQua['tong_so_luong_san_pham'] ?? 0;
+                
+
+        } catch (PDOException $e) {
+            //throw $th;
+            echo 'Lỗi: '. $e->getMessage();
+
+        }
+
+    }
+    public function thongKeDanhMuc() {
+        try {
+             
+            $sql = "SELECT COUNT(*) AS tong_so_luong_danh_muc 
+                    FROM danh_mucs;
+                    ";
+            
+                    
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $ketQua = $stmt->fetch();
+            
+            return $ketQua['tong_so_luong_danh_muc'] ?? 0;
+                
+
+        } catch (PDOException $e) {
+            //throw $th;
+            echo 'Lỗi: '. $e->getMessage();
+
+        }
+
     }
 
 

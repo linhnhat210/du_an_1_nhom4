@@ -42,12 +42,12 @@
                      <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                <h4 class="mb-sm-0">Quản Lý Bình Luận</h4>
+                                <h4 class="mb-sm-0">Quản Lý Đánh Giá</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
-                                        <li class="breadcrumb-item active">Bình luận</li>
+                                        <li class="breadcrumb-item active">Đánh giá</li>
                                     </ol>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                <!-- Striped Rows -->
                                <div class="card">
                                 <div class="card-header align-items-center d-flex">
-                                    <h4 class="card-title mb-0 flex-grow-1">Danh Sách Bình Luận</h4>
+                                    <h4 class="card-title mb-0 flex-grow-1">Danh Sách Đánh Giá</h4>
 
                                 </div><!-- end card header -->
 
@@ -74,41 +74,40 @@
                                             <th>Tên Khách Hàng</th>
                                             <th>Sản Phẩm</th>
                                             <th>Ảnh Sản Phẩm</th>
-                                            <th>Nội Dung</th>
-                                            <th>Ngày Bình Luận</th>
+                                            <th>Đánh Giá</th>
+                                            <th>Ngày Đánh Giá</th>
                                             <th>Thao tác</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php if (!empty($binhLuans) && is_array($binhLuans)) : ?>
-                                    <?php foreach ($binhLuans as $key => $binhLuan) : ?>
+                                        <?php if (!empty($danhGias) && is_array($danhGias)) : ?>
+                                    <?php foreach ($danhGias as $key => $danhGia) : ?>
                                         <tr>
                                             <td><?= $key + 1 ?></td>
-                                            <td><?= $binhLuan['ten_nguoi_dung'] ?></td>
-                                            <td><?= $binhLuan['ten_san_pham'] ?></td>
+                                            <td><?= $danhGia['ten_nguoi_dung'] ?></td>
+                                            <td><?= $danhGia['ten_san_pham'] ?></td>
                                             <td>
-                                                <img src="<?= BASE_URL . $binhLuan['hinh_anh']?>" alt="" width="100px" height="100px">
+                                                <img src="<?= BASE_URL . $danhGia['hinh_anh']?>" alt="" width="100px" height="100px">
                                             </td>
-                                            <td><?= $binhLuan['noi_dung'] ?></td>
-                                            <td><?= $binhLuan['ngay_binh_luan'] ?></td>
+                                            <td><?= $danhGia['danh_gia'] ?></td>
+                                            <td><?= $danhGia['ngay_danh_gia'] ?></td>
                                             <td>
                                                 <div class="btn-group">
                                                     
-                                                <form action="?act=xoa-binh-luan" method="POST"
+                                                     <form action="?act=xoa-danh-gia" method="POST"
                                                                      onsubmit="return confirm('Bạn có đồng ý xóa không')">
-                                                                    <input type="hidden" name="id_binh_luan" value="<?= $binhLuan['id'] ?>">
+                                                                    <input type="hidden" name="id_danh_gia" value="<?= $danhGia['id'] ?>">
                                                                     <button type="submit" class="link-danger fs-15" style="border:none;background:none;">
                                                                         <i class="ri-delete-bin-line"></i>
                                                                     </button>
                                                                     </form>
-                                                    
                                                 </div>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
                                 <?php else : ?>
                                     <tr>
-                                        <td colspan="6" class="text-center">Không có bình luận nào.</td>
+                                        <td colspan="6" class="text-center">Không có đánh giá nào.</td>
                                     </tr>
                                 <?php endif ?>
                                         </tbody>

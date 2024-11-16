@@ -1,5 +1,5 @@
 <!-- App favicon -->
-<link rel="shortcut icon" href="assets/images/favicon.ico">
+<link rel="shortcut icon" href="../assets/img/logo/KMT.png">
 
 <!-- jsvectormap css -->
 <link href="assets/libs/jsvectormap/jsvectormap.min.css" rel="stylesheet" type="text/css" />

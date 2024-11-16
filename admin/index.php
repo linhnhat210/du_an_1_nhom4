@@ -16,6 +16,7 @@ require_once 'controllers/NguoiDungController.php';
 require_once 'controllers/TrangThaiDonHangController.php';
 require_once 'controllers/KhuyenMaiController.php';
 require_once 'controllers/BinhLuanController.php';
+require_once 'controllers/DanhGiaController.php';
 
 // Require toàn bộ file Models
 require_once 'models/Dashboard.php';
@@ -29,6 +30,7 @@ require_once 'models/NguoiDung.php';
 require_once 'models/TrangThaiDonHang.php';
 require_once 'models/KhuyenMai.php';
 require_once 'models/BinhLuan.php';
+require_once 'models/DanhGia.php';
 
 
 
@@ -133,7 +135,11 @@ match ($act) {
       
       // route bình luận
       'binh-luans'                               => (new BinhLuanController())->index(),
-      'xoa-binh-luan'                            => (new BinhLuanController())->destroy()
+      'xoa-binh-luan'                            => (new BinhLuanController())->destroy(),
+      
+      // route đánh giá
+      'danh-gias'                               => (new DanhGiaController())->index(),
+      'xoa-danh-gia'                            => (new DanhGiaController())->destroy(),
 
 
 

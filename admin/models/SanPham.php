@@ -268,6 +268,24 @@ public function updateSanPham($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_k
             echo "lỗi" . $e->getMessage();
         }
     }
+    public function getDanhGiaFromSanPham($id){
+        try {
+            //code...
+            $sql ='SELECT 
+                danh_gias.*, 
+                nguoi_dungs.ten_nguoi_dung AS ten_nguoi_dung
+            FROM danh_gias
+            INNER JOIN nguoi_dungs ON danh_gias.nguoi_dung_id = nguoi_dungs.id
+            WHERE danh_gias.san_pham_id = :id';
+              $stmt = $this->conn->prepare($sql);
+
+              $stmt->execute([':id' => $id]);
+  
+              return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
     
 
 

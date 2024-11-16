@@ -35,17 +35,16 @@ class BinhLuanController
     }
 
     // Xóa một bình luận
-    public function destroy()
-    {
-        $binh_luan_id = $_GET['id_binh_luan'] ?? null;
+    public function destroy(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $id_binh_luan = $_POST['id_binh_luan'] ?? null;
+            // var_dump($id_danh_gia);die;
+            // xóa danh mục
+            $this->modelBinhLuan->deleteBinhLuan($id_binh_luan);
+            header("Location: ?act=binh-luans");
+            exit();
 
-        if ($binh_luan_id) {
-            $this->modelBinhLuan->deleteBinhLuan($binh_luan_id);
-            header("Location: ?act=binh-luans");
-            exit();
-        } else {
-            header("Location: ?act=binh-luans");
-            exit();
         }
     }
+   
 }

@@ -160,7 +160,76 @@
                                                             <hr>
                                                             <h2>Lịch sử bình luận</h2>
                                                             <div>
-                                                                
+                                                                <table id="example1" class="table table-striped table-nowrap align-middle mb-0">
+                                                                <thead>
+                                                                    <tr>
+                                                                    <th>STT</th>
+                                                                    <th>Sản Phẩm</th>
+                                                                    <th>Ảnh Sản phẩm</th>
+                                                                    <th>Nội dung</th>
+                                                                    <th>Ngày bình luận</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php if (!empty($listBinhLuan)) : ?>
+                                                                    <?php foreach ($listBinhLuan as $key => $binhluan) :?>
+                                                                    <tr>
+                                                                        <td><?= $key + 1?></td>
+                                                                        
+                                                                        <td><?= $binhluan['ten_san_pham']?></td>
+                                                                        <td>
+                                                                            <img style="border-radius:5px;" src="<?= BASE_URL . $binhluan['hinh_anh']?>" alt="chưa có ảnh" width="100px" height="100px">
+                                                                        </td>
+                                                                        <td><?= $binhluan['noi_dung']?></td>
+                                                                        <td><?= $binhluan['ngay_binh_luan']?></td>
+                                                                        
+                                                                        
+                                                                    </tr>
+                                                                    <?php endforeach;?>
+                                                                    <?php else : ?>
+                                                                        <tr>
+                                                                            <td colspan="6" class="text-center">Người dùng chưa có bình luận nào.</td>
+                                                                        </tr>
+                                                                    <?php endif; ?>
+                                                                </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <hr>
+                                                            <h2>Lịch sử đánh giá</h2>
+                                                            <div>
+                                                                <table id="example1" class="table table-striped table-nowrap align-middle mb-0">
+                                                                <thead>
+                                                                    <tr>
+                                                                    <th>STT</th>
+                                                                    <th>Sản Phẩm</th>
+                                                                    <th>Ảnh Sản phẩm</th>
+                                                                    <th>Đánh giá</th>
+                                                                    <th>Ngày đánh giá</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php if (!empty($listDanhGia)) : ?>
+                                                                    <?php foreach ($listDanhGia as $key => $danhgia) :?>
+                                                                    <tr>
+                                                                        <td><?= $key + 1?></td>
+                                                                        
+                                                                        <td><?= $danhgia['ten_san_pham']?></td>
+                                                                        <td>
+                                                                            <img style="border-radius:5px;" src="<?= BASE_URL . $danhgia['hinh_anh']?>" alt="chưa có ảnh" width="100px" height="100px">
+                                                                        </td>
+                                                                        <td><?= $danhgia['danh_gia']?></td>
+                                                                        <td><?= $danhgia['ngay_danh_gia']?></td>
+                                                                        
+                                                                        
+                                                                    </tr>
+                                                                    <?php endforeach;?>
+                                                                    <?php else : ?>
+                                                                        <tr>
+                                                                            <td colspan="6" class="text-center">Người dùng chưa có bình luận nào.</td>
+                                                                        </tr>
+                                                                    <?php endif; ?>
+                                                                </tbody>
+                                                                </table>
                                                             </div>
                                                         </div>
                                                         <!-- /.col -->

@@ -104,7 +104,7 @@ class KhuyenMaiController {
 
         // Lây thông tin chi tiết cảu danh mục
         $khuyenMai = $this->modelKhuyenMai->getDetailData($id);
-
+        deleteSessionError();
 
         require_once './views/khuyenmai/edit_khuyen_mai.php';
     }
@@ -169,7 +169,9 @@ class KhuyenMaiController {
         }else{
             // nếu có lỗi thì nhập lại
             $_SESSION['errors'] = $errors;
+            $_SESSION['flash'] = true;
             header("Location: ?act=form-sua-khuyen-mai&khuyen_mai_id=$id");
+            // unset($_SESSION['errors']);
             exit();
         }
         
