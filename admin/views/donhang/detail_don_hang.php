@@ -151,6 +151,7 @@
                                             <thead class="table-light text-muted">
                                                 <tr>
                                                     <th scope="col">Tên Sản Phẩm</th>
+                                                    <th scope="col">Hình Ảnh</th>
                                                     <th scope="col">Giá</th>
                                                     <th scope="col">Số lượng</th>
                                                     <th scope="col">Thành tiền</th>
@@ -160,32 +161,37 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php foreach($sanPhamDonHang as $key =>$SP) : ?>
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex">
-                                                            <div class="flex-shrink-0 avatar-md bg-light rounded p-1" style="width:75px;height">
-                                                                <img src="<?=BASE_URL .$sanPhamDonHang[0]['hinh_anh']?>" alt="" class="img-fluid d-block">
-                                                            </div>
+                                                            
+                                                            
                                                             <div class="flex-grow-1 ms-3 align-self-center">
-                                                                <h5 class="fs-15"><a href="?act=chi-tiet-san-pham&san_pham_id=<?=$sanPhamDonHang[0]['san_pham_id']?>" class="link-primary"><?= $sanPhamDonHang[0]['ten_san_pham']?> </a></h5>
+                                                                <h5 class="fs-15"><a href="?act=chi-tiet-san-pham&san_pham_id=<?=$SP['san_pham_id']?>" class="link-primary"><?= $SP['ten_san_pham']?> </a></h5>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td> <?= isset($sanPhamDonHang[0]['gia_khuyen_mai']) && $sanPhamDonHang[0]['gia_khuyen_mai'] > 0 ? $sanPhamDonHang[0]['gia_khuyen_mai'] : $sanPhamDonHang[0]['gia_ban'] ?></td>
-                                                    <td><?=$sanPhamDonHang[0]['so_luong']?></td>
+                                                    <td>
+                                                        <img src="<?=BASE_URL .$SP['hinh_anh']?>" alt="" width="50px" height="50px" class="img-fluid d-block">
+
+                                                    </td>
+                                                    <td> <?= isset($SP['gia_khuyen_mai']) && $SP['gia_khuyen_mai'] > 0 ? $SP['gia_khuyen_mai'] : $SP['gia_ban'] ?></td>
+                                                    <td><?=$SP['so_luong']?></td>
                                                     <td>
                                                         
-                                                        <?=$sanPhamDonHang[0]['don_gia']?>
+                                                        <?=$SP['don_gia']?>
                                                     </td>
                                                     <td class="fw-medium text-end">
-                                                        <?=$sanPhamDonHang[0]['giam_gia']?>
+                                                        <?=$SP['giam_gia']?>
                                                     </td>
                                                     <td class="fw-medium text-end">
                                                         0
                                                     </td>
                                                     <td class="fw-medium text-end">
-                                                           <?=$sanPhamDonHang[0]['thanh_tien']?>
+                                                           <?=$SP['thanh_tien']?>
                                                     </td>
+                                                    <?php endforeach; ?>
                                                
                                                
                                             </tbody>

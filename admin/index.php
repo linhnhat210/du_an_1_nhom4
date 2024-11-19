@@ -37,7 +37,7 @@ require_once 'models/DanhGia.php';
 // Route
 $act = $_GET['act'] ?? '/';
 
-if ($act !== 'login-admin' && $act !== 'check-login-admin' ) {
+if ($act !== 'login-admin' && $act !== 'check-login-admin') {
   checkLoginAdmin();
 }
 

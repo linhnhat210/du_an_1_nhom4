@@ -35,7 +35,7 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
                                                 <ul class="megamenu dropdown">
                                                     <?php foreach($danhMucs as $danhMuc) : ?>
                                                     
-                                                            <li><a href="san_pham_theo_danh_muc&danh_muc_id=<?=$danhMuc["id"]?>"><?= $danhMuc['ten_danh_muc']?></a></li>
+                                                            <li><a href="san_pham_theo_danh_muc&danh_muc_id=<?=$danhMuc["id"]?>" style="text-transform:uppercase;"><?= $danhMuc['ten_danh_muc']?></a></li>
                                                            
                                                       <?php endforeach; ?>
                                                 </ul>
@@ -90,7 +90,7 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
                         </div>
                         <!-- main menu area end -->
 
-                        <!-- mini cart area start -->
+                        
                         <div class="col-lg-4">
                             <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                                 <div class="header-search-container">
@@ -108,16 +108,21 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
                                                 <div class="notification">2</div>
                                             </a>
                                         </li>
-                                        <li class="user-hover">
-                                            <a href="#">
-                                                <i class="pe-7s-user"></i>
-                                            </a>
-                                            <ul class="dropdown-list">
-                                                <li><a href="<?= BASE_URL . './?act=login' ?>">Đăng Nhập</a></li> 
-                                                <li><a href="<?= BASE_URL . './?act=form-dang-ki' ?>">Đăng Ký</a></li>
-                                                <li><a href="my-account.html">Tài Khoản Của Tôi</a></li>
-                                            </ul>
-                                        </li>
+                                       <li class="user-hover">
+    <a href="#">
+        <i class="pe-7s-user"></i>
+    </a>
+    <ul class="dropdown-list">
+<?php if (isset($_SESSION['user_client'])): ?>
+    <li><a href="#"><?= htmlspecialchars($_SESSION['user_client']['ten_nguoi_dung'], ENT_QUOTES, 'UTF-8') ?></a></li>
+    <li><a href="views/taikhoan/logout.php">Đăng Xuất</a></li>
+<?php else: ?>
+    <li><a href="<?= BASE_URL . './?act=login' ?>">Đăng Nhập</a></li> 
+    <li><a href="<?= BASE_URL . './?act=dang-ky' ?>">Đăng Ký</a></li>
+<?php endif; ?>
+    </ul>
+</li>
+
                                     </ul>
                                 </div>
                             </div>

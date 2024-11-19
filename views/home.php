@@ -115,7 +115,7 @@
             <div class="col-12">
                 <!-- section title start -->
                 <div class="section-title text-center">
-                    <h2 class="title">Toàn bộ truyện tranh</h2>
+                    <h2 class="title">Truyện Tranh Mới Nhất</h2>
                     <p class="sub-title">Thêm Sản phẩm của chúng tôi vào giỏ hàng của bạn</p>
                 </div>
                 <!-- section title start -->
@@ -129,7 +129,7 @@
                         <div class="tab-pane fade show active" id="tab1">
                             <!-- Sản phẩm được hiển thị theo dạng grid -->
                             <div class="row" id="product-list">
-                                <?php foreach (array_slice($listSanPham, 0, 12) as $key => $sanPham): ?>
+                                <?php foreach (array_slice($listSanPham, 0, 8) as $key => $sanPham): ?>
                                     <div class="col-md-3 col-sm-6 mb-4 product-item">
                                         <div class="card">
                                             <div class="product-thumb">
