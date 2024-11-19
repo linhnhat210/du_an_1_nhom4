@@ -118,9 +118,9 @@
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
                                                                     <!-- <a href="?act=form-sua-san-pham&san_pham_id=<?= $sanPham['id']?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a> -->
-                                                                    <form action="?act=xoa-san-pham" method="POST"
+                                                                    <form action="?act=xoa-banner" method="POST"
                                                                      onsubmit="return confirm('Bạn có đồng ý xóa không')">
-                                                                    <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                                                                    <input type="hidden" name="banner_id" value="<?= $Banner['id'] ?>">
                                                                     <button type="submit" class="link-danger fs-15" style="border:none;background:none;">
                                                                         <i class="ri-delete-bin-line"></i>
                                                                     </button>

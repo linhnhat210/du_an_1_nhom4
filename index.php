@@ -8,26 +8,44 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 require_once './controllers/HomeController.php';
 require_once './controllers/LienHeController.php';
 require_once './controllers/TintucController.php';
-require_once 'controllers/BannerController.php';
-
+require_once './controllers/BannerController.php';
+require_once './controllers/NguoiDungController.php';
+require_once './controllers/DangkiController.php';
+require_once './controllers/DanhMucController.php';
 
 // Require toàn bộ file Models
 require_once './models/Lienhe.php';
 require_once './models/Tintuc.php';
 require_once 'models/Banner.php';
+require_once 'models/NguoiDung.php';
+require_once 'models/DangKi.php';
+require_once 'models/SanPham.php';
+require_once 'models/DanhMuc.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
 
-// Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
-
+// Để bảo đảm tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 match ($act) {
     // Trang chủ
-    '/'                 => (new HomeController())->index(),
+    '/'                 => (new HomeController())->home(),
 
+    // Liên hệ
     'form-lien-he'      => (new LienHeControler())->index(),
     'gui-thong-tin'     => (new LienHeControler())->guilienhe(),
 
-    'list-tin-tucs'      => (new TintucController())->index(),
+    // Tin tức
+    'list-tin-tucs'     => (new TintucController())->index(),
 
+     // Đăng nhập
+    'login'               => (new NguoiDungController())->formLogin(),
+    'check-login'         => (new NguoiDungController())->login(),
+
+
+    // Load thêm sản phẩm
+    'load-more-products' => (new HomeController())->loadMoreProducts(),
+    
+    // Default fallback nếu không có action hợp lệ
+    default               => (new HomeController())->index(),
+   
 };

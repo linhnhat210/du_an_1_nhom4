@@ -116,16 +116,16 @@
             <div class="page-content">
                 <div class="container-fluid">
                      <!-- start page title -->
-                     <div class="row">
+                      <!-- start page title -->
+                    <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                <h4 class="mb-sm-0">Quản Lý Đơn hàng</h4>
-                                
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Chi tiết đơn hàng</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
-                                        <li class="breadcrumb-item active">Đơn hàng</li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Đơn hàng</a></li>
+                                        <li class="breadcrumb-item active">Chi tiết đơn hàng</li>
                                     </ol>
                                 </div>
 
@@ -133,119 +133,161 @@
                         </div>
                     </div>
                     <!-- end page title -->
-<div class="content-wrapper">
-    <div class="card order-card">
-        <div class="card-header order-header">
-            <h2>Quản lý danh sách đơn hàng - Đơn hàng: <?= $donHang['ma_don_hang'] ?></h2>
-        </div>
-        <div class="card-body order-body">
-            <?php
-            $colorAlerts = match($donHang['trang_thai_id']) {
-                1 => 'primary',
-                2,3,4,5,6,7,8 => 'warning',
-                9 => 'success',
-                default => 'danger',
-            };
-            ?>
-            <div class="alert alert-<?= $colorAlerts ?>" role="alert">
-                Đơn hàng: <?= $donHang['ten_trang_thai'] ?>
-            </div>
 
-            <!-- Thông tin người đặt Table -->
-            <div class="table-responsive mb-4">
-                <table class="table info-table">
-                    <thead>
-                        <tr><th colspan="2">Thông tin người đặt</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>Họ tên:</strong></td><td><?= $donHang['ten_nguoi_dung'] ?></td></tr>
-                        <tr><td><strong>Email:</strong></td><td><?= $donHang['email'] ?></td></tr>
-                        <tr><td><strong>Số điện thoại:</strong></td><td><?= $donHang['sdt'] ?></td></tr>
-                    </tbody>
-                </table>
-            </div>
+                    <div class="row">
+                        <div class="col-xl-9">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="d-flex align-items-center">
+                                        <h5 class="card-title flex-grow-1 mb-0">Đơn hàng #VL2667</h5>
+                                        <div class="flex-shrink-0">
+                                            <a href="apps-invoices-details.html" class="btn btn-success btn-sm"><i class="ri-download-2-fill align-middle me-1"></i> Invoice</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive table-card">
+                                        <table class="table table-nowrap align-middle table-borderless mb-0">
+                                            <thead class="table-light text-muted">
+                                                <tr>
+                                                    <th scope="col">Tên Sản Phẩm</th>
+                                                    <th scope="col">Giá</th>
+                                                    <th scope="col">Số lượng</th>
+                                                    <th scope="col">Thành tiền</th>
+                                                    <th scope="col">Giảm giá</th>
+                                                    <th scope="col">Phí ship</th>
+                                                    <th scope="col" class="text-end">Tổng tiền</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <div class="flex-shrink-0 avatar-md bg-light rounded p-1" style="width:75px;height">
+                                                                <img src="<?=BASE_URL .$sanPhamDonHang[0]['hinh_anh']?>" alt="" class="img-fluid d-block">
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-3 align-self-center">
+                                                                <h5 class="fs-15"><a href="?act=chi-tiet-san-pham&san_pham_id=<?=$sanPhamDonHang[0]['san_pham_id']?>" class="link-primary"><?= $sanPhamDonHang[0]['ten_san_pham']?> </a></h5>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td> <?= isset($sanPhamDonHang[0]['gia_khuyen_mai']) && $sanPhamDonHang[0]['gia_khuyen_mai'] > 0 ? $sanPhamDonHang[0]['gia_khuyen_mai'] : $sanPhamDonHang[0]['gia_ban'] ?></td>
+                                                    <td><?=$sanPhamDonHang[0]['so_luong']?></td>
+                                                    <td>
+                                                        
+                                                        <?=$sanPhamDonHang[0]['don_gia']?>
+                                                    </td>
+                                                    <td class="fw-medium text-end">
+                                                        <?=$sanPhamDonHang[0]['giam_gia']?>
+                                                    </td>
+                                                    <td class="fw-medium text-end">
+                                                        0
+                                                    </td>
+                                                    <td class="fw-medium text-end">
+                                                           <?=$sanPhamDonHang[0]['thanh_tien']?>
+                                                    </td>
+                                               
+                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end card-->
+                            
+                        </div>
+                        <!--end col-->
+                        <div class="col-xl-3">
+                           
 
-            <!-- Người nhận Table -->
-            <div class="table-responsive mb-4">
-                <table class="table info-table">
-                    <thead>
-                        <tr><th colspan="2">Người nhận</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>Họ tên:</strong></td><td><?= $donHang['ten_nguoi_nhan'] ?></td></tr>
-                        <tr><td><strong>Email:</strong></td><td><?= $donHang['email_nguoi_nhan'] ?></td></tr>
-                        <tr><td><strong>Số điện thoại:</strong></td><td><?= $donHang['sdt_nguoi_nhan'] ?></td></tr>
-                        <tr><td><strong>Địa chỉ:</strong></td><td><?= $donHang['dia_chi_nguoi_nhan'] ?></td></tr>
-                    </tbody>
-                </table>
-            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="d-flex">
+                                        <h5 class="card-title flex-grow-1 mb-0">Người Đặt</h5>
+                                        <div class="flex-shrink-0">
+                                            <a href="?act=chi-tiet-nguoi-dung&id_nguoi_dung=<?= $donHang['nguoi_dung_id']?>" class="link-secondary">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled mb-0 vstack gap-3">
+                                        <li>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <img src=" <?= BASE_URL . $donHang['avatar']?>" alt=""  onerror="this.onerror=null; this.src=' https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'" class="avatar-sm rounded">
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h6 class="fs-14 mb-1"><?= $donHang['ten_nguoi_dung']?></h6>
+                                                    <p class="text-muted mb-0"><?= $donHang['vai_tro'] == 1 ? 'Quản Trị Viên' : 'Khách Hàng'?></p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li><i class="ri-mail-line me-2 align-middle text-muted fs-16"></i> <?= $donHang['email']?></li>
+                                        <li><i class="ri-phone-line me-2 align-middle text-muted fs-16"></i> <?= $donHang['sdt']?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--end card-->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0"><i class="ri-map-pin-line align-middle me-1 text-muted"></i>Địa chỉ nhân hàng</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled vstack gap-2 fs-13 mb-0">      
+                                        <li class="fw-medium fs-14">Tên người nhận : <?= $donHang['ten_nguoi_nhan']?></li>
+                                        <li>Số điện thoại: <?= $donHang['sdt_nguoi_nhan']?></li>
+                                        <li>Địa chỉ : <?= $donHang['dia_chi_nguoi_nhan']?></li>
+                                        
+                                        <li>Ghi chú : <?= $donHang['ghi_chu']?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!--end card-->
 
-            <!-- Chi tiết đơn hàng Table -->
-            <div class="table-responsive mb-4">
-                <table class="table info-table">
-                    <thead>
-                        <tr><th colspan="2">Chi tiết đơn hàng</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>Mã đơn hàng:</strong></td><td><?= $donHang['ma_don_hang'] ?></td></tr>
-                        <tr><td><strong>Tổng tiền:</strong></td><td><?= number_format($donHang['tong_tien'], 0, ',', '.') ?>đ</td></tr>
-                        <tr><td><strong>Ghi chú:</strong></td><td><?= $donHang['ghi_chu'] ?></td></tr>
-                        <tr><td><strong>Thanh toán:</strong></td><td><?= $donHang['ten_phuong_thuc'] ?></td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Product List Table -->
-            <div class="table-responsive">
-                <table class="table product-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Số lượng</th>
-                            <th>Đơn giá</th>
-                            <th>Giảm giá</th>
-                            <th>Thành tiền</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $tong_tien = 0; ?>
-                        <?php foreach($sanPhamDonHang as $key => $sanPham) : ?>
-                            <tr>
-                                <td><?= ++$key ?></td>
-                                <td><?= $sanPham['ten_san_pham'] ?></td>
-                                <td><?= $sanPham['so_luong'] ?></td>
-                                <td><?= number_format($sanPham['don_gia'], 0, ',', '.') ?>đ</td>
-                                <td><?= number_format($sanPham['giam_gia'], 0, ',', '.') ?>đ</td>
-                                <td><?= number_format($sanPham['thanh_tien'], 0, ',', '.') ?>đ</td>
-                            </tr>
-                            <?php $tong_tien += $sanPham['thanh_tien']; ?>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Order Summary Table -->
-            <div class="table-responsive">
-                <table class="table product-table">
-                    <tr>
-                        <th>Thành tiền:</th>
-                        <td><?= number_format($tong_tien, 0, ',', '.') ?>đ</td>
-                    </tr>
-                    <tr>
-                        <th>Vận chuyển:</th>
-                        <td>20.000đ</td>
-                    </tr>
-                    <tr>
-                        <th>Tổng tiền:</th>
-                        <td><?= number_format($tong_tien + 20000, 0, ',', '.') ?>đ</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0"><i class="ri-secure-payment-line align-bottom me-1 text-muted"></i>Chi tiết đơn hàng</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="flex-shrink-0">
+                                            <p class="text-muted mb-0">Mã đơn hàng :</p>
+                                        </div>
+                                        <div class="flex-grow-1 ms-2">
+                                            <h6 class="mb-0"><?= $donHang['ma_don_hang']?></h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="flex-shrink-0">
+                                            <p class="text-muted mb-0">Phương thức thanh toán :</p>
+                                        
+                                            <h6 class="mb-0"><?= $donHang['ten_phuong_thuc']?></h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="flex-shrink-0">
+                                            <p class="text-muted mb-0">Trạng thái đơn hàng :</p>
+                                        
+                                            <h6 class="mb-0"><?= $donHang['ten_trang_thai']?></h6>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <p class="text-muted mb-0">Tổng tiền:</p>
+                                        </div>
+                                        <div class="flex-grow-1 ms-2">
+                                            <h6 class="mb-0"><?= $donHang['tong_tien']?> </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end card-->
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
 
 
 

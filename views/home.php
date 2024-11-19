@@ -33,6 +33,15 @@
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .product-thumb img {
+    width: 100%; /* Chiều rộng ảnh chiếm toàn bộ không gian container */
+    height: auto; /* Giữ nguyên tỷ lệ ban đầu nếu không bị cắt */
+    aspect-ratio: 3 / 4; /* Đảm bảo tỷ lệ 3x4 */
+    object-fit: cover; /* Cắt ảnh nếu cần để phù hợp với container */
+    border-radius: 8px; /* (Tuỳ chọn) Bo góc để ảnh trông mượt mà */
+}
+    </style>
 
 </head>
 
@@ -101,245 +110,66 @@
 
         <!-- product area start -->
         <section class="product-area section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- section title start -->
-                        <div class="section-title text-center">
-                            <h2 class="title">Toàn bộ truyện tranh</h2>
-                            <p class="sub-title">Thêm Sản phẩm của chúng tôi vào giỏ hàng của bạn</p>
-                        </div>
-                        <!-- section title start -->
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- section title start -->
+                <div class="section-title text-center">
+                    <h2 class="title">Toàn bộ truyện tranh</h2>
+                    <p class="sub-title">Thêm Sản phẩm của chúng tôi vào giỏ hàng của bạn</p>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="product-container">
-
-                            <!-- product tab content start -->
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="tab1">
-                                    <div class="product-carousel-4 slick-row-10">
-                                        <!-- product item start -->
-                                        <div class="product-item">
-                                            <figure class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img class="pri-img" src="assets/img/product/daophu.png" alt="product">
-                                                    <img class="sec-img" src="assets/img/product/shy.png" alt="product">
+                <!-- section title start -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="product-container">
+                    <!-- product tab content start -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab1">
+                            <!-- Sản phẩm được hiển thị theo dạng grid -->
+                            <div class="row" id="product-list">
+                                <?php foreach (array_slice($listSanPham, 0, 12) as $key => $sanPham): ?>
+                                    <div class="col-md-3 col-sm-6 mb-4 product-item">
+                                        <div class="card">
+                                            <div class="product-thumb">
+                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
+                                                    <img class="card-img-top" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
                                                 </a>
-                                                <div class="product-badge">
-                                                    <div class="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div class="product-label discount">
-                                                        <span>10%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="button-group">
-                                                    <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                                                </div>
                                                 <div class="cart-hover">
-                                                    <button class="btn btn-cart">add to cart</button>
+                                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>" class="btn btn-cart">Xem chi tiết</a>
                                                 </div>
-                                            </figure>
-                                            <div class="product-caption text-center">
-                                                <div class="product-identity">
-                                                    <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                                </div>
-                                                <ul class="color-categories">
-                                                    <li>
-                                                        <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
-                                                <h6 class="product-name">
-                                                    <a href="product-details.html">Perfect Diamond Jewelry</a>
-                                                </h6>
+                                            </div>
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title">
+                                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
+                                                </h5>
                                                 <div class="price-box">
-                                                    <span class="price-regular">$60.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
+                                                    <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                        <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) ?>đ</span>
+                                                        <span class="price-old"><del><?= formatPrice($sanPham['gia_ban']) ?>đ</del></span>
+                                                    <?php } else { ?>
+                                                        <span class="price-regular"><?= formatPrice($sanPham['gia_ban']) ?>đ</span>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                        <!-- product item end -->
-
-                                        <!-- product item start -->
-                                        <div class="product-item">
-                                            <figure class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img class="pri-img" src="assets/img/product/daophu.png" alt="product">
-                                                    <img class="sec-img" src="assets/img/product/shy.png" alt="product">
-                                                </a>
-                                                <div class="product-badge">
-                                                    <div class="product-label new">
-                                                        <span>sale</span>
-                                                    </div>
-                                                    <div class="product-label discount">
-                                                        <span>new</span>
-                                                    </div>
-                                                </div>
-                                                <div class="button-group">
-                                                    <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                                                </div>
-                                                <div class="cart-hover">
-                                                    <button class="btn btn-cart">add to cart</button>
-                                                </div>
-                                            </figure>
-                                            <div class="product-caption text-center">
-                                                <div class="product-identity">
-                                                    <p class="manufacturer-name"><a href="product-details.html">mony</a></p>
-                                                </div>
-                                                <ul class="color-categories">
-                                                    <li>
-                                                        <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
-                                                <h6 class="product-name">
-                                                    <a href="product-details.html">Handmade Golden Necklace</a>
-                                                </h6>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$50.00</span>
-                                                    <span class="price-old"><del>$80.00</del></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- product item end -->
-
-                                        <!-- product item start -->
-                                        <div class="product-item">
-                                            <figure class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img class="pri-img" src="assets/img/product/daophu.png" alt="product">
-                                                    <img class="sec-img" src="assets/img/product/shy.png" alt="product">
-                                                </a>
-                                                <div class="product-badge">
-                                                    <div class="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                </div>
-                                                <div class="button-group">
-                                                    <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                                                </div>
-                                                <div class="cart-hover">
-                                                    <button class="btn btn-cart">add to cart</button>
-                                                </div>
-                                            </figure>
-                                            <div class="product-caption text-center">
-                                                <div class="product-identity">
-                                                    <p class="manufacturer-name"><a href="product-details.html">Diamond</a></p>
-                                                </div>
-                                                <ul class="color-categories">
-                                                    <li>
-                                                        <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
-                                                <h6 class="product-name">
-                                                    <a href="product-details.html">Perfect Diamond Jewelry</a>
-                                                </h6>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$99.00</span>
-                                                    <span class="price-old"><del></del></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- product item end -->
-
-                                        <!-- product item start -->
-                                        <div class="product-item">
-                                            <figure class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img class="pri-img" src="assets/img/product/daophu.png" alt="product">
-                                                    <img class="sec-img" src="assets/img/product/shy.png" alt="product">
-                                                </a>
-                                                <div class="product-badge">
-                                                    <div class="product-label new">
-                                                        <span>sale</span>
-                                                    </div>
-                                                    <div class="product-label discount">
-                                                        <span>15%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="button-group">
-                                                    <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                                                </div>
-                                                <div class="cart-hover">
-                                                    <button class="btn btn-cart">add to cart</button>
-                                                </div>
-                                            </figure>
-                                            <div class="product-caption text-center">
-                                                <div class="product-identity">
-                                                    <p class="manufacturer-name"><a href="product-details.html">silver</a></p>
-                                                </div>
-                                                <ul class="color-categories">
-                                                    <li>
-                                                        <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
-                                                <h6 class="product-name">
-                                                    <a href="product-details.html">Diamond Exclusive Ornament</a>
-                                                </h6>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$55.00</span>
-                                                    <span class="price-old"><del>$75.00</del></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- product item end -->
-
                                     </div>
-                                </div>
-
+                                <?php endforeach; ?>
                             </div>
-                            <!-- product tab content end -->
+                            <!-- Add "Xem thêm" button -->
+                            <div class="text-center">
+                                <button id="load-more" style="background-color: #ccac78" class="btn-cart">Xem thêm</button>
+                            </div>
                         </div>
                     </div>
+                    <!-- product tab content end -->
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+
         <!-- product area end -->
 
 
@@ -469,6 +299,67 @@
 
     <!-- JS
 ============================================ -->
+<script>
+    let offset = 12; // Bắt đầu từ sản phẩm thứ 13 (vì đã hiển thị 12 sản phẩm đầu tiên)
+
+    document.getElementById('load-more').addEventListener('click', function () {
+        fetch('<?= BASE_URL ?>?act=load-more-products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ offset: offset, limit: 4 }) // Gửi offset và limit
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Render thêm sản phẩm vào danh sách
+                const productList = document.getElementById('product-list');
+                data.products.forEach(product => {
+                    const productHTML = `
+                        <div class="col-md-3 col-sm-6 mb-4 product-item">
+                            <div class="card">
+                                <div class="product-thumb">
+                                    <a href="${product.detailUrl}">
+                                        <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}">
+                                    </a>
+                                    <div class="cart-hover">
+                                        <a href="${product.detailUrl}" class="btn btn-cart">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">
+                                        <a href="${product.detailUrl}">${product.name}</a>
+                                    </h5>
+                                    <div class="price-box">
+                                        ${product.discountPrice
+                                            ? `<span class="price-regular">${product.discountPrice}</span>
+                                               <span class="price-old"><del>${product.originalPrice}</del></span>`
+                                            : `<span class="price-regular">${product.originalPrice}</span>`
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    productList.insertAdjacentHTML('beforeend', productHTML);
+                });
+
+                // Cập nhật offset
+                offset += data.products.length;
+
+                // Ẩn nút nếu không còn sản phẩm
+                if (data.products.length < 4) {
+                    document.getElementById('load-more').style.display = 'none';
+                }
+            } else {
+                alert('Không có thêm sản phẩm để hiển thị!');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+                                                        
     <!-- Modernizer JS -->
     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <!-- jQuery JS -->

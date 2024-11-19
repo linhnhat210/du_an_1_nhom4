@@ -36,6 +36,8 @@ class donHang
                             nguoi_dungs.ten_nguoi_dung,
                             nguoi_dungs.email,
                             nguoi_dungs.sdt,
+                            nguoi_dungs.avatar,
+                            nguoi_dungs.vai_tro,
                             phuong_thuc_thanh_toans.ten_phuong_thuc
             FROM don_hangs
             INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
@@ -58,10 +60,14 @@ class donHang
     public function getListSpDonHang($id)
     {
         try {
-            $sql = 'SELECT chi_tiet_don_hangs.*, san_phams.ten_san_pham
-            FROM chi_tiet_don_hangs
-            INNER JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
-            WHERE chi_tiet_don_hangs.don_hang_id = :id';
+            $sql = 'SELECT  chi_tiet_don_hangs.*,
+                            san_phams.ten_san_pham,
+                            san_phams.hinh_anh,
+                            san_phams.gia_ban,
+                            san_phams.gia_khuyen_mai
+                    FROM chi_tiet_don_hangs
+                    INNER JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
+                    WHERE chi_tiet_don_hangs.don_hang_id = :id';
 
             $stmt = $this->conn->prepare($sql);
 

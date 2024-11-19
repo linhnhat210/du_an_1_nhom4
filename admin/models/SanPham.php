@@ -286,6 +286,21 @@ public function updateSanPham($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_k
             echo "lỗi" . $e->getMessage();
         }
     }
+    public function diemDanhGia($id){
+        try {
+            //code...
+            $sql ='SELECT AVG(diem_danh_gia) AS diem_trung_binh
+                   FROM danh_gias
+                   WHERE san_pham_id = :id';
+              $stmt = $this->conn->prepare($sql);
+
+              $stmt->execute([':id' => $id]);
+              $ketQua = $stmt->fetch();
+              return $ketQua['diem_trung_binh'] ?? 0;
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
     
 
 

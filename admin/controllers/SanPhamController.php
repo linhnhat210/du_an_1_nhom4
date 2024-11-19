@@ -316,6 +316,9 @@ class SanPhamController
         $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
         
         $listDanhGia = $this->modelSanPham->getDanhGiaFromSanPham($id);
+        $diemDanhGia = $this->modelSanPham->diemDanhGia($id);
+        
+        // var_dump($diemDanhGia);die;
 
         if ($sanPham) {
             require_once './views/sanpham/detail_san_pham.php';

@@ -1,4 +1,8 @@
-    <header class="header-area header-wide">
+  <?php
+$danhMucs = (new DanhMucsController())->DanhMuc();
+
+?>
+  <header class="header-area header-wide">
         <!-- main header start -->
         <div class="main-header d-none d-lg-block">
 
@@ -29,38 +33,11 @@
                                             </li>
                                             <li class="position-static"><a href="#">Thể Loại<i class="fa fa-angle-down"></i></a>
                                                 <ul class="megamenu dropdown">
-                                                    <li class="mega-title"><span>column 01</span>
-                                                        <ul>
-                                                            <li><a href="shop.html">shop grid left sidebar</a></li>
-                                                            <li><a href="shop-grid-right-sidebar.html">shop grid right sidebar</a></li>
-                                                            <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="mega-title"><span>column 02</span>
-                                                        <ul>
-                                                            <li><a href="product-details.html">product details</a></li>
-                                                            <li><a href="product-details-affiliate.html">product details affiliate</a></li>
-                                                            <li><a href="product-details-variable.html">product details variable</a></li>
-                                                            <li><a href="privacy-policy.html">privacy policy</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="mega-title"><span>column 03</span>
-                                                        <ul>
-                                                            <li><a href="cart.html">cart</a></li>
-                                                            <li><a href="checkout.html">checkout</a></li>
-                                                            <li><a href="compare.html">compare</a></li>
-                                                            <li><a href="wishlist.html">wishlist</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="mega-title"><span>column 04</span>
-                                                        <ul>
-                                                            <li><a href="my-account.html">my-account</a></li>
-                                                            <li><a href="login-register.html">login-register</a></li>
-                                                            <li><a href="about-us.html">about us</a></li>
-                                                            <li><a href="contact-us.html">contact us</a></li>
-                                                        </ul>
-                                                    </li>
+                                                    <?php foreach($danhMucs as $danhMuc) : ?>
+                                                    
+                                                            <li><a href="san_pham_theo_danh_muc&danh_muc_id=<?=$danhMuc["id"]?>"><?= $danhMuc['ten_danh_muc']?></a></li>
+                                                           
+                                                      <?php endforeach; ?>
                                                 </ul>
                                             </li>
                                             <!-- <li><a href="shop.html">shop <i class="fa fa-angle-down"></i></a>
@@ -136,8 +113,8 @@
                                                 <i class="pe-7s-user"></i>
                                             </a>
                                             <ul class="dropdown-list">
-                                                <li><a href="login-register.html">Đăng Nhập</a></li>
-                                                <li><a href="login-register.html">Đăng Ký</a></li>
+                                                <li><a href="<?= BASE_URL . './?act=login' ?>">Đăng Nhập</a></li> 
+                                                <li><a href="<?= BASE_URL . './?act=form-dang-ki' ?>">Đăng Ký</a></li>
                                                 <li><a href="my-account.html">Tài Khoản Của Tôi</a></li>
                                             </ul>
                                         </li>

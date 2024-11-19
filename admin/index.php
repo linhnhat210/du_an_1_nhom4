@@ -80,8 +80,6 @@ match ($act) {
     'banners'                                   => (new BannerController())->index(),
     'form-them-banner'                          => (new BannerController())->create(),
     'post-them-banner'                          => (new BannerController())->postcreate(),
-    'form-sua-banner'                           => (new BannerController())->edit(),
-    'post-sua-banner'                           => (new BannerController())->postedit(),
     'xoa-banner'                                => (new BannerController())->destroy(),
     'search-banner'                             => (new BannerController())->search(),
     

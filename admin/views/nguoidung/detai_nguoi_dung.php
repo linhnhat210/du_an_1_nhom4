@@ -76,10 +76,10 @@
                                             <section class="content">
                                                 <div class="container-fluid">
                                                     <div class="row">
-                                                        <div class="col-4">
-                                                            <td>
-                                                                <img src="<?= $nguoiDung['avatar'] ?>"
-                                                                    style="width:80%; " alt=""
+                                                        <div class="col-4 d-flex justify-content-center align-items-center">
+                                                            <td class="">
+                                                                <img src="<?= BASE_URL . $nguoiDung['avatar'] ?>"
+                                                                    style="width:80%;border-radius:50%; " alt=""
                                                                     onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'">
                                                             </td>
                                                         </div>
