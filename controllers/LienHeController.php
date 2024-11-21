@@ -22,6 +22,7 @@ class LienHeControler
         
         // varlidate
         $errors = [];
+        
         if(empty($ten_khach_hang)){
             $errors["ten_khach_hang"] = "Vui lòng nhập tên khách hàng";
         }
@@ -42,6 +43,7 @@ class LienHeControler
             // thêm vào csdl
             // var_dump($ngay_lien_he);die;
             $this->modelLienhe->guilienhe($ten_khach_hang,$email,$so_dien_thoai,$tin_nhan,$ngay_lien_he,$trang_thai);
+            $_SESSION['success'] = 'Gửi thông tin liên hệ thành công!';
             // unset($_SESSION['errors']);
             header("Location: ?act=form-lien-he");
             exit();

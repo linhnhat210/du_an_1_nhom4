@@ -31,11 +31,11 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
                                         <ul>
                                             <li class="active"><a href="?act=/">Trang Chủ</a>
                                             </li>
-                                            <li class="position-static"><a href="#">Thể Loại<i class="fa fa-angle-down"></i></a>
+                                            <li class="position-static"><a href="?act=list-san-pham">Truyện Tranh<i class="fa fa-angle-down"></i></a>
                                                 <ul class="megamenu dropdown">
                                                     <?php foreach($danhMucs as $danhMuc) : ?>
                                                     
-                                                            <li><a href="san_pham_theo_danh_muc&danh_muc_id=<?=$danhMuc["id"]?>" style="text-transform:uppercase;"><?= $danhMuc['ten_danh_muc']?></a></li>
+                                                            <li><a href="?act=list-san-pham&danh_muc_id=<?=$danhMuc["id"]?>" style="text-transform:uppercase;"><?= $danhMuc['ten_danh_muc']?></a></li>
                                                            
                                                       <?php endforeach; ?>
                                                 </ul>
@@ -82,6 +82,7 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
                                                 </ul> -->
                                             </li>
                                             <li><a href="?act=form-lien-he">Liên Hệ</a></li>
+                                            <li><a href="?act=form-khuyen-mai">Khuyến Mãi</a></li>
                                         </ul>
                                     </nav>
                                     <!-- main menu navbar end -->

@@ -20,6 +20,10 @@ class NguoiDungController{
             // Lấy email và pass gửi lên từ form
             $email = $_POST['email'];
             $mat_khau = $_POST['mat_khau'];
+
+            
+            
+            
             // var_dump($email);die;
 
             // Xử lý kiểm tra thông tin đăng nhập

@@ -33,6 +33,12 @@
 </head>
 
 <body>
+    <?php 
+    if (isset($_SESSION['success'])) {
+    echo "<script>alert('" . $_SESSION['success'] . "');</script>";
+    unset($_SESSION['success']); // Xóa thông báo sau khi hiển thị
+    }
+    ?>
     <!-- Header -->
     <?php require_once 'views/layout/header.php'; ?>
     
