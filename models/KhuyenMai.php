@@ -14,7 +14,7 @@ class KhuyenMai
     // damh sach
     public function getKhuyenmai() {
         try {
-            $sql = 'SELECT * FROM khuyen_mais';
+            $sql = 'SELECT * FROM khuyen_mais WHERE trang_thai = 2';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
     

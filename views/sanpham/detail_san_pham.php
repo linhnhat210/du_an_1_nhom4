@@ -33,24 +33,47 @@
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+
     <style>
         .product-thumb img {
             width: 100%;
             /* Chiều rộng ảnh chiếm toàn bộ không gian container */
             height: auto;
             /* Giữ nguyên tỷ lệ ban đầu nếu không bị cắt */
-            aspect-ratio: 3 / 4;
+            aspect-ratio: 3 / 5;
             /* Đảm bảo tỷ lệ 3x4 */
             object-fit: cover;
             /* Cắt ảnh nếu cần để phù hợp với container */
             border-radius: 8px;
             /* (Tuỳ chọn) Bo góc để ảnh trông mượt mà */
         }
+.pro-nav-thumb img{
+                width: 100%;
+            /* Chiều rộng ảnh chiếm toàn bộ không gian container */
+            height: auto;
+            /* Giữ nguyên tỷ lệ ban đầu nếu không bị cắt */
+            aspect-ratio: 3 / 5;
+            /* Đảm bảo tỷ lệ 3x4 */
+            object-fit: cover;
+            /* Cắt ảnh nếu cần để phù hợp với container */
 
+}
         #amount::after {
             content: "K";
             /* Thêm chữ "K" sau giá trị */
+            
         }
+        .comment-date {
+    font-size: 14px;
+    color: #6c757d; /* Màu xám nhạt */
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.comment-date::before {
+    content: "📅 "; /* Biểu tượng lịch */
+    color: #007bff; /* Màu xanh dương cho biểu tượng */
+}
     </style>
 
 </head>
@@ -70,8 +93,9 @@
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="<?php BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="?act=list-san-pham">San phẩm</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
+                                <li class="breadcrumb-item"><a href="?act=list-san-pham">Sản phẩm</a></li>
+                       
+                                <li class="breadcrumb-item active" aria-current="page"><?= $sanPham['ten_san_pham']?></li>
                             </ul>
                         </nav>
                     </div>
@@ -92,16 +116,22 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="product-large-slider">
+                                    <div class="pro-large-img">
+                                            <img src="<?= BASE_URL . $sanPham['hinh_anh']?>" alt="product-details" />
+                                        </div>
                                     <?php
                                     // var_dump($listAnhSanPham);
                                     // die;
                                     foreach ($listAnhSanPham as $key => $anhSanPham): ?>
-                                        <div class="pro-large-img img-zoom">
+                                        <div class="pro-large-img">
                                             <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>" alt="product-details" />
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
                                 <div class="pro-nav slick-row-10 slick-arrow-style">
+                                    <div class="pro-nav-thumb">
+                                            <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product-details" />
+                                        </div>
                                     <?php foreach ($listAnhSanPham as $key => $anhSanPham): ?>
                                         <div class="pro-nav-thumb">
                                             <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>" alt="product-details" />
@@ -154,47 +184,58 @@
 
                     <!-- product details reviews start -->
                     <div class="product-details-reviews section-padding pb-0">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="product-review-info">
-                                    <ul class="nav review-tab">
-                                        <li>
-                                            <a class="active" data-bs-toggle="tab" href="#tab_three">Bình luận (<?= $countComment ?>)</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content reviews-tab">
-                                        <div class="tab-pane fade show active" id="tab_three">
-                                            <?php foreach ($listBinhLuan as $binhLuan) : ?>
-                                                <div class="total-reviews">
-                                                    <div class="rev-avatar">
-                                                        <img src="<?= $binhLuan['anh_dai_dien'] ?>" alt="">
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <div class="post-author">
-                                                            <p><span><?= $binhLuan['ho_ten'] ?></span><?= $binhLuan['ngay_dang'] ?></p>
-                                                        </div>
-                                                        <p><?= $binhLuan['noi_dung'] ?></p>
-                                                    </div>
-                                                </div>
-                                            <?php endforeach; ?>
-                                            <form action="#" class="review-form">
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
-                                                            Nội dung bình luận</label>
-                                                        <textarea class="form-control" required></textarea>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                        <div class="buttons">
-                                            <button class="btn btn-sqr" type="submit">Bình luận</button>
-                                        </div>
-                                        </form> <!-- end of review-form -->
-                                    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="product-review-info">
+                <ul class="nav review-tab">
+                    <li>
+                        <a class="active" data-bs-toggle="tab" href="#tab_three">Bình luận (<?= $countComment ?>)</a>
+                    </li>
+                </ul>
+                <div class="tab-content reviews-tab">
+                    <div class="tab-pane fade show active" id="tab_three">
+                        <!-- Form bình luận -->
+                        <form action="?act=dang-binh-luan" method="POST" class="review-form">
+                            <input type="hidden" name="san_pham_id" value="<?= $sanPham["id"] ?>">
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label class="col-form-label"><span class="text-danger">*</span> Nội dung bình luận</label>
+                                    <textarea class="form-control" name="noi_dung" required></textarea>
                                 </div>
                             </div>
-                        </div>
+                            <div class="buttons">
+                                <button class="btn btn-sqr" type="submit">Bình luận</button>
+                            </div>
+                        </form>
+                        <!-- Kết thúc form bình luận -->
+                        <br>
+                        <!-- Danh sách bình luận -->
+                        <?php foreach ($listBinhLuan as $binhLuan) : ?>
+                            <div class="total-reviews">
+                                <div class="rev-avatar">
+                                    <img src="<?= BASE_URL . $binhLuan['avatar'] ?>" style="width:80%;border-radius:50%;"
+                                        alt=""
+                                        onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'">
+                                </div>
+                                <div class="review-box">
+                                    <div class="post-author">
+                                        <p><span><?= $binhLuan["ten_nguoi_dung"] ?></span></p>
+                                         <p class="commentDate" data-comment-date="<?= date('Y-m-d\TH:i:s', strtotime($binhLuan['ngay_binh_luan'])) ?>">
+        <?= $binhLuan['ngay_binh_luan'] ?>
+    </p>
+                                    </div>
+                                    <p><?= $binhLuan['noi_dung'] ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                        <!-- Kết thúc danh sách bình luận -->
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
                 </div>
                 <!-- product details reviews end -->
             </div>
@@ -282,11 +323,60 @@
     ?>
     <!-- footer area end -->
 
+
+    
+          <!-- Mini cart -->
+      <?php require_once "./views/layout/cart.php"; ?>
+
     
 
   
     <!-- JS
 ============================================ -->
+<script>
+    // Chuẩn hóa định dạng ngày sang ISO (YYYY-MM-DDTHH:mm:ss)
+    function formatToISO(dateString) {
+        if (dateString.includes(" ")) {
+            return dateString.replace(" ", "T"); // Thay khoảng trắng bằng "T"
+        }
+        return dateString; // Trả về nếu đã đúng định dạng ISO
+    }
+
+    // Hàm tính toán thời gian đã qua
+    function timeAgo(dateString) {
+        const formattedDate = formatToISO(dateString); // Chuẩn hóa định dạng
+        const commentDate = new Date(formattedDate); // Chuyển thành đối tượng Date
+
+        // Kiểm tra ngày hợp lệ
+        if (isNaN(commentDate.getTime())) {
+            return dateString; // Trả về chuỗi gốc nếu ngày không hợp lệ
+        }
+
+        const now = new Date();
+        const diff = now - commentDate; // Khoảng cách thời gian (ms)
+
+        const seconds = Math.floor(diff / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+
+        if (seconds < 60) return `${seconds} giây trước`;
+        if (minutes < 60) return `${minutes} phút trước`;
+        if (hours < 24) return `${hours} giờ trước`;
+        return `${days} ngày trước`;
+    }
+
+    // Xử lý tất cả các bình luận
+    const commentDateElements = document.querySelectorAll(".commentDate");
+    commentDateElements.forEach(element => {
+        const commentDateString = element.getAttribute("data-comment-date");
+        if (commentDateString) {
+            element.innerText = timeAgo(commentDateString);
+        } else {
+            element.innerText = "Không có thời gian bình luận";
+        }
+    });
+</script>
 
     <!-- Modernizer JS -->
     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
@@ -314,8 +404,12 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
     <!-- google map active js -->
     <script src="assets/js/plugins/google-map.js"></script>
+
+
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+
+
 </body>
 
 

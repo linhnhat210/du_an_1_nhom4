@@ -17,6 +17,7 @@ class SanPham
             $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc
                     FROM san_phams
                     LEFT JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+                    ORDER BY id DESC
 ';
 
             $stmt = $this->conn->prepare($sql);
@@ -37,14 +38,12 @@ class SanPham
             LEFT JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
             WHERE san_phams.ten_san_pham LIKE ?    
                OR danh_mucs.ten_danh_muc LIKE ?
-               OR san_phams.tac_gia LIKE ?
                OR san_phams.gia_ban LIKE ?";
     $stmt = $this->conn->prepare($sql);
 
     $stmt->bindValue(1, "%$keyword%");
     $stmt->bindValue(2, "%$keyword%");
     $stmt->bindValue(3, "%$keyword%");
-    $stmt->bindValue(4, "%$keyword%");
 
 
     try {
@@ -58,17 +57,16 @@ class SanPham
       }
 
     //thêm sản phẩm
-    public function createSanPham($ten_san_pham,$danh_muc_id,$tac_gia,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai,$hinh_anh){
+    public function createSanPham($ten_san_pham,$danh_muc_id,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai,$hinh_anh){
         try {
             //code...
-            $sql = 'INSERT INTO  san_phams (ten_san_pham,danh_muc_id,tac_gia,gia_ban,gia_khuyen_mai,so_luong,ngay_nhap,mo_ta,trang_thai,hinh_anh)
-                    VALUES (:ten_san_pham,:danh_muc_id,:tac_gia,:gia_ban,:gia_khuyen_mai,:so_luong,:ngay_nhap,:mo_ta,:trang_thai,:hinh_anh)';
+            $sql = 'INSERT INTO  san_phams (ten_san_pham,danh_muc_id,gia_ban,gia_khuyen_mai,so_luong,ngay_nhap,mo_ta,trang_thai,hinh_anh)
+                    VALUES (:ten_san_pham,:danh_muc_id,:gia_ban,:gia_khuyen_mai,:so_luong,:ngay_nhap,:mo_ta,:trang_thai,:hinh_anh)';
 
             $stmt = $this->conn->prepare($sql);
             
             $stmt->bindParam(':ten_san_pham',$ten_san_pham);
             $stmt->bindParam(':danh_muc_id',$danh_muc_id);
-            $stmt->bindParam(':tac_gia',$tac_gia);
             $stmt->bindParam(':gia_ban',$gia_ban);
             $stmt->bindParam(':gia_khuyen_mai',$gia_khuyen_mai);
             $stmt->bindParam(':so_luong',$so_luong);

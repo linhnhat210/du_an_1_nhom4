@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Đăng Ký</title>
+    <title>Khuyến Mãi</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,25 +12,51 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/KMT.png">
 
     <!-- CSS -->
-    <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-    <!-- Font-awesome CSS -->
+    <link rel="stylesheet" href="assets/css/vendor/pe-icon-7-stroke.css">
     <link rel="stylesheet" href="assets/css/vendor/font-awesome.min.css">
-    <!-- main style css -->
+    <link rel="stylesheet" href="assets/css/plugins/slick.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/animate.css">
+    <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
+    <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
+
+    
+    <style>
+        .copy-button {
+            color: #6F4F28; /* Brown text */
+            padding: 10px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        }
+
+        .copy-button:hover {
+            background-color: #6F4F28; /* Brown background */
+            color: white; /* White text */
+        }
+
+        .copied {
+            background-color: #6F4F28; /* Brown background */
+            color: white; /* White text */
+        }
+    </style>
 </head>
 
 <body>
+    <?php
+    require_once "./views/layout/header.php";
+    ?>
     <!-- Main Content -->
-        <!-- Start Header Area -->
-        <?php
-        require_once "./views/layout/header.php";
-        ?>  
     <main>
-        <!-- main header start -->
+    <!-- Start Header Area -->
+             <!-- main header start -->
                  <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
             <div class="container">
@@ -41,7 +67,7 @@
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item"><a href="shop.html">shop</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">cart</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Khuyến Mãi</li>
                                 </ul>
                             </nav>
                         </div>
@@ -50,55 +76,93 @@
             </div>
         </div>
         <!-- breadcrumb area end -->
+    <!-- main header start -->
 
-        <!-- cart main wrapper start -->
-        <div class="cart-main-wrapper section-padding">
-            <div class="container">
-                <div class="section-bg-color">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <!-- Cart Table Area -->
-                            <div class="cart-table table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">STT</th>
-                                            <th scope="col">Mã Khuyến Mãi</th>
-                                            <th scope="col">Giá Trị</th>
-                                            <th scope="col">Ngày Bắt Đầu</th>
-                                            <th scope="col">Ngày Kết Thúc</th>
-                                            <th scope="col">Sao Chép Mã</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php if (!empty($khuyenMais) && is_array($khuyenMais)): ?>
-                                            <?php foreach ($khuyenMais as $index => $khuyenMai): ?>
-                                                <tr>
-                                                    <td class="fw-medium"><?= $index + 1 ?></td>
-                                                    <td id="code-<?= $index ?>"><?= $khuyenMai["ma_khuyen_mai"]?></td>
-                                                    <td><?= $khuyenMai["giam_phan_tram"]?>% giảm tối đa <?= number_format($khuyenMai["giam_toi_da"])?>đ</td>
-                                                    <td><?= $khuyenMai["ngay_bat_dau"]?></td>
-                                                    <td><?= $khuyenMai["ngay_ket_thuc"]?></td>
-                                                    <td>
-                                                        <button class="copy-button" onclick="copyToClipboard('code-<?= $index ?>', this)">Copy</button>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <tr>
-                                                <td colspan="6" class="text-center">Không có mã giảm giá.</td>
-                                            </tr>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
+    <!-- cart main wrapper start -->
+    <div class="cart-main-wrapper section-padding">
+        <div class="container">
+            <div class="section-bg-color">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Cart Table Area -->
+                        <div class="cart-table table-responsive">
+                            <style>
+                                .table-container {
+                                    display: grid;
+                                    grid-template-columns: repeat(4, 1fr);
+                                    gap: 20px;
+                                    padding: 20px;
+                                }
+
+                                .table-box {
+                                    border: 1px solid #ccc;
+                                    border-radius: 8px;
+                                    padding: 15px;
+                                    background-color: #f9f9f9;
+                                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    height: 100%;
+                                }
+
+                                .table-box h3 {
+                                    font-size: 1.2rem;
+                                    color: white; /* Đổi màu chữ thành trắng */
+                                    text-align: center;
+                                    margin-bottom: 15px;
+                                    background-color: #CCAC78; /* Đổi nền thành màu nâu */
+                                    padding: 10px;
+                                    border-radius: 4px;
+                                }
+
+
+                                .table-box ul {
+                                    list-style: none;
+                                    padding: 0;
+                                    margin: 0 0 15px 0;
+                                }
+
+                                .table-box ul li {
+                                    padding: 5px 0;
+                                    border-bottom: 1px solid #ddd;
+                                    font-size: 0.9rem;
+                                }
+
+                                .table-box ul li:last-child {
+                                    border-bottom: none;
+                                }
+                            </style>
+
+                            <div class="table-container">
+                                <?php if (!empty($khuyenMais) && is_array($khuyenMais)): ?>
+                                    <?php foreach ($khuyenMais as $index => $khuyenMai): ?>
+                                        <div class="table-box">
+                                            <h3>Voucher <?= $index + 1 ?></h3>
+                                            <ul>
+                                                <li><strong>Mã:</strong> 
+                                                    <span id="code-<?= $index ?>"><?= $khuyenMai["ma_khuyen_mai"] ?></span>
+                                                </li>
+                                                <li><strong>Giá Trị:</strong> <?= $khuyenMai["giam_phan_tram"] ?>% giảm tối đa <?= number_format($khuyenMai["giam_toi_da"]) ?>đ</li>
+                                                <li><strong>Ngày Bắt Đầu:</strong> <?= $khuyenMai["ngay_bat_dau"] ?></li>
+                                                <li><strong>Ngày Kết Thúc:</strong> <?= $khuyenMai["ngay_ket_thuc"] ?></li>
+                                            </ul>
+                                            <button class="copy-button" onclick="copyToClipboard('code-<?= $index ?>', this)">Copy</button>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <div class="table-box">
+                                        <h3>Không có mã khuyến mãi</h3>
+                                    </div>
+                                <?php endif; ?>
                             </div>
-                            <!-- Cart Update Option -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- cart main wrapper end -->
+    </div>
+    <!-- cart main wrapper end -->
     </main>
 
     <!-- JS -->
@@ -109,25 +173,27 @@
     <script>
         // Function to copy text to clipboard
         function copyToClipboard(elementId, button) {
-            var text = document.getElementById(elementId).innerText;
+            const textToCopy = document.getElementById(elementId).innerText;
 
-            navigator.clipboard.writeText(text).then(function() {
+            navigator.clipboard.writeText(textToCopy).then(() => {
                 button.innerText = "Đã Copy";
                 button.classList.add("copied");
 
-                // Optionally reset after a delay
-                setTimeout(function() {
+                // Reset button text after 3 seconds
+                setTimeout(() => {
                     button.innerText = "Copy";
                     button.classList.remove("copied");
                 }, 3000);
-            }).catch(function(error) {
-                console.error('Failed to copy text: ', error);
-                alert("Failed to copy text.");
+            }).catch(err => {
+                console.error('Error copying text: ', err);
+                alert("Không thể sao chép mã khuyến mãi.");
             });
         }
     </script>
 
     <?php require_once 'views/layout/footer.php'; ?>
+         <!-- Mini cart -->
+      <?php require_once "./views/layout/cart.php"; ?>
 </body>
 
 </html>

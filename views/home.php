@@ -37,7 +37,7 @@
         .product-thumb img {
     width: 100%; /* Chiều rộng ảnh chiếm toàn bộ không gian container */
     height: auto; /* Giữ nguyên tỷ lệ ban đầu nếu không bị cắt */
-    aspect-ratio: 3 / 4; /* Đảm bảo tỷ lệ 3x4 */
+    aspect-ratio: 3 / 5; /* Đảm bảo tỷ lệ 3x4 */
     object-fit: cover; /* Cắt ảnh nếu cần để phù hợp với container */
     border-radius: 8px; /* (Tuỳ chọn) Bo góc để ảnh trông mượt mà */
 }
@@ -131,26 +131,27 @@
                             <div class="row" id="product-list">
                                 <?php foreach (array_slice($listSanPham, 0, 8) as $key => $sanPham): ?>
                                     <div class="col-md-3 col-sm-6 mb-4 product-item">
-                                        <div class="card">
-                                            <div class="product-thumb">
+                                        <div class="product-item">
+                                            <figure class="product-thumb">
                                                 <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
-                                                    <img class="card-img-top" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
+                                                    <img class="pri-img" src="<?= BASE_URL . $sanPham["hinh_anh"] ?>" alt="product">
+                                                    <img class="sec-img" src="<?= BASE_URL . $sanPham["hinh_anh"] ?>" alt="product">
                                                 </a>
                                                 <div class="cart-hover">
                                                     <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>" class="btn btn-cart">Xem chi tiết</a>
                                                 </div>
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title">
-                                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
-                                                </h5>
+                                            </figure>
+                                            <div class="product-caption text-center">
+                                                <h6 class="product-name">
+                                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>"><?= $sanPham["ten_san_pham"] ?></a>
+                                                </h6>
                                                 <div class="price-box">
-                                                    <?php if ($sanPham['gia_khuyen_mai']) { ?>
-                                                        <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) ?>đ</span>
-                                                        <span class="price-old"><del><?= formatPrice($sanPham['gia_ban']) ?>đ</del></span>
-                                                    <?php } else { ?>
-                                                        <span class="price-regular"><?= formatPrice($sanPham['gia_ban']) ?>đ</span>
-                                                    <?php } ?>
+                                                    <?php if (!empty($sanPham["gia_khuyen_mai"])): ?>
+                                                        <span class="price-regular"><?= number_format($sanPham["gia_khuyen_mai"])  ?>đ</span>
+                                                        <span class="price-old"><del><?= number_format($sanPham["gia_ban"])  ?>đ</del></span>
+                                                    <?php else: ?>
+                                                        <span class="price-regular"><?= number_format($sanPham["gia_ban"])  ?>đ</span>
+                                                    <?php endif; ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -287,11 +288,16 @@
         <!-- latest blog area end -->
 
     </main>
+    
 
 
     <!-- FOOTER -->
      <?php require_once "./views/layout/footer.php"; ?>
 
+
+     <!-- Mini cart -->
+      <?php require_once "./views/layout/cart.php"; ?>
+   
 
 
 

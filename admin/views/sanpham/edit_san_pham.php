@@ -83,22 +83,22 @@
                                             <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
                                             <label for="ten_san_pham">Tên sản phẩm</label>
                                             <input type="text" id="ten_san_pham" name="ten_san_pham" class="form-control" value="<?= $sanPham['ten_san_pham'] ?>">
-                                            <?php if (isset($_SESSION['error']['ten_san_pham'])) { ?>
-                                                <p class="text-danger"><?= $_SESSION['error']['ten_san_pham'] ?></p>
+                                            <?php if (isset($_SESSION['errors']['ten_san_pham'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['errors']['ten_san_pham'] ?></p>
                                             <?php } ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="gia_san_pham">Giá sản phẩm</label>
                                             <input type="number" id="gia_san_pham" name="gia_san_pham" class="form-control" value="<?= $sanPham['gia_ban'] ?>">
-                                            <?php if (isset($_SESSION['error']['gia_san_pham'])) { ?>
-                                                <p class="text-danger"><?= $_SESSION['error']['gia_san_pham'] ?></p>
+                                            <?php if (isset($_SESSION['errors']['gia_san_pham'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['errors']['gia_san_pham'] ?></p>
                                             <?php } ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="gia_khuyen_mai">Giá khuyến mãi</label>
                                             <input type="number" id="gia_khuyen_mai" name="gia_khuyen_mai" class="form-control" value="<?= $sanPham['gia_khuyen_mai'] ?>">
-                                            <?php if (isset($_SESSION['error']['gia_khuyen_mai'])) { ?>
-                                                <p class="text-danger"><?= $_SESSION['error']['gia_khuyen_mai'] ?></p>
+                                            <?php if (isset($_SESSION['errors']['gia_khuyen_mai'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['errors']['gia_khuyen_mai'] ?></p>
                                             <?php } ?>
                                         </div>
                                         <div class="form-group">
@@ -108,15 +108,15 @@
                                         <div class="form-group">
                                             <label for="so_luong">Số lượng</label>
                                             <input type="number" id="so_luong" name="so_luong" class="form-control" value="<?= $sanPham['so_luong'] ?>">
-                                            <?php if (isset($_SESSION['error']['so_luong'])) { ?>
-                                                <p class="text-danger"><?= $_SESSION['error']['so_luong'] ?></p>
+                                            <?php if (isset($_SESSION['errors']['so_luong'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['errors']['so_luong'] ?></p>
                                             <?php } ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="ngay_nhap">Ngày nhập</label>
                                             <input type="date" id="ngay_nhap" name="ngay_nhap" class="form-control" value="<?= $sanPham['ngay_nhap'] ?>">
-                                            <?php if (isset($_SESSION['error']['ngay_nhap'])) { ?>
-                                                <p class="text-danger"><?= $_SESSION['error']['ngay_nhap'] ?></p>
+                                            <?php if (isset($_SESSION['errors']['ngay_nhap'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['errors']['ngay_nhap'] ?></p>
                                             <?php } ?>
                                         </div>
                                         <div class="form-group">
@@ -137,8 +137,8 @@
                                         <div class="form-group">
                                             <label for="mo_ta">Mô tả sản phẩm</label>
                                             <textarea id="mo_ta" name="mo_ta" class="form-control" rows="4"><?= $sanPham['mo_ta'] ?></textarea>
-                                            <?php if (isset($_SESSION['error']['mo_ta'])) { ?>
-                                                <p class="text-danger"><?= $_SESSION['error']['mo_ta'] ?></p>
+                                            <?php if (isset($_SESSION['errors']['mo_ta'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['errors']['mo_ta'] ?></p>
                                             <?php } ?>
                                         </div>
                                     </div>

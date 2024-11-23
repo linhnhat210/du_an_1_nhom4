@@ -21,41 +21,133 @@
     <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .news-section {
+            margin-top: 40px;
+        }
+
+        .news-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .news-header p {
+            color: #555;
+            font-style: italic;
+        }
+
+        .news-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-between;
+        }
+
+        .news-item {
+            flex: 1 1 calc(33.333% - 30px);
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, z-index 0s ease;
+        }
+
+        .news-item:hover {
+            transform: scale(1.05); /* Phóng to */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Tăng bóng đổ */
+            border: 1px solid #007bff; /* Thêm viền màu khi hover */
+            z-index: 10; /* Đảm bảo mục tin tức được đưa lên trên khi hover */
+        }
+
+        .news-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .news-content {
+            padding: 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .news-content h5 {
+            margin: 15px 0;
+            font-size: 1.6rem;
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        .news-content h5:hover {
+            text-decoration: underline;
+        }
+
+        .news-content p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .news-content .btn-primary {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .news-content .btn-primary:hover {
+            background-color: #0056b3;
+            cursor: pointer;
+        }
+
+        .news-item a {
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Start Header Area -->
     <?php require_once "./views/layout/header.php"; ?>
 
-    <div class="container mt-4">
-    <h1 class="mb-4 text-center">Danh sách tin tức</h1>
-
-    <?php if (empty($tinTucs)): ?>
-        <div class="alert alert-warning text-center">
-            Không có tin tức nào để hiển thị.
+    <!-- Start News Section -->
+    <div class="container news-section">
+        <div class="news-header text-center">
+            <h1>Danh sách tin tức</h1>
+            <p>Xem những bài viết mới nhất từ chúng tôi</p>
         </div>
-    <?php else: ?>
-        <div class="row">
-            <?php foreach ($tinTucs as $tinTuc): ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+        <?php if (empty($tinTucs)): ?>
+            <div class="alert alert-warning text-center">
+                Không có tin tức nào để hiển thị.
+            </div>
+        <?php else: ?>
+            <div class="news-list">
+                <?php foreach ($tinTucs as $tinTuc): ?>
+                    <div class="news-item">
                         <a href="?act=chi-tiet-tin-tuc&id=<?= $tinTuc['id'] ?>">
-                            <img class="card-img-top" src="<?= BASE_URL . 'uploads/' . $tinTuc['hinh_anh'] ?>" alt="Hình ảnh tin tức">
+                            <img src="<?= BASE_URL . 'uploads/' . $tinTuc['hinh_anh'] ?>" alt="Hình ảnh tin tức">
                         </a>
-                        <div class="card-body text-center">
-                            <h5 class="card-title">
-                                <a href="?act=chi-tiet-tin-tuc&id=<?= $tinTuc['id'] ?>" class="text-dark"><?= htmlspecialchars($tinTuc['tieu_de']) ?></a>
+                        <div class="news-content">
+                            <h5>
+                                <a href="?act=chi-tiet-tin-tuc&id=<?= $tinTuc['id'] ?>"><?= htmlspecialchars($tinTuc['tieu_de']) ?></a>
                             </h5>
-                            <p class="card-text text-truncate"><?= nl2br(htmlspecialchars(substr($tinTuc['noi_dung'], 0, 100))) ?>...</p>
-                            <a href="?act=chi-tiet-tin-tuc&id=<?= $tinTuc['id'] ?>" class="btn btn-primary mt-2">Xem thêm</a>
+                            <p class="text-truncate"><?= nl2br(htmlspecialchars(substr($tinTuc['noi_dung'], 0, 100))) ?>...</p>
+                            <a href="?act=chi-tiet-tin-tuc&id=<?= $tinTuc['id'] ?>" class="btn btn-primary">Xem thêm</a>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
-</div>
-
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
 
     <?php require_once "./views/layout/footer.php"; ?>
 

@@ -83,6 +83,7 @@
                                             <th>Số điện thoại</th>
                                             <th>Ngày đặt</th>
                                             <th>Tổng tiền</th>
+                                            <th>Trạng Thái</th>
                                            
                                             <th>Thao tác</th>
                                         </tr>
@@ -96,6 +97,7 @@
                                             <td><?= $donHang['sdt_nguoi_nhan'] ?></td>
                                             <td><?= $donHang['ngay_dat'] ?></td>
                                             <td><?= $donHang['tong_tien'] ?></td>
+                                            <td><?= $donHang['ten_trang_thai'] ?></td>
                                           
                                             <!-- <td><span class="badge text-gb-primary"></span></td> -->
                                             <td>

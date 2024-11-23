@@ -15,7 +15,10 @@ class TintucController
     {
         $tinTucs = $this->tinTucModel->getAllTinTuc();
 
-        
+        if (!$tinTucs) {
+            echo "Không có tin tức để hiển thị!";
+            return;
+        }
 
         require_once 'views/tintuc/danh_sach_tin_tuc.php';
     }
@@ -32,6 +35,10 @@ class TintucController
 
         $tinTuc = $this->tinTucModel->getTinTucById($id);
 
+        if (!$tinTuc) {
+            echo "Tin tức không tồn tại.";
+            return;
+        }
 
         require_once 'views/tintuc/chi_tiet_tin_tuc.php';
     }

@@ -112,7 +112,7 @@ class DonHangController
             } else {
                 // Trả về form và lỗi
                 // Đặt chỉ thị xóa session sau khi hiển thị form
-                $_SESSION['flash'] = true;
+                
                 header("Location: ?act=form-sua-don-hang&id_don_hang=" . $don_hang_id);
                 exit();
             }

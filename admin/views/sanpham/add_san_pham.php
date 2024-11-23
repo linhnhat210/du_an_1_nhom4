@@ -93,18 +93,7 @@
                                                     
                                                 </div>
                                                 <!--end col-->
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="citynameInput" class="form-label">Tác Giả</label>
-                                                        <input type="text" class="form-control" placeholder="Nhập vào tên tác giả(*)" name="tac_gia">
-                                                   
-                                                        <span class="text-danger">
-                                                            <?= !empty($_SESSION["errors"]["tac_gia"]) ?  $_SESSION["errors"]["tac_gia"] : '' ?>
-                                                        </span>
-                                                    </div>
-                                                    
-                                                </div>
+                                            
                                                 <!--end col-->
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
@@ -154,8 +143,8 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="mb-6">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
                                                         <label for="citynameInput" class="form-label">Mô tả</label>
                                                         <textarea type="text" class="form-control" placeholder="Mô tả(*)" name="mo_ta"></textarea>
                                                         

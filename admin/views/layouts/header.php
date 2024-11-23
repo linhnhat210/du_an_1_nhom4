@@ -60,6 +60,7 @@
                         <h6 class="dropdown-header">Welcome <?= $_SESSION['user_admin']['ten_nguoi_dung']?>!</h6>
                         <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
                         <a class="dropdown-item" href="./controllers/logout.php"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
+                        <a class="dropdown-item" href="/base_du_an_1/"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Vào trang người dùng</span></a>
                     </div>
                 </div>
             </div>

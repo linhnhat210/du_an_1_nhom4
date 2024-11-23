@@ -2,7 +2,9 @@
 $danhMucs = (new DanhMucsController())->DanhMuc();
 
 ?>
+
   <header class="header-area header-wide">
+    
         <!-- main header start -->
         <div class="main-header d-none d-lg-block">
 
@@ -31,11 +33,11 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
                                         <ul>
                                             <li class="active"><a href="?act=/">Trang Chủ</a>
                                             </li>
-                                            <li class="position-static"><a href="?act=list-san-pham">Truyện Tranh<i class="fa fa-angle-down"></i></a>
-                                                <ul class="megamenu dropdown">
+                                            <li><a href="?act=list-san-pham">Truyện Tranh<i class="fa fa-angle-down"></i></a>
+                                                <ul class="dropdown">
                                                     <?php foreach($danhMucs as $danhMuc) : ?>
                                                     
-                                                            <li><a href="?act=list-san-pham&danh_muc_id=<?=$danhMuc["id"]?>" style="text-transform:uppercase;"><?= $danhMuc['ten_danh_muc']?></a></li>
+                                                            <li><a href="?act=list-san-pham&danh_muc_id=<?=$danhMuc["id"]?>"><?= $danhMuc['ten_danh_muc']?></a></li>
                                                            
                                                       <?php endforeach; ?>
                                                 </ul>
@@ -79,7 +81,7 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
                                                     <li><a href="blog-details-audio.html">blog details audio</a></li>
                                                     <li><a href="blog-details-video.html">blog details video</a></li>
                                                     <li><a href="blog-details-image.html">blog details image</a></li>
-                                                </ul> -->
+                                                </ul>-->
                                             </li>
                                             <li><a href="?act=form-lien-he">Liên Hệ</a></li>
                                             <li><a href="?act=form-khuyen-mai">Khuyến Mãi</a></li>
@@ -104,7 +106,7 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
                                 <div class="header-configure-area">
                                     <ul class="nav justify-content-end">
                                         <li>
-                                            <a href="#" class="">
+                                            <a href="#" class="minicart-btn">
                                                 <i class="pe-7s-shopbag"></i>
                                                 <div class="notification">2</div>
                                             </a>
@@ -121,6 +123,9 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
     <li><a href="<?= BASE_URL . './?act=login' ?>">Đăng Nhập</a></li> 
     <li><a href="<?= BASE_URL . './?act=dang-ky' ?>">Đăng Ký</a></li>
 <?php endif; ?>
+<?php if (isset($_SESSION['user_admin'])): ?>
+     <li><a href="/base_du_an_1/admin/">Vào trang quản trị</a></li>
+     <?php endif; ?>
     </ul>
 </li>
 
@@ -137,3 +142,4 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
         </div>
         <!-- main header end -->
     </header>
+    

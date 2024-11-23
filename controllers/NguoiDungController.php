@@ -35,10 +35,12 @@ class NguoiDungController{
             if ($user['vai_tro'] == 2) { // Vai trò người dùng
                 // Lưu thông tin vào session
                 $_SESSION['user_client'] = $user;
+                
                 header("Location: /base_du_an_1/"); // Chuyển đến trang người dùng
                 exit();
             } elseif ($user['vai_tro'] == 1) { // Vai trò admin
                 $_SESSION['user_admin'] = $user;
+                $_SESSION['user_client'] = $user;
                 header("Location: /base_du_an_1/admin/"); // Chuyển đến trang admin
                 exit();
             } else {
@@ -71,7 +73,7 @@ class NguoiDungController{
     // ham hien thi form them
      public function dangKy(){
         require_once "./views/taikhoan/form_dang_ky.php";
-        deleteSessionError();
+        unset($_SESSION['errors']);
     }
 
     // ham xu ly form them 
@@ -100,7 +102,11 @@ class NguoiDungController{
         }
         if(empty($email)){
             $errors["email"] = "Vui Lòng Nhập Email";
+        }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors["email"] = "Email không hợp lệ (phải chứa ký tự '@')";
         }
+
+        
         if($user['email']==$email){
             $errors["email"] = "Email đã tồn tại, vui lòng chọn email khác";
         }

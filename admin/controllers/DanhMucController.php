@@ -37,7 +37,7 @@ class DanhMucController
     // ham hien thi form them
     public function create(){
         require_once "./views/danhmuc/add_danh_muc.php";
-        deleteSessionError();
+        unset($_SESSION['errors']);
     }
 
     // ham xu ly form them 
@@ -81,6 +81,7 @@ class DanhMucController
 
         // echo $danhMuc["tenDanhMuc"];
         require_once "./views/danhmuc/edit_danh_muc.php";
+        unset($_SESSION['errors']);
     }
 
     //ham xu ly form sua

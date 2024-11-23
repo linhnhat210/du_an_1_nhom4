@@ -27,6 +27,7 @@ class SanPhamController
         // Lọc theo danh mục và phân trang
         $sanPhams = $this->modelSanPham->getSanPhamByDanhMucAndPrice($danhMucId, $priceFrom, $priceTo, $page, $limit, $sortby);
         $totalItems = $this->modelSanPham->getTotalItemsByDanhMucAndPrice($danhMucId, $priceFrom, $priceTo); // Tổng số sản phẩm trong danh mục
+        $tenDanhMuc = $this->modelSanPham->getTenDanhMuc($danhMucId);
     } else {
         // Lấy tất cả sản phẩm nếu không có danh mục
         $sanPhams = $this->modelSanPham->getAllSanPhamWithPrice($priceFrom, $priceTo, $page, $limit, $sortby);

@@ -89,12 +89,12 @@
         <div class="carousel-inner">
             <!-- Ảnh chính -->
             <div class="carousel-item active">
-                <img id="mainImage" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="d-block w-100 rounded" alt="Product Image" style="height: 500px;width:375px; object-fit: cover;">
+                <img id="mainImage" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="d-block w-100 rounded" alt="Product Image" style="height: 650px;width:375px; object-fit: cover;">
             </div>
             <!-- Ảnh nhỏ hơn trong $listAnhSanPham -->
             <?php foreach ($listAnhSanPham as $anhSP) : ?>
                 <div class="carousel-item">
-                    <img src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" class="d-block w-100 rounded" alt="Product Thumbnail" style="height: 500px;width:375px; object-fit: cover;">
+                    <img src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" class="d-block w-100 rounded" alt="Product Thumbnail" style="height: 650px;width:375px; object-fit: cover;">
                 </div>
             <?php endforeach ?>
         </div>
@@ -120,9 +120,9 @@
         <div class="col-lg-6">
             <h4>Tên : <?= $sanPham['ten_san_pham'] ?></h4>
             <div class="hstack gap-4 flex-wrap mb-3">
-                <div><span class="text-primary d-block">Tác Giả : <?= $sanPham['tac_gia'] ?></span></div>
+                <div><span class="text-primary d-block">Thể loại : <?= $sanPham['ten_danh_muc'] ?></span></div>
                 <div class="vr"></div>
-                <div class="text-muted">Thể loại : <span class="text-body fw-medium"><?= $sanPham['ten_danh_muc'] ?></span></div>
+          
                 <div class="vr"></div>
                 <div class="text-muted">Ngày Nhập : <span class="text-body fw-medium"><?=date("d M, Y", strtotime($sanPham['ngay_nhap']))  ?></span></div>
             </div>

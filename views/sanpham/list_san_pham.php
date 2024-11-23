@@ -40,7 +40,7 @@
             /* Chiều rộng ảnh chiếm toàn bộ không gian container */
             height: auto;
             /* Giữ nguyên tỷ lệ ban đầu nếu không bị cắt */
-            aspect-ratio: 3 / 4;
+            aspect-ratio: 3 / 5;
             /* Đảm bảo tỷ lệ 3x4 */
             object-fit: cover;
             /* Cắt ảnh nếu cần để phù hợp với container */
@@ -73,6 +73,9 @@
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="?act=/"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page">shop</li>
+                                    <?php if($danhMucId): ?>
+                                    <li class="breadcrumb-item active" aria-current="page"><?=$tenDanhMuc["ten_danh_muc"]?></li>
+                                    <?php endif; ?>
                                 
                                 </ul>
                             </nav>
@@ -97,7 +100,7 @@
                                     <ul class="shop-categories">
                                         <?php foreach ($danhMucs as $danhMuc) : ?>
                                             <li>
-                                                <a href="?act=list-san-pham&danh_muc_id=<?= $danhMuc["id"] ?>&page=1&xep=desc">
+                                                <a href="?act=list-san-pham&danh_muc_id=<?= $danhMuc["id"] ?>&page=1&xep=newest">
                                                     <?= $danhMuc['ten_danh_muc'] ?>
                                                 </a>
                                             </li>
@@ -130,7 +133,7 @@
 
                                     <!-- Button tìm kiếm -->
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-cart w-100" style="background-color: rgb(216, 189, 79);">Tìm kiếm</button>
+                                        <button type="submit" class="btn btn-cart w-100" style="background-color:#CCAC78;">Tìm kiếm</button>
                                     </div>
                                 </form>
                             </div>
@@ -293,6 +296,8 @@
 
     <!-- footer area start -->
     <?php require_once "views/layout/footer.php" ?>
+         <!-- Mini cart -->
+      <?php require_once "./views/layout/cart.php"; ?>
 
 
 

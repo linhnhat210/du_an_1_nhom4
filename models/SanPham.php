@@ -13,11 +13,27 @@ class SanPhams
         try {
             $sql = 'SELECT *
                     FROM san_phams
+                    WHERE trang_thai = 1
                     ORDER BY id DESC;
                     ';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    public function getTenDanhMuc($id){
+        try {
+            $sql = 'SELECT ten_danh_muc
+                    FROM danh_mucs
+                    WHERE 
+                    id = :id;
+                    ';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id',$id);
+            $stmt->execute();
+            return $stmt->fetch();
         } catch (Exception $e) {
             echo "Lỗi: " . $e->getMessage();
         }
@@ -28,12 +44,21 @@ class SanPhams
         try {
             $offset = ($page - 1) * $limit;
     
-            $orderBy = ($sortby == 'asc') ? 'ORDER BY gia_khuyen_mai ASC' : 'ORDER BY gia_khuyen_mai DESC';
+             if ($sortby === 'asc') {
+            $orderBy = 'ORDER BY gia_khuyen_mai ASC';
+        } elseif ($sortby === 'desc') {
+            $orderBy = 'ORDER BY gia_khuyen_mai DESC';
+        } elseif ($sortby === 'newest') {
+            $orderBy = 'ORDER BY id DESC';
+        } else {
+            // Mặc định sắp xếp theo id DESC nếu không có sortby hợp lệ
+            $orderBy = 'ORDER BY id DESC';
+        }
     
             $sql = "SELECT sp.*, dm.ten_danh_muc 
                     FROM san_phams sp 
                     JOIN danh_mucs dm ON sp.danh_muc_id = dm.id 
-                    WHERE sp.danh_muc_id = :danh_muc_id ";
+                    WHERE sp.danh_muc_id = :danh_muc_id AND sp.trang_thai = 1";
     
             // Điều kiện lọc theo giá
             if ($priceFrom) {
@@ -172,7 +197,7 @@ class SanPhams
        public function getAllDanhMuc()
        {
            try {
-               $sql = 'SELECT * FROM danh_mucs';
+               $sql = 'SELECT * FROM danh_mucs WHERE trang_thai = 1';
                $stmt = $this->conn->prepare($sql);
                $stmt->execute();
                return $stmt->fetchAll();

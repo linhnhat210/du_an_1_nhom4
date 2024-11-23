@@ -44,7 +44,7 @@ class SanPhamController
 
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
         require_once "./views/sanpham/add_san_pham.php";
-        deleteSessionError();
+        unset($_SESSION['errors']);
     }
 
     // ham xu ly form them 
@@ -52,7 +52,6 @@ class SanPhamController
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $ten_san_pham = $_POST["ten_san_pham"] ?? '';
             $danh_muc_id = $_POST["danh_muc_id"] ?? '';
-            $tac_gia = $_POST["tac_gia"] ?? '';
             $gia_ban = $_POST["gia_ban"] ?? '';
             $gia_khuyen_mai = $_POST["gia_khuyen_mai"] ?? '';
             $so_luong = $_POST["so_luong"] ?? '';
@@ -81,9 +80,6 @@ class SanPhamController
         if(empty($ten_san_pham)){
             $errors["ten_san_pham"] = "Vui Lòng Nhập Tên Sản Phẩm";
         }
-        if(empty($tac_gia)){
-            $errors["tac_gia"] = "Vui Lòng Nhập Tên Tác Giả";
-        }
         if(empty($gia_ban)){
             $errors["gia_ban"] = "Vui Lòng Nhập Giá Bán";
         }
@@ -103,7 +99,7 @@ class SanPhamController
         if(empty($errors)){
             // nếu không co lỗi thì thêm dữ liệu
             // thêm vào csdl
-            $san_pham_id = $this->modelSanPham->createSanPham($ten_san_pham,$danh_muc_id,$tac_gia,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai,$file_thumb);
+            $san_pham_id = $this->modelSanPham->createSanPham($ten_san_pham,$danh_muc_id,$gia_ban,$gia_khuyen_mai,$so_luong,$ngay_nhap,$mo_ta,$trang_thai,$file_thumb);
             if(!empty($img_array['name'])){
                 
                 foreach ($img_array['name'] as $key => $value){
@@ -143,7 +139,7 @@ class SanPhamController
         $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
         if ($sanPham) {
             require_once './views/sanpham/edit_san_pham.php';
-            deleteSessionError();
+            unset($_SESSION['errors']);
         } else {
             header("Location: ?act=san-phams");
             exit();
@@ -198,7 +194,7 @@ class SanPhamController
                 $errors['trang_thai'] = 'Trạng thái sản phẩm phảm chọn';
             }
 
-            $_SESSION['error'] = $errors;
+            $_SESSION['errors'] = $errors;
             // var_dump($errors);die;
 
             // Logic sửa ảnh

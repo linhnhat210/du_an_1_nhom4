@@ -33,14 +33,18 @@
 </head>
 
 <body>
-    <?php 
-    if (isset($_SESSION['success'])) {
-    echo "<script>alert('" . $_SESSION['success'] . "');</script>";
-    unset($_SESSION['success']); // Xóa thông báo sau khi hiển thị
-    }
-    ?>
-    <!-- Header -->
-    <?php require_once 'views/layout/header.php'; ?>
+
+<?php require_once 'views/layout/header.php'; ?>
+   <?php
+if (isset($_SESSION['lien-he'])) {
+    // Hiển thị thông báo
+    echo '<div class="alert alert-success">' . $_SESSION['lien-he'] . '</div>';
+    
+    // Xóa thông báo khỏi session để tránh hiển thị lại
+    unset($_SESSION['lien-he']);
+}
+?>
+    
     
 
     <main>
@@ -90,7 +94,7 @@
                                         <input name="so_dien_thoai" placeholder="Số Điện Thoại *" type="text" required>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <input name="email" placeholder="Email *" type="email" required>
+                                        <input name="email" placeholder="Email *" type="text" required>
                                     </div>
                                     <div class="col-12">
                                         <div class="contact2-textarea text-center">
@@ -146,10 +150,38 @@
 
 
     </script>
+    <script>
+    document.getElementById('contact-form').onsubmit = function(event) {
+        // Lấy các giá trị đã nhập trong form
+        var soDienThoai = document.querySelector('input[name="so_dien_thoai"]').value;
+        var email = document.querySelector('input[name="email"]').value;
+
+        // Kiểm tra số điện thoại có phải là 10 chữ số không
+        if (!/^\d{10}$/.test(soDienThoai)) {
+            alert('Số điện thoại không hợp lệ!');
+            event.preventDefault(); // Ngừng gửi form nếu không hợp lệ
+            return false;
+        }
+
+        // Kiểm tra email có đúng định dạng không
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            alert('Email không hợp lệ!');
+            event.preventDefault(); // Ngừng gửi form nếu không hợp lệ
+            return false;
+        }
+
+        // Nếu không có lỗi, form sẽ được gửi đi
+        return true;
+    }
+</script>
+
 
 
     <!-- footer -->
     <?php require_once 'views/layout/footer.php'; ?>
+
+         <!-- Mini cart -->
+      <?php require_once "./views/layout/cart.php"; ?>
 
     <!-- JS -->
     <!-- Modernizer JS -->

@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 // var_dump($_SESSION['user_client']['vai_tro']);die;
 // Require file Common
 require_once './commons/env.php'; // Khai báo biến môi trường
@@ -14,17 +15,22 @@ require_once './controllers/NguoiDungController.php';
 require_once './controllers/DanhMucController.php';
 require_once './controllers/SanPhamController.php';
 require_once './controllers/KhuyenMaiController.php';
+require_once './controllers/BinhLuanController.php';
+require_once './controllers/GioHangController.php';
 
 
 // Require toàn bộ file Models
 require_once './models/Lienhe.php';
 require_once './models/Tintuc.php';
-require_once 'models/Banner.php';
-require_once 'models/NguoiDung.php';
-require_once 'models/SanPham.php';
-require_once 'models/DanhMuc.php';
-require_once 'models/SanPham.php';
-require_once 'models/KhuyenMai.php';
+require_once './models/Banner.php';
+require_once './models/NguoiDung.php';
+require_once './models/SanPham.php';
+require_once './models/DanhMuc.php';
+require_once './models/SanPham.php';
+require_once './models/BinhLuan.php';
+require_once './models/KhuyenMai.php';
+require_once './models/GioHang.php';
+
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -44,6 +50,9 @@ match ($act) {
     // Tin tức
     'list-tin-tucs'     => (new TintucController())->index(),
     'chi-tiet-tin-tuc'   => (new TintucController())->chiTiet(),
+
+    //bình luận
+    'dang-binh-luan' => (new BinhLuanController())->postBinhLuan(),
 
     // Đăng nhập
     'login'               => (new NguoiDungController())->formLogin(),
@@ -66,4 +75,9 @@ match ($act) {
     'load-more-products' => (new HomeController())->loadMoreProducts(),
     // detail sản phẩm
     'chi-tiet-san-pham' => (new SanPhamController())->chiTietSanPham(),
+
+
+    // giỏ hàng 
+    'them-gio-hang' => (new GioHangController())->addGioHang(),
+    'gio-hang'=> (new GioHangController())->gioHang(),
 };

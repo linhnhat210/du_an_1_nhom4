@@ -21,6 +21,37 @@ class NguoiDungs {
             return 'Lỗi khi kết nối đến cơ sở dữ liệu: ' . $e->getMessage();
         }
     }
+    public function getNguoiDung(){
+        try {
+            $sql = "SELECT * FROM nguoi_dungs";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+             
+            return $stmt->fetchAll();; // Trả về toàn bộ thông tin người dùng
+    
+            
+        } catch (Exception $e) {
+            return 'Lỗi khi kết nối đến cơ sở dữ liệu: ' . $e->getMessage();
+        }
+    }
+    public function getTaiKhoanFromEmail($id)
+    {
+        try {
+            $sql = 'SELECT * FROM nguoi_dungs WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':id' => $id
+            ]);
+            // var_dump($email) ; die;
+
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
     public function createNguoiDung($ten_nguoi_dung,$email,$sdt,$dia_chi,$mat_khau,$gioi_tinh,$ngay_sinh,$trang_thai,$vai_tro){
         try {
             //code...
