@@ -328,7 +328,7 @@
                                                     <!--end col-->
                                                     <div class="col-6 col-sm-3">
                                                         <div class="p-3 border border-dashed border-start-0 border-end-0">
-                                                            <h5 class="mb-1 text-success"><span class="counter-value" data-target="<?= round($danhGia / $tongSoLuongDonHang * 100, 2) ?>">0</span>%</h5>
+                                                            <h5 class="mb-1 text-success"><span class="counter-value" data-target="<?= $danhGia ?>">0</span>%</h5>
                                                             <p class="text-muted mb-0">Tỷ Lệ Đánh Giá</p>
                                                         </div>
                                                     </div>

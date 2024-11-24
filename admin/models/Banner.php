@@ -14,7 +14,8 @@ class Banner
     public function getAllBanner(){
         try {
             //code...
-            $sql = 'SELECT  * FROM banners';
+            $sql = 'SELECT  * FROM banners
+            ORDER BY id DESC';
 
             $stmt = $this->conn->prepare($sql);
 

@@ -60,6 +60,24 @@
                         </div>
                     </div>
                     <!-- end page title -->
+                          <!-- Bắt đầu Form tìm kiếm -->
+                    <div class="row">
+                        <div class="col">
+                            <form action="?act=search-don-hang" method="POST">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="text" name="keyword" class="form-control" placeholder="Tìm kiêm thông tin">
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Kết thúc Form tìm kiếm -->
                     
 
                     <div class="row">
@@ -80,6 +98,7 @@
                                             <th>STT</th>
                                             <th>Mã đơn hàng</th>
                                             <th>Tên người nhân</th>
+                                            <th>Email</th>
                                             <th>Số điện thoại</th>
                                             <th>Ngày đặt</th>
                                             <th>Tổng tiền</th>
@@ -94,6 +113,7 @@
                                             <td><?= $key + 1 ?></td>
                                             <td><?= $donHang['ma_don_hang'] ?></td>
                                             <td><?= $donHang['ten_nguoi_nhan'] ?></td>
+                                            <td><?= $donHang['email_nguoi_nhan'] ?></td>
                                             <td><?= $donHang['sdt_nguoi_nhan'] ?></td>
                                             <td><?= $donHang['ngay_dat'] ?></td>
                                             <td><?= $donHang['tong_tien'] ?></td>

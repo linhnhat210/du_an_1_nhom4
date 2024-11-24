@@ -13,7 +13,8 @@ class Tintuc
     // Lấy danh sách tất cả tin tức
     public function getAllTinTuc(){
         try {
-            $sql = 'SELECT * FROM tin_tucs';
+            $sql = 'SELECT * FROM tin_tucs
+                    ORDER BY id DESC ';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -24,7 +25,8 @@ class Tintuc
         // Tìm kiếm
     public function searchTinTuc($keyword){
        
-            $sql = 'SELECT * FROM tin_tucs WHERE tieu_de LIKE ? OR noi_dung LIKE ?';
+            $sql = 'SELECT * FROM tin_tucs WHERE tieu_de LIKE ? OR noi_dung LIKE ?
+            ORDER BY id DESC';
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(1, "%$keyword%");
             $stmt->bindValue(2, "%$keyword%");

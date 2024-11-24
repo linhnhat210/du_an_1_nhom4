@@ -17,6 +17,25 @@ class DonHangController
         require_once "./views/donhang/list_don_hang.php";
     }
 
+        // serach
+    public function search()
+    {
+        // lấy dữ liệu từ yêu cầu (request)
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $keyword = $_POST['keyword'];
+            $donHangModel = new DonHang();
+            $donHang = $donHangModel->searchDonHang($keyword);
+
+            // var_dump($trangThai);
+        }
+
+        // tìm kiếm danh mục liên hệ
+        $this->modelDonHang->searchDonHang($keyword);
+
+        // hiển thị kết quả tìm kiếm
+        require_once "./views/donhang/list_don_hang.php";
+    }
+
     public function detailDonHang()
     {
         // Hàm này dùng để hiển thị form nhập

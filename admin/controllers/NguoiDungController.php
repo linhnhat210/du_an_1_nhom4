@@ -44,6 +44,7 @@
             $nguoiDung = $this->modelNguoiDung->getDetailNguoiDung($id_khach_hang);
         
             $listDonHang = $this->modelNguoiDung->getDonHangFromKhachHang($id_khach_hang);
+            // var_dump($listDonHang);die;
             $listBinhLuan = $this->modelNguoiDung->getBinhLuanFromKhachHang($id_khach_hang);
             $listDanhGia = $this->modelNguoiDung->getDanhGiaFromKhachHang($id_khach_hang);
             

@@ -30,6 +30,7 @@ require_once './models/SanPham.php';
 require_once './models/BinhLuan.php';
 require_once './models/KhuyenMai.php';
 require_once './models/GioHang.php';
+require_once './models/DonHang.php';
 
 
 // Route
@@ -80,4 +81,10 @@ match ($act) {
     // giỏ hàng 
     'them-gio-hang' => (new GioHangController())->addGioHang(),
     'gio-hang'=> (new GioHangController())->gioHang(),
+    'xoa-san-pham-gio-hang'   => (new GioHangController())->DeleteSpGioHang(),
+
+
+   // thanh toán 
+   'thanh-toan'=> (new GioHangController())->thanhToan(),
+   'xu-ly-thanh-toan'=> (new GioHangController())->postThanhToan(),
 };

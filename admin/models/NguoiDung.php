@@ -14,7 +14,8 @@ class NguoiDung
     public function getAllNguoiDung(){
         try {
             //code...
-            $sql = 'SELECT * FROM nguoi_dungs';
+            $sql = 'SELECT * FROM nguoi_dungs
+                    ORDER BY id DESC';
 
             $stmt = $this->conn->prepare($sql);
 
@@ -46,14 +47,25 @@ class NguoiDung
     public function getDonHangFromKhachHang($id_khach_hang){
         try {
             
-            $sql="SELECT don_hangs.id, don_hangs.ma_don_hang, don_hangs.nguoi_dung_id, don_hangs.ten_nguoi_nhan,
-                         don_hangs.email_nguoi_nhan, don_hangs.sdt_nguoi_nhan, don_hangs.dia_chi_nguoi_nhan, 
-                         don_hangs.ngay_dat, don_hangs.tong_tien, don_hangs.ghi_chu, 
-                         don_hangs.phuong_thuc_thanh_toan_id, don_hangs.trang_thai_id, 
-                         trang_thai_don_hangs.ten_trang_thai
-                         FROM don_hangs
-                         JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
-                         WHERE don_hangs.nguoi_dung_id = :nguoi_dung_id;";
+            $sql="SELECT 
+                        don_hangs.id, 
+                        don_hangs.ma_don_hang, 
+                        don_hangs.nguoi_dung_id, 
+                        don_hangs.ten_nguoi_nhan,
+                        don_hangs.email_nguoi_nhan, 
+                        don_hangs.sdt_nguoi_nhan, 
+                        don_hangs.dia_chi_nguoi_nhan, 
+                        don_hangs.ngay_dat, 
+                        don_hangs.tong_tien, 
+                        don_hangs.ghi_chu, 
+                        don_hangs.phuong_thuc_thanh_toan_id, 
+                        don_hangs.trang_thai_id, 
+                        trang_thai_don_hangs.ten_trang_thai
+                    FROM don_hangs
+                    JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
+                    WHERE don_hangs.nguoi_dung_id = :nguoi_dung_id
+                    ORDER BY don_hangs.id DESC
+                         ";
 
 
             $stmt = $this->conn->prepare($sql);
@@ -84,7 +96,8 @@ class NguoiDung
                     FROM binh_luans
                     INNER JOIN san_phams 
                     ON binh_luans.san_pham_id = san_phams.id
-                    WHERE binh_luans.nguoi_dung_id = :id';
+                    WHERE binh_luans.nguoi_dung_id = :id
+                    ORDER BY binh_luans.id DESC';
 
             
               $stmt = $this->conn->prepare($sql);
@@ -105,7 +118,8 @@ class NguoiDung
                     FROM danh_gias
                     INNER JOIN san_phams 
                     ON danh_gias.san_pham_id = san_phams.id
-                    WHERE danh_gias.nguoi_dung_id = :id';
+                    WHERE danh_gias.nguoi_dung_id = :id
+                    ORDER BY danh_gias.id DESC';
 
             
               $stmt = $this->conn->prepare($sql);
@@ -119,7 +133,8 @@ class NguoiDung
     }
     public function searchNguoiDung($keyword)
     {
-  $sql = "SELECT * FROM nguoi_dungs WHERE ten_nguoi_dung LIKE ?  OR email LIKE ? OR sdt LIKE ? ";
+  $sql = "SELECT * FROM nguoi_dungs WHERE ten_nguoi_dung LIKE ?  OR email LIKE ? OR sdt LIKE ? 
+  ORDER BY id DESC";
   $stmt = $this->conn->prepare($sql);
   $stmt->bindValue(1, "%$keyword%");
   $stmt->bindValue(2, "%$keyword%");

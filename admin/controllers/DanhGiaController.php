@@ -19,6 +19,22 @@ class DanhGiaController
 
         require_once "./views/danhgia/list_danh_gia.php";
     }
+        public function search(){
+                // lấy dữ liệu từ yêu cầu (request)
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $keyword = $_POST['keyword'];
+            $danhGiaModel = new DanhGia();
+            $danhGias = $danhGiaModel->searchDanhGia($keyword);
+
+            // var_dump($trangThai);
+        }
+
+        // tìm kiếm danh mục liên hệ
+        $this->modelDanhGia->searchDanhGia($keyword);
+
+        // hiển thị kết quả tìm kiếm
+        require_once "./views/danhgia/list_danh_gia.php";
+    }
 
     // Chi tiết một bình luận
     

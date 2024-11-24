@@ -54,6 +54,24 @@
                         </div>
                     </div>
                     <!-- end page title -->
+                       <!-- Bắt đầu Form tìm kiếm -->
+                    <div class="row">
+                        <div class="col">
+                            <form action="?act=search-danh-gia" method="POST">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="text" name="keyword" class="form-control" placeholder="Tìm kiêm thông tin">
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Kết thúc Form tìm kiếm -->
                     
                     <div class="row">
                         <div class="col">
@@ -74,7 +92,8 @@
                                             <th>Tên Khách Hàng</th>
                                             <th>Sản Phẩm</th>
                                             <th>Ảnh Sản Phẩm</th>
-                                            <th>Đánh Giá</th>
+                                            <th>Đánh giá ( Sao )</th>
+                                            <th>Nội Dung</th>
                                             <th>Ngày Đánh Giá</th>
                                             <th>Thao tác</th>
                                         </tr>
@@ -89,6 +108,7 @@
                                             <td>
                                                 <img src="<?= BASE_URL . $danhGia['hinh_anh']?>" alt="" width="100px" height="100px">
                                             </td>
+                                            <td><?= $danhGia['diem_danh_gia'] ?></td>
                                             <td><?= $danhGia['danh_gia'] ?></td>
                                             <td><?= $danhGia['ngay_danh_gia'] ?></td>
                                             <td>

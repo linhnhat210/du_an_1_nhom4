@@ -14,7 +14,8 @@ class Lienhe
     public function getAllLienhe(){
         try {
             //code...
-            $sql = 'SELECT  * FROM lien_hes';
+            $sql = 'SELECT  * FROM lien_hes
+                ORDER BY id DESC';
 
             $stmt = $this->conn->prepare($sql);
 
@@ -31,7 +32,8 @@ class Lienhe
       // Tìm kiếm theo tên người dùng, số điện thoại hoặc email
       public function searchLienHe($keyword)
       {
-    $sql = "SELECT * FROM lien_hes WHERE ten_khach_hang LIKE ? OR so_dien_thoai LIKE ? OR email LIKE ?";
+    $sql = "SELECT * FROM lien_hes WHERE ten_khach_hang LIKE ? OR so_dien_thoai LIKE ? OR email LIKE ?
+    ORDER BY id DESC";
     $stmt = $this->conn->prepare($sql);
     $stmt->bindValue(1, "%$keyword%");
     $stmt->bindValue(2, "%$keyword%");

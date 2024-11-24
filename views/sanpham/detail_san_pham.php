@@ -172,7 +172,8 @@
                                                 <div class="pro-qty"><input type="text" value="1" name="so_luong"></div>
                                             </div>
                                             <div class="action_link">
-                                                <button class="btn btn-cart2">Thêm giỏ hàng</button>
+                                               
+                                            <button class="btn btn-cart2">Thêm giỏ hàng</button>
                                             </div>
                                         </div>
                                     </form>

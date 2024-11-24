@@ -323,20 +323,21 @@
                 const productList = document.getElementById('product-list');
                 data.products.forEach(product => {
                     const productHTML = `
-                        <div class="col-md-3 col-sm-6 mb-4 product-item">
-                            <div class="card">
-                                <div class="product-thumb">
+                                                 <div class="col-md-3 col-sm-6 mb-4 product-item">
+                                        <div class="product-item">
+                                            <figure class="product-thumb">
                                     <a href="${product.detailUrl}">
                                         <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}">
                                     </a>
                                     <div class="cart-hover">
                                         <a href="${product.detailUrl}" class="btn btn-cart">Xem chi tiết</a>
                                     </div>
-                                </div>
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">
+                                </figure>
+                              
+                                 <div class="product-caption text-center">
+                                                <h6 class="product-name">
                                         <a href="${product.detailUrl}">${product.name}</a>
-                                    </h5>
+                                    </h6>
                                     <div class="price-box">
                                         ${product.discountPrice
                                             ? `<span class="price-regular">${product.discountPrice}</span>

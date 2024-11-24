@@ -19,6 +19,22 @@ class BinhLuanController
 
         require_once "./views/binhluan/list_binh_luan.php";
     }
+    public function search(){
+                // lấy dữ liệu từ yêu cầu (request)
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $keyword = $_POST['keyword'];
+            $binhLuanModel = new BinhLuan();
+            $binhLuans = $binhLuanModel->searchBinhLuan($keyword);
+
+            // var_dump($trangThai);
+        }
+
+        // tìm kiếm danh mục liên hệ
+        $this->modelBinhLuan->searchBinhLuan($keyword);
+
+        // hiển thị kết quả tìm kiếm
+        require_once "./views/binhluan/list_binh_luan.php";
+    }
 
     // Chi tiết một bình luận
     public function detailBinhLuan()

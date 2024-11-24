@@ -107,6 +107,7 @@ match ($act) {
    'form-sua-don-hang'                          => (new DonHangController())->formEditDonHang(),
     'sua-don-hang'                              => (new DonHangController())->postEditDonHang(),
     'chi-tiet-don-hang'                         => (new DonHangController())->detailDonHang(),
+    'search-don-hang'                           => (new DonHangController())->search(),
 
     // route tài khoản 
     'nguoi-dungs'                               => (new NguoiDungController())->index(),
@@ -127,18 +128,21 @@ match ($act) {
 
     // login
     // check login
-      'login-admin' =>(new NguoiDungController())->formLogin(),
-      'check-login-admin' =>(new NguoiDungController())->login(),
+      'login-admin'                             =>(new NguoiDungController())->formLogin(),
+      'check-login-admin'                       =>(new NguoiDungController())->login(),
 
 
       
       // route bình luận
-      'binh-luans'                               => (new BinhLuanController())->index(),
-      'xoa-binh-luan'                            => (new BinhLuanController())->destroy(),
+      'binh-luans'                              => (new BinhLuanController())->index(),
+      'xoa-binh-luan'                           => (new BinhLuanController())->destroy(),
+      'search-binh-luan'                        => (new BinhLuanController())->search(),
       
       // route đánh giá
       'danh-gias'                               => (new DanhGiaController())->index(),
       'xoa-danh-gia'                            => (new DanhGiaController())->destroy(),
+      'search-danh-gia'                            => (new DanhGiaController())->search(),
+      
 
 
 

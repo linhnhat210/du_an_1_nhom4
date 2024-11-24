@@ -106,7 +106,7 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
                                 <div class="header-configure-area">
                                     <ul class="nav justify-content-end">
                                         <li>
-                                            <a href="#" class="minicart-btn">
+                                            <a href="?act=gio-hang" class="">
                                                 <i class="pe-7s-shopbag"></i>
                                                 <div class="notification">2</div>
                                             </a>

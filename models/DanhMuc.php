@@ -13,7 +13,7 @@ class DanhMucs
     // damh sach danh muc 
     public function getDanhMuc() {
         try {
-            $sql = 'SELECT * FROM danh_mucs';
+            $sql = 'SELECT * FROM danh_mucs WHERE trang_thai = 1 ';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
     

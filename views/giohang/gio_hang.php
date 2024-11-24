@@ -29,7 +29,7 @@
         <?php
         require_once "./views/layout/header.php";
         ?>  
-        <main>
+<main>
     <!-- breadcrumb area start -->
     <div class="breadcrumb-area">
         <div class="container">
@@ -77,13 +77,11 @@
                                         <tr>
                                             <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="Product" /></a></td>
                                             <td class="pro-title"><a href="#"><?= $sanPham['ten_san_pham'] ?></a></td>
-                                            <td class="pro-price"><span>
-                                                    <?php if ($sanPham['gia_khuyen_mai']) {
+                                            <td class="pro-price">
+                                                    <?= 
                                                          formatPrice($sanPham['gia_khuyen_mai']) . 'đ'; 
-                                                          } else { 
-                                                            formatPrice($sanPham['gia_ban']) . 'đ';
-                                                        } ?>
-                                                </span></td>
+                                                           ?>
+                                                </td>
                                             <td class="pro-quantity">
                                                 <div class="pro-qty">
                                                     <input type="text" value="<?= $sanPham['so_luong'] ?>" />
@@ -101,23 +99,39 @@
                                                 echo formatPrice($tongTien) . ' đ';
                                                 ?>
                                             </span></td>
-                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                            <td class="pro-remove"> 
+                                            <a href="<?=  '?act=xoa-san-pham-gio-hang&id_san_pham_gio_hang='. $sanPham['id']?>" 
+                                            onclick="return confirm('Bạn có đồng ý xóa hay không?')">
+                                                <i class="fa fa-trash-o"></i></a></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
-                        <!-- Cart Update Option -->
-                        <div class="cart-update-option d-block d-md-flex justify-content-between">
-                            <div class="apply-coupon-wrapper">
-                                <form action="#" method="post" class=" d-block d-md-flex">
-                                    <input type="text" placeholder="Enter Your Coupon Code" required />
-                                    <button class="btn btn-sqr">Apply Coupon</button>
-                                </form>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5 ml-auto">
+                        <!-- Cart Calculation Area -->
+                        <div class="cart-calculator-wrapper">
+                            <div class="cart-calculate-items">
+                                <h6>Tổng đơn hàng</h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <td>Tổng tiền sản phẩm</td>
+                                            <td><?= formatPrice($tongGioHang) . ' đ' ?></td>
+                                        </tr>
+                                        
+                                        <tr class="total">
+                                            <td>Tổng thanh toán</td>
+                                            <td class="total-amount"><?= formatPrice($tongGioHang ) . ' đ' ?></td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="cart-update">
-                                <a href="#" class="btn btn-sqr">Update Cart</a>
-                            </div>
+                            <a href="<?= BASE_URL . '?act=thanh-toan' ?>" class="btn btn-sqr d-block">Tiến hành đặt hàng</a>
                         </div>
                     </div>
                 </div>

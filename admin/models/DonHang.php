@@ -30,6 +30,43 @@ class donHang
             echo 'Lỗi: '. $e->getMessage();
         }
     }
+    public function searchDonHang($keyword){
+
+    $sql = "SELECT don_hangs.*, trang_thai_don_hangs.ten_trang_thai
+            FROM don_hangs
+            LEFT JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
+            WHERE don_hangs.ma_don_hang LIKE ? 
+               OR don_hangs.ten_nguoi_nhan LIKE ? 
+               OR don_hangs.email_nguoi_nhan LIKE ?
+               OR don_hangs.sdt_nguoi_nhan LIKE ?
+               OR don_hangs.ngay_dat LIKE ?
+               OR don_hangs.tong_tien LIKE ?
+               OR trang_thai_don_hangs.ten_trang_thai LIKE ?
+            ORDER BY don_hangs.id DESC";
+    
+    $stmt = $this->conn->prepare($sql);
+
+    // Gán từ khóa tìm kiếm cho tất cả các điều kiện
+    $stmt->bindValue(1, "%$keyword%", PDO::PARAM_STR);
+    $stmt->bindValue(2, "%$keyword%", PDO::PARAM_STR);
+    $stmt->bindValue(3, "%$keyword%", PDO::PARAM_STR);
+    $stmt->bindValue(4, "%$keyword%", PDO::PARAM_STR);
+    $stmt->bindValue(5, "%$keyword%", PDO::PARAM_STR);
+    $stmt->bindValue(6, "%$keyword%", PDO::PARAM_STR);
+    $stmt->bindValue(7, "%$keyword%", PDO::PARAM_STR);
+
+    try {
+        $stmt->execute();
+        // Lấy tất cả kết quả tìm kiếm
+        $donHangs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $donHangs;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+
+
+    }
 
     public function getDetailDonHang($id)
     {
