@@ -36,8 +36,28 @@ class GioHang
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute([':gio_hang_id'=>$id]);
+            $gioHang = $stmt->fetchAll();
+            
+            return $gioHang;
+        } catch (Exception $e) {
+            echo "Lõi" . $e->getMessage();
+        }
+    }
+    public function getDetailSanPhamGioHang($san_pham_id,$id){
+        try {
+            $sql = 'SELECT chi_tiet_gio_hangs.*, san_phams.ten_san_pham, san_phams.hinh_anh, san_phams.gia_ban, san_phams.gia_khuyen_mai
+            FROM chi_tiet_gio_hangs
+            INNER JOIN san_phams ON chi_tiet_gio_hangs.san_pham_id = san_phams.id
+            WHERE chi_tiet_gio_hangs.gio_hang_id = :gio_hang_id AND san_pham_id = :san_pham_id';
 
-            return $stmt->fetchAll();
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':gio_hang_id'=>$id,
+                            ':san_pham_id'=>$san_pham_id
+                            ]);
+
+            
+            return $stmt->fetch();;
         } catch (Exception $e) {
             echo "Lõi" . $e->getMessage();
         }
@@ -90,6 +110,7 @@ class GioHang
                     VALUES (:gio_hang_id, :san_pham_id, :so_luong)';
 
             $stmt = $this->conn->prepare($sql);
+            // var_dump($gio_hang_id); die;
 
             $stmt->execute([
                 ':gio_hang_id' => $gio_hang_id,
@@ -122,14 +143,14 @@ class GioHang
 {
     try {
         // Xóa chi tiết giỏ hàng trước
-        $sqlChiTiet = "DELETE FROM chi_tiet_gio_hang WHERE gio_hang_id IN (
-            SELECT id FROM gio_hang WHERE nguoi_dung_id = :nguoi_dung_id
+        $sqlChiTiet = "DELETE FROM chi_tiet_gio_hangs WHERE gio_hang_id IN (
+            SELECT id FROM gio_hangs WHERE nguoi_dung_id = :nguoi_dung_id
         )";
         $stmtChiTiet = $this->conn->prepare($sqlChiTiet);
         $stmtChiTiet->execute([':nguoi_dung_id' => $nguoi_dung_id]);
 
         // Xóa giỏ hàng chính
-        $sqlGioHang = "DELETE FROM gio_hang WHERE nguoi_dung_id = :nguoi_dung_id";
+        $sqlGioHang = "DELETE FROM gio_hangs WHERE nguoi_dung_id = :nguoi_dung_id";
         $stmtGioHang = $this->conn->prepare($sqlGioHang);
         $stmtGioHang->execute([':nguoi_dung_id' => $nguoi_dung_id]);
 
@@ -139,6 +160,21 @@ class GioHang
         error_log("Lỗi khi xóa giỏ hàng: " . $e->getMessage());
         return false; // Xóa thất bại
     }
+}
+public function getKhuyenMai($ma_khuyen_mai){
+      try {
+            $sql = 'SELECT * FROM khuyen_mais WHERE ma_khuyen_mai = :ma_khuyen_mai';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':ma_khuyen_mai' => $ma_khuyen_mai
+            ]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
 }
 
 

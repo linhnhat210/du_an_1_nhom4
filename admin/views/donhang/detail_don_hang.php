@@ -139,7 +139,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
-                                        <h5 class="card-title flex-grow-1 mb-0">Đơn hàng #VL2667</h5>
+                                        <h5 class="card-title flex-grow-1 mb-0">Đơn hàng <?=$donHang["ma_don_hang"]?> </h5>
                                         <div class="flex-shrink-0">
                                             <a href="apps-invoices-details.html" class="btn btn-success btn-sm"><i class="ri-download-2-fill align-middle me-1"></i> Invoice</a>
                                         </div>
@@ -155,8 +155,6 @@
                                                     <th scope="col">Giá</th>
                                                     <th scope="col">Số lượng</th>
                                                     <th scope="col">Thành tiền</th>
-                                                    <th scope="col">Giảm giá</th>
-                                                    <th scope="col">Phí ship</th>
                                                     <th scope="col" class="text-end">Tổng tiền</th>
                                                 </tr>
                                             </thead>
@@ -176,22 +174,45 @@
                                                         <img src="<?=BASE_URL .$SP['hinh_anh']?>" alt="" width="50px" height="50px" class="img-fluid d-block">
 
                                                     </td>
-                                                    <td> <?= isset($SP['gia_khuyen_mai']) && $SP['gia_khuyen_mai'] > 0 ? $SP['gia_khuyen_mai'] : $SP['gia_ban'] ?></td>
+                                                    <td> <?= isset($SP['gia_khuyen_mai']) && $SP['gia_khuyen_mai'] > 0 ? formatPrice($SP['gia_khuyen_mai']) : formatPrice($SP['gia_ban']) ?></td>
                                                     <td><?=$SP['so_luong']?></td>
                                                     <td>
                                                         
-                                                        <?=$SP['don_gia']?>
+                                                        <?=formatPrice($SP['don_gia'])?>
                                                     </td>
+                                                
+                                                    
                                                     <td class="fw-medium text-end">
-                                                        <?=$SP['giam_gia']?>
-                                                    </td>
-                                                    <td class="fw-medium text-end">
-                                                        0
-                                                    </td>
-                                                    <td class="fw-medium text-end">
-                                                           <?=$SP['thanh_tien']?>
+                                                           <?=formatPrice($SP['thanh_tien'])?>
                                                     </td>
                                                     <?php endforeach; ?>
+
+                                                     <tr class="border-top border-top-dashed">
+                                                    <td colspan="3"></td>
+                                                    <td colspan="3" class="fw-medium p-0">
+                                                        <table class="table table-borderless mb-0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Tổng tiền hàng :</td>
+                                                                    <td class="text-end"><?= formatPrice($donHang['tong_tien_hang'])?> đ</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Giảm giá <span class="text-muted"></span>:</td>
+                                                                    <td class="text-end"><?= formatPrice($donHang['giam_gia'])?> đ</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Phí ship :</td>
+                                                                    <td class="text-end">0 đ</td>
+                                                                </tr>
+                                                                
+                                                                <tr class="border-top border-top-dashed">
+                                                                    <th scope="row">Tổng :</th>
+                                                                    <th class="text-end"><?= formatPrice($donHang['tong_don_hang'])?></th>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
                                                
                                                
                                             </tbody>
@@ -284,7 +305,7 @@
                                             <p class="text-muted mb-0">Tổng tiền:</p>
                                         </div>
                                         <div class="flex-grow-1 ms-2">
-                                            <h6 class="mb-0"><?= $donHang['tong_tien']?> </h6>
+                                            <h6 class="mb-0"><?= $donHang['tong_don_hang']?> </h6>
                                         </div>
                                     </div>
                                 </div>

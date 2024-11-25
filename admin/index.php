@@ -141,7 +141,7 @@ match ($act) {
       // route đánh giá
       'danh-gias'                               => (new DanhGiaController())->index(),
       'xoa-danh-gia'                            => (new DanhGiaController())->destroy(),
-      'search-danh-gia'                            => (new DanhGiaController())->search(),
+      'search-danh-gia'                         => (new DanhGiaController())->search(),
       
 
 

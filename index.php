@@ -17,6 +17,7 @@ require_once './controllers/SanPhamController.php';
 require_once './controllers/KhuyenMaiController.php';
 require_once './controllers/BinhLuanController.php';
 require_once './controllers/GioHangController.php';
+require_once './controllers/DonHangController.php';
 
 
 // Require toàn bộ file Models
@@ -86,5 +87,11 @@ match ($act) {
 
    // thanh toán 
    'thanh-toan'=> (new GioHangController())->thanhToan(),
+   'thanh-toan-khuyen-mai'=> (new GioHangController())->thanhToanKhuyenMai(),
    'xu-ly-thanh-toan'=> (new GioHangController())->postThanhToan(),
+
+
+   // đơn hàng
+   // chi tiết đơn hàng
+   'chi-tiet-don-hang' => (new DonHangController())->chiTietDonHang(), 
 };

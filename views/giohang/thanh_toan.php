@@ -4,23 +4,33 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title></title>
+    <title>Thanh Toán</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/KMT.png">
 
-    <!-- CSS -->
+    <!-- CSS
+	============================================ -->
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <!-- Pe-icon-7-stroke CSS -->
+    <link rel="stylesheet" href="assets/css/vendor/pe-icon-7-stroke.css">
     <!-- Font-awesome CSS -->
     <link rel="stylesheet" href="assets/css/vendor/font-awesome.min.css">
+    <!-- Slick slider css -->
+    <link rel="stylesheet" href="assets/css/plugins/slick.min.css">
+    <!-- animate css -->
+    <link rel="stylesheet" href="assets/css/plugins/animate.css">
+    <!-- Nice Select css -->
+    <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
+    <!-- jquery UI css -->
+    <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
 
 <body>
@@ -59,7 +69,9 @@
                 <div class="col-12">
                     <!-- Checkout Login Coupon Accordion Start -->
                     <div class="checkoutaccordion" id="checkOutAccordion">
-
+                   <span class="text-danger">
+                                                            <?= !empty($_SESSION["errors"]) ?  $_SESSION["errors"] : '' ?>
+                                                        </span>
 
                         <div class="card">
                             <h6>Thêm mã giảm giá? <span data-bs-toggle="collapse" data-bs-target="#couponaccordion">Click
@@ -68,9 +80,11 @@
                                 <div class="card-body">
                                     <div class="cart-update-option">
                                         <div class="apply-coupon-wrapper">
-                                            <form action="#" method="post" class=" d-block d-md-flex">
-                                                <input type="text" placeholder="Enter Your Coupon Code" required />
-                                                <button class="btn btn-sqr">Apply Coupon</button>
+                                           
+                                            <form action="?act=thanh-toan-khuyen-mai" method="post" class=" d-block d-md-flex">
+                                                <input type="text" name="khuyen_mai" placeholder="Enter Your Coupon Code"/>
+                                                
+                                                <button class="btn btn-sqr">Áp dụng</button>
                                             </form>
                                         </div>
                                     </div>
@@ -121,57 +135,119 @@
                             <div class="order-summary-content">
                                 <!-- Order Summary Table -->
                                 <div class="order-summary-table table-responsive text-center">
-                                    <table class="table table-bordered">
+                                                                        <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>Sản phẩm</th>
-                                                <th>Tổng</th>
+                                                <th>Giá</th>
+                                                <th>Số lượng</th>
+                                               
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $tongGioHang = 0;
                                             foreach ($chiTietGioHang as $key => $sanPham) :
                                             ?>
                                                 <tr>
                                                     <td>
+                                                        <input type="hidden" name="san_pham_id[]" value="<?= $sanPham["san_pham_id"] ?>">
                                                         <a href="">
-                                                            <?= $sanPham['ten_san_pham'] ?> <strong> × <?= $sanPham['so_luong'] ?></strong>
+                                                            <?= $sanPham['ten_san_pham'] ?>
                                                         </a>
                                                     </td>
+
+                                                   <?php if($sanPham["gia_khuyen_mai"]){
+                                                    $gia_san_pham = $sanPham["gia_khuyen_mai"];
+                                                   } else{
+                                                    $gia_san_pham = $sanPham["gia_ban"];
+                                                   }
+                                                   ?>
+                                                   
+
                                                     <td>
-                                                        <?php
-                                                        $tongTien = 0;
-                                                        if ($sanPham['gia_khuyen_mai']) {
+
+                                                    <input type="hidden" name=" gia_san_pham[]" value="<?= $gia_san_pham ?>">
+                                                        <a href="">
+                                                        <a href="">
+                                                            <?= $gia_san_pham ?>
+                                                        </a>
+                                                    </td>
+                                                     <input type="hidden" name="so_luong[]" value="<?= $sanPham["so_luong"] ?>">
+                                                    <td>
+                                                        <a href="">
+                                                            <?= $sanPham['so_luong'] ?>
+                                                        </a>
+                                                    </td>
+                                                  
+                                                    
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                        
+                                       
+                                        
+                                    </table>
+                                    <br>    
+                                    <table class="table table-bordered">
+                                        <?php $tongGioHang=0;
+                                            foreach ($chiTietGioHang as $key => $sanPham){
+                                                if ($sanPham['gia_khuyen_mai']) {
                                                             $tongTien = $sanPham['gia_khuyen_mai'] * $sanPham['so_luong'];
                                                         } else {
                                                             $tongTien = $sanPham['gia_ban'] * $sanPham['so_luong'];
                                                         }
                                                         $tongGioHang += $tongTien;
-                                                        echo formatPrice($tongTien) . ' đ';
-                                                        ?>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                        <tfoot>
+                                                       
+                                            } 
+                                            ?>
+                                         <tfoot>
                                             <tr>
                                                 <td>Tổng tiền sản phẩm</td>
                                                 <td><strong><?= formatPrice($tongGioHang) . ' đ' ?></strong></td>
                                             </tr>
+                                            <?php if(isset($khuyen_mai) && $khuyen_mai): ?>
+                                            <tr>
+                                                <td>Giá trị voucher</td>
+                                                <td class="d-flex justify-content-center">
+                                                    <strong><?= $khuyen_mai["giam_phan_tram"]?>% tối đa <?= $khuyen_mai["giam_toi_da"]?> </strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Giảm giá</td>
+                                                <td class="d-flex justify-content-center">
+                                                    <?php if(($khuyen_mai["giam_phan_tram"] * $tongGioHang / 100) >= $khuyen_mai["giam_toi_da"] ){
+                                                            $giam_gia = $khuyen_mai["giam_toi_da"];
+                                                    }elseif(($khuyen_mai["giam_phan_tram"] * $tongGioHang / 100) < $khuyen_mai["giam_toi_da"]){
+                                                        $giam_gia = $khuyen_mai["giam_phan_tram"] * $tongGioHang / 100;
+                                                    }
+                                                    ?>
+                                                    <strong><?=$giam_gia . ' đ'?></strong>
+                                                </td>
+                                            </tr>
+                                            <?php endif; ?>
                                             <tr>
                                                 <td>Shipping</td>
                                                 <td class="d-flex justify-content-center">
-                                                    <strong>30.000 đ</strong>
+                                                    <strong>0 đ</strong>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Tổng đơn hàng</td>
-                                                <input type="hidden" name="tong_tien" value="<?= $tongGioHang +3000 ?>">
-                                                <td><strong><?= formatPrice($tongGioHang + 30000) . ' đ' ?></strong></td>
+                                                <?php if(isset($giam_gia) && $giam_gia){
+                                                    $tong_tien = $tongGioHang - $giam_gia;
+                                                }else{ 
+                                                    $tong_tien = $tongGioHang;
+                                                }
+                                                ?>
+                                                <input type="hidden" name="don_gia" value="<?= $tongGioHang ?? 0?>">
+                                                <input type="hidden" name="giam_gia" value="<?= $giam_gia ?? 0 ?>">
+                                                <input type="hidden" name="thanh_tien" value="<?= $tong_tien ?>">
+                                                <td><strong><?= formatPrice($tong_tien) . ' đ' ?></strong></td>
                                             </tr>
                                         </tfoot>
-                                    </table>
+                                    
+                                        </table>
+
                                 </div>
                                 <!-- Order Payment Method -->
                                 <div class="order-payment-method">
