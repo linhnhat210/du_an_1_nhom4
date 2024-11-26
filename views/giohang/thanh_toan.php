@@ -208,13 +208,13 @@
                                             <?php if(isset($khuyen_mai) && $khuyen_mai): ?>
                                             <tr>
                                                 <td>Giá trị voucher</td>
-                                                <td class="d-flex justify-content-center">
+                                                <td>
                                                     <strong><?= $khuyen_mai["giam_phan_tram"]?>% tối đa <?= $khuyen_mai["giam_toi_da"]?> </strong>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Giảm giá</td>
-                                                <td class="d-flex justify-content-center">
+                                                <td>
                                                     <?php if(($khuyen_mai["giam_phan_tram"] * $tongGioHang / 100) >= $khuyen_mai["giam_toi_da"] ){
                                                             $giam_gia = $khuyen_mai["giam_toi_da"];
                                                     }elseif(($khuyen_mai["giam_phan_tram"] * $tongGioHang / 100) < $khuyen_mai["giam_toi_da"]){
@@ -227,7 +227,7 @@
                                             <?php endif; ?>
                                             <tr>
                                                 <td>Shipping</td>
-                                                <td class="d-flex justify-content-center">
+                                                <td>
                                                     <strong>0 đ</strong>
                                                 </td>
                                             </tr>

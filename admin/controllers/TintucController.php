@@ -33,7 +33,7 @@ class TintucController
     // Hàm hiển thị form thêm tin tức
     public function create(){
         require_once "./views/tintuc/add_tin_tuc.php";
-        deleteSessionError();
+         unset($_SESSION['errors']);
     }
 
     // Hàm xử lý form thêm tin tức
@@ -42,6 +42,7 @@ class TintucController
             $tieu_de = $_POST["tieu_de"];
             
             $noi_dung = $_POST["noi_dung"];
+            
             $hinh_anh = $_FILES["hinh_anh"];
             $trang_thai = $_POST["trang_thai"];
             $file_thumb = uploadFile($hinh_anh,'./uploads/');
@@ -53,6 +54,7 @@ class TintucController
             if (empty($noi_dung)) {
                 $errors["noi_dung"] = "Vui lòng nhập nội dung tin tức.";
             }
+            $_SESSION['errors'] = $errors;
 
             // Nếu không có lỗi, tiến hành thêm dữ liệu
             if (empty($errors)) {
@@ -63,7 +65,7 @@ class TintucController
                 header("Location: ?act=tin-tucs");
                 exit();
             } else {
-                $_SESSION['flash'] = true;
+             
                 header("Location: ?act=form-them-tin-tuc");
                 exit();
             }
@@ -75,7 +77,7 @@ class TintucController
         $id = $_GET['tin_tuc_id'];
         $tinTuc = $this->modelTinTuc->getDetailData($id);
         require_once "./views/tintuc/edit_tin_tuc.php";
-        deleteSessionError();
+        unset($_SESSION['errors']);
     }
 
     // Hàm xử lý form sửa tin tức
@@ -107,6 +109,7 @@ class TintucController
             if (empty($noi_dung)) {
                 $errors["noi_dung"] = "Vui lòng nhập nội dung tin tức.";
             }
+            $_SESSION['errors'] = $errors;
             
             if (empty($errors)) {
                 // var_dump($new_file);die;
@@ -116,8 +119,8 @@ class TintucController
                 header("Location: ?act=tin-tucs");
                 exit();
             } else {
-                $_SESSION['flash'] = true;
-                header("Location: ?act=form-sua-tin-tuc");
+                
+                header("Location: ?act=form-sua-tin-tuc&tin_tuc_id=" . $id);
                 exit();
             }
         }

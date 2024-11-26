@@ -12,7 +12,8 @@ class TinTuc
     public function getAllTinTuc()
     {
         try {
-            $sql = 'SELECT id, tieu_de, noi_dung, hinh_anh, trang_thai FROM tin_tucs';
+            $sql = 'SELECT * FROM tin_tucs WHERE trang_thai=1
+                    ORDER BY id DESC';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
 
@@ -27,7 +28,7 @@ class TinTuc
     public function getTinTucById($id)
     {
         try {
-            $sql = 'SELECT id, tieu_de, noi_dung, hinh_anh, trang_thai FROM tin_tucs WHERE id = :id';
+            $sql = 'SELECT * FROM tin_tucs WHERE id = :id AND trang_thai = 1';
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();

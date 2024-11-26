@@ -36,7 +36,7 @@ class DashboardController {
         $khachHangThang             = $this->modelDashboard->soNguoiDungMoiTheoThang();
 
 
-        $donHangThangData = array_column($donHangThang, 'tong_don_hang');
+        $donHangThangData = array_column($donHangThang, 'tong_so_don_hang');
         $tienHangThangData = array_column($tienHangThang, 'tong_tien');
         $khachHangThangData = array_column($khachHangThang, 'tong_nguoi_dung_moi');
 

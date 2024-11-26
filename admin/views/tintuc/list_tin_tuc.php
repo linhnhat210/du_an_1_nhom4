@@ -86,11 +86,34 @@
                                                         <?php foreach ($tinTucs as $index => $tinTuc) : ?>
                                                         <tr>
                                                             <td class="fw-medium"><?= $index + 1 ?></td>
-                                                            <td><?= $tinTuc["tieu_de"] ?></td>
+                                                            <td><?php
+                       
+                        $noi_dung = $tinTuc['tieu_de'];
+                        $words = explode(' ', $noi_dung);
+                        if (count($words) > 6) {
+                           
+                            $words = array_slice($words, 0, 6);
+                            $noi_dung = implode(' ', $words) . '...';
+                        }
+                        echo $noi_dung;
+                        ?></td>
                                                             <td>
                                                                 <img src="<?= BASE_URL . $tinTuc['hinh_anh'] ?>" style="width:100px;height:100px" alt="Hình ảnh tin tức">
                                                             </td>
-                                                            <td><?= substr($tinTuc["noi_dung"], 0, 50) ?>...</td>
+                                                            <td>
+                                                                <?php
+                        // Limit the content to 80 words
+                        $noi_dung = $tinTuc['noi_dung'];
+                        $words = explode(' ', $noi_dung); 
+                        if (count($words) > 50) {
+                           
+                            $words = array_slice($words, 0, 50);
+                            $noi_dung = implode(' ', $words) . '...';
+                        }
+                        echo $noi_dung;
+                        ?>
+                    </p>
+                                                            </td>
                                                             <td>
                                                                 <?php if ($tinTuc["trang_thai"] == 1): ?>
                                                                     <span class="badge bg-success">Hiển Thị</span>

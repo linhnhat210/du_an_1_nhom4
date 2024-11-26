@@ -176,6 +176,29 @@ public function getKhuyenMai($ma_khuyen_mai){
             echo "lỗi" . $e->getMessage();
         }
 }
+    public function demSoSP($id) {
+        try {
+            
+            $sql = "SELECT COUNT(*) AS so_luong_san_pham
+                    FROM chi_tiet_gio_hangs AS ctgh
+                    JOIN gio_hangs AS gh ON ctgh.gio_hang_id = gh.id
+                    WHERE gh.nguoi_dung_id = :nguoi_dung_id;";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindPaRam(':nguoi_dung_id',$id);
+            $stmt->execute();
+            $ketQua = $stmt->fetch();
+            // var_dump($ketQua);die;
+
+            return $ketQua['so_luong_san_pham'] ?? 0; // Trả về 0 nếu không có đơn hàng nào
+            //code...
+        } catch (PDOException $e) {
+            //throw $th;
+            echo 'Lỗi: '. $e->getMessage();
+
+        }
+    }
+       
 
 
 

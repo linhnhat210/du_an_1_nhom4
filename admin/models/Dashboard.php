@@ -17,7 +17,7 @@ class Dashboard
         try {
             //code...
             $ngayHienTai = date('Y-m-d'); // Lấy ngày hiện tại
-            $sql = "SELECT SUM(tong_tien) AS tong_thu_nhap 
+            $sql = "SELECT SUM(tong_don_hang) AS tong_thu_nhap 
                     FROM don_hangs 
                     WHERE ngay_nhan = :ngay_hien_tai AND trang_thai_id = 7";
 
@@ -42,10 +42,11 @@ class Dashboard
             $sql = "SELECT COUNT(*) AS so_luong_don_hang FROM don_hangs WHERE DATE(ngay_dat) = :ngay_hien_tai";
 
             $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['ngay_hien_tai' => $ngayHienTai]);
             
             $ketQua = $stmt->fetch();
 
-            return $ketQua['so_luong_don_hang'] ?? 0; // Trả về 0 nếu không có đơn hàng nào
+            return $ketQua['so_luong_don_hang'] ?? 0 ; // Trả về 0 nếu không có đơn hàng nào
             //code...
         } catch (PDOException $e) {
             //throw $th;
@@ -182,7 +183,7 @@ class Dashboard
     public function thongKeTongTien() {
         try {
             $nam = date('Y'); 
-            $sql = "SELECT SUM(tong_tien) AS tong_thu_nhap_nam
+            $sql = "SELECT SUM(tong_don_hang) AS tong_thu_nhap_nam
             FROM don_hangs 
             WHERE trang_thai_id = 7";
             
@@ -205,7 +206,7 @@ class Dashboard
     public function thongKeHoanTien() {
         try {
             $nam = date('Y'); 
-            $sql = "SELECT SUM(tong_tien) AS hoan_tien
+            $sql = "SELECT SUM(tong_don_hang) AS hoan_tien
             FROM don_hangs 
             WHERE YEAR(ngay_dat) = :nam AND trang_thai_id = 8";
             
@@ -303,7 +304,7 @@ class Dashboard
         $sql = "
             SELECT 
                 MONTH(dh.ngay_nhan) AS thang,
-                COUNT(DISTINCT dh.id) AS tong_don_hang
+                COUNT(DISTINCT dh.id) AS tong_so_don_hang
             FROM 
                 don_hangs AS dh
             WHERE YEAR(dh.ngay_nhan) = :nam AND dh.trang_thai_id = 7
@@ -317,13 +318,13 @@ class Dashboard
         // Khởi tạo mảng mặc định với tháng từ 1 đến 12
         $thangData = [];
         for ($i = 1; $i <= 12; $i++) {
-            $thangData[$i] = ['thang' => $i, 'tong_don_hang' => 0];
+            $thangData[$i] = ['thang' => $i, 'tong_so_don_hang' => 0];
         }
 
         // Duyệt kết quả từ câu truy vấn và cập nhật mảng $thangData
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($data as $row) {
-            $thangData[$row['thang']]['tong_don_hang'] = $row['tong_don_hang'];
+            $thangData[$row['thang']]['tong_so_don_hang'] = $row['tong_so_don_hang'];
         }
 
         return $thangData;
@@ -343,7 +344,7 @@ public function tongTienTheoThang() {
         $sql = "
             SELECT 
                 MONTH(dh.ngay_nhan) AS thang,
-                COALESCE(SUM(dh.tong_tien), 0) AS tong_tien
+                COALESCE(SUM(dh.tong_don_hang), 0) AS tong_tien
             FROM 
                 don_hangs AS dh
             WHERE YEAR(dh.ngay_nhan) = :nam AND dh.trang_thai_id = 7
@@ -360,7 +361,7 @@ public function tongTienTheoThang() {
 
         foreach ($data as $row) {
             $thangData[$row['thang']]['thang'] = $row['thang'];
-            $thangData[$row['thang']]['tong_tien'] = $row['tong_tien'] / 1000000;
+            $thangData[$row['thang']]['tong_tien'] = $row['tong_tien'] / 100000;
         }
 
         return $thangData;

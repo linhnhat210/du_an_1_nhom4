@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable" data-theme="default" data-theme-colors="default">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <title>King Manga - Chỉnh Sửa Tin Tức</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Quản lý tin tức" name="description" />
@@ -61,7 +61,7 @@
 
                                         <div class="mb-3">
                                             <label for="noi_dung" class="form-label">Nội Dung(*)</label>
-                                            <textarea class="form-control" name="noi_dung" rows="5" placeholder="Nhập nội dung"><?= $tinTuc['noi_dung'] ?></textarea>
+                                            <textarea class="form-control" name="noi_dung" rows="5" placeholder="Nhập nội dung"  id="noidungbaiviet"><?= $tinTuc['noi_dung'] ?></textarea>
                                             <span class="text-danger"><?= $_SESSION["errors"]["noi_dung"] ?? '' ?></span>
                                         </div>
 

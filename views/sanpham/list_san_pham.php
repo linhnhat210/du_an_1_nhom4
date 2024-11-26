@@ -149,15 +149,7 @@
 
 
 
-                            <!-- single sidebar start -->
-                            <div class="sidebar-banner">
-                                <div class="img-container">
-                                    <a href="#">
-                                        <img src="assets/img/banner/sidebar-banner.jpg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- single sidebar end -->
+
                         </aside>
                     </div>
                     <!-- sidebar area end -->

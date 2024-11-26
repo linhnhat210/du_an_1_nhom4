@@ -20,3 +20,5 @@
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>
+<script src="assets/tinymce/tinymce.min.js"></script>
+<script src="assets/js/js.js"></script>

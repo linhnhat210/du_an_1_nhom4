@@ -1,5 +1,8 @@
   <?php
 $danhMucs = (new DanhMucsController())->DanhMuc();
+if (isset($_SESSION['user_client'])) {
+    $soluongsanpham = (new GioHangController())->demSoSP($_SESSION['user_client']["id"]);
+}
 
 ?>
 
@@ -108,16 +111,29 @@ $danhMucs = (new DanhMucsController())->DanhMuc();
                                         <li>
                                             <a href="?act=gio-hang" class="">
                                                 <i class="pe-7s-shopbag"></i>
-                                                <div class="notification">2</div>
+                                                <div class="notification"><?php if (isset($_SESSION['user_client'])){
+                                                    echo $soluongsanpham;
+                                                }else{
+                                                    echo 0;
+                                                } ?>
+                                                    
+                                                </div>
                                             </a>
                                         </li>
                                        <li class="user-hover">
-    <a href="#">
+<?php if (isset($_SESSION['user_client'])): ?>
+                        
+    <a href="?act=my-account">
         <i class="pe-7s-user"></i>
     </a>
+    <?php else:?>
+             <a href="?act=login">
+        <i class="pe-7s-user"></i>
+    </a>
+    <?php endif; ?>
     <ul class="dropdown-list">
 <?php if (isset($_SESSION['user_client'])): ?>
-    <li><a href="#"><?= htmlspecialchars($_SESSION['user_client']['ten_nguoi_dung'], ENT_QUOTES, 'UTF-8') ?></a></li>
+    <li><a href="?act=my-account"><?= htmlspecialchars($_SESSION['user_client']['ten_nguoi_dung'], ENT_QUOTES, 'UTF-8') ?></a></li>
     <li><a href="views/taikhoan/logout.php">Đăng Xuất</a></li>
 <?php else: ?>
     <li><a href="<?= BASE_URL . './?act=login' ?>">Đăng Nhập</a></li> 

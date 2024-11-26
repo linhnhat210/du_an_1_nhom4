@@ -294,7 +294,7 @@ class GioHangController {
 
             // Thông báo thành công và chuyển hướng về trang chủ
 
-            header("Location: " . BASE_URL );
+            header("Location: " . BASE_URL."?act=thong-bao&id_don_hang=" . $don_hang_id  );
             die();
 
         } catch (Exception $e) {
@@ -303,7 +303,7 @@ class GioHangController {
                 alert("Đã xảy ra lỗi khi đặt hàng: ' . $e->getMessage() . '");
                 
             </script>';
-            header("Location: " . BASE_URL );
+            header("Location: " . BASE_URL);
             die();
         }
     } else {
@@ -315,6 +315,17 @@ class GioHangController {
         header("Location: ?act=gio-hang");
         die();
     }
+}
+public function thongBao(){
+    $don_hang_id = $_GET["id_don_hang"] ?? 0;
+    $don_hang = $this->modelDonHang->getDonHang($don_hang_id);
+
+    
+    require_once "views/giohang/thong_bao.php";
+}
+public function demSoSP($id){
+    $soLuongSP = $this->modelGioHang->demSoSP($id);
+    return $soLuongSP;
 }
 
 

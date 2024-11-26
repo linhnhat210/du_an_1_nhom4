@@ -1,9 +1,11 @@
 <?php
 class NguoiDungController{
     public $modelNguoiDung;
+    public $modelDonHang;
 
     public function __construct(){
         $this->modelNguoiDung = new NguoiDungs();
+        $this->modelDonHang = new DonHang();
     }
 
     
@@ -149,5 +151,10 @@ class NguoiDungController{
             header("Location:?act=dang-ky");
             exit();
         }
+    }
+       public function myAccount(){
+        $userId = $_SESSION['user_client']['id'];
+        $donHang = $this->modelDonHang->getAllDonHang($userId);
+        require_once './views/taikhoan/my_account.php';
     }
 }

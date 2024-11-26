@@ -119,9 +119,10 @@
                       <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
+                          
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0">Chi tiết đơn hàng</h4>
-
+                                 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Đơn hàng</a></li>
@@ -133,6 +134,23 @@
                         </div>
                     </div>
                     <!-- end page title -->
+
+            <?php
+          if ($donHang['trang_thai_id'] == 6 ) {
+            $colorAlerts = 'danger';
+          } elseif ($donHang['trang_thai_id'] >= 1 && $donHang['trang_thai_id'] <= 5) {
+            $colorAlerts = 'primary';
+          } elseif ($donHang['trang_thai_id'] == 7) {
+            $colorAlerts = 'success';
+          } elseif($donHang['trang_thai_id'] =8) {
+            $colorAlerts = 'warning';
+          }
+          ?>
+          <div class="alert alert-<?= $colorAlerts ?>" role="alert">
+            Đơn hàng: <?= $donHang['ten_trang_thai'] ?>
+          </div>
+
+
 
                     <div class="row">
                         <div class="col-xl-9">
@@ -154,8 +172,8 @@
                                                     <th scope="col">Hình Ảnh</th>
                                                     <th scope="col">Giá</th>
                                                     <th scope="col">Số lượng</th>
-                                                    <th scope="col">Thành tiền</th>
-                                                    <th scope="col" class="text-end">Tổng tiền</th>
+                                                    <th scope="col" class="text-end">Thành tiền</th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -176,10 +194,7 @@
                                                     </td>
                                                     <td> <?= isset($SP['gia_khuyen_mai']) && $SP['gia_khuyen_mai'] > 0 ? formatPrice($SP['gia_khuyen_mai']) : formatPrice($SP['gia_ban']) ?></td>
                                                     <td><?=$SP['so_luong']?></td>
-                                                    <td>
-                                                        
-                                                        <?=formatPrice($SP['don_gia'])?>
-                                                    </td>
+
                                                 
                                                     
                                                     <td class="fw-medium text-end">
@@ -187,10 +202,35 @@
                                                     </td>
                                                     <?php endforeach; ?>
 
-                                                     <tr class="border-top border-top-dashed">
-                                                    <td colspan="3"></td>
-                                                    <td colspan="3" class="fw-medium p-0">
-                                                        <table class="table table-borderless mb-0">
+            
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                               
+                                               
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end card-->
+                             <div class="card">
+                                <div class="card-header">
+                                    <div class="d-sm-flex align-items-center">
+                                        <h5 class="card-title flex-grow-1 mb-0">Tổng tiền đơn hàng</h5>
+                                      
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="profile-timeline">
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            <div class="accordion-item border-0">
+                                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                    
+
+                                                        <table class="table table-border mb-0">
                                                             <tbody>
                                                                 <tr>
                                                                     <td>Tổng tiền hàng :</td>
@@ -211,12 +251,14 @@
                                                                 </tr>
                                                             </tbody>
                                                         </table>
-                                                    </td>
-                                                </tr>
-                                               
-                                               
-                                            </tbody>
-                                        </table>
+                                                </div>
+                                            </div>
+                                        
+                                       
+                                         
+                               
+                                        </div>
+                                        <!--end accordion-->
                                     </div>
                                 </div>
                             </div>

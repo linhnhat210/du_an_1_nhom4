@@ -59,9 +59,9 @@
                                             <div class="mt-3 mt-lg-0">
                                                 <form action="javascript:void(0);">
                                                     <div class="row g-3 mb-0 align-items-center">
-                                                        <div class="col-auto">
+                                                        <!-- <div class="col-auto">
                                                             <button type="button" class="btn btn-soft-success material-shadow-none"><i class="ri-add-circle-line align-middle me-1"></i> Add Product</button>
-                                                        </div>
+                                                        </div> -->
                                                         <!--end col-->
                                                         <div class="col-auto">
                                                             <button type="button" class="btn btn-soft-info btn-icon waves-effect material-shadow-none waves-light layout-rightside-btn"><i class="ri-pulse-line"></i></button>
@@ -113,7 +113,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-grow-1 overflow-hidden">
-                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Đơn Hàng</p>
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Đơn Hàng Mới</p>
                                                     </div>
                                                     <div class="flex-shrink-0">
                                                         <h5 class="text-muted fs-14 mb-0">
@@ -142,7 +142,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-grow-1 overflow-hidden">
-                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Khách Hàng</p>
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Khách Hàng Mới</p>
                                                     </div>
                                                     <div class="flex-shrink-0">
                                                         <h5 class="text-muted fs-14 mb-0">
@@ -171,7 +171,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-grow-1 overflow-hidden">
-                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Liên Hệ</p>
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Liên Hệ Mới</p>
                                                     </div>
                                                     <div class="flex-shrink-0">
                                                         <h5 class="text-muted fs-14 mb-0">
@@ -199,7 +199,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-grow-1 overflow-hidden">
-                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Khuyến Mãi</p>
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Khuyến Mãi Hôm Nay</p>
                                                     </div>
                                                     <div class="flex-shrink-0">
                                                         <h5 class="text-muted fs-14 mb-0">
@@ -227,7 +227,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-grow-1 overflow-hidden">
-                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Đánh Giá</p>
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Đánh Giá Mới</p>
                                                     </div>
                                                     <div class="flex-shrink-0">
                                                         <h5 class="text-muted fs-14 mb-0">
@@ -328,7 +328,7 @@
                                                     <!--end col-->
                                                     <div class="col-6 col-sm-3">
                                                         <div class="p-3 border border-dashed border-start-0 border-end-0">
-                                                            <h5 class="mb-1 text-success"><span class="counter-value" data-target="<?= $danhGia ?>">0</span>%</h5>
+                                                            <h5 class="mb-1 text-success"><span class="counter-value" data-target="<?= number_format($danhGia / $tongSoLuongDonHang , 2) ?>">0</span>%</h5>
                                                             <p class="text-muted mb-0">Tỷ Lệ Đánh Giá</p>
                                                         </div>
                                                     </div>
@@ -796,13 +796,13 @@
                      'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
             datasets: [
                 {
-                    label: 'Doanh thu (triệu VND)',
+                    label: 'Doanh thu (Trăm nghìn VND)',
                     data: tienHangThang,  // Dữ liệu doanh thu từ PHP
                     backgroundColor: 'rgba(0, 255, 21, 0.6)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Đơn hàng',
+                    label: 'Đơn hàng (Thành Công)',
                     data: donHangThang,  // Dữ liệu số đơn hàng từ PHP
                     backgroundColor: 'rgba(255, 159, 64, 0.6)',
                     borderWidth: 1
@@ -850,9 +850,9 @@
                             color: 'rgba(200, 200, 200, 0.5)'
                         },
                         ticks: {
-                            stepSize: 5 // Bước giá trị trên trục Y, nhỏ hơn để cột cao hơn
+                            stepSize: 2 // Bước giá trị trên trục Y, nhỏ hơn để cột cao hơn
                         },
-                        max: 50 // Đặt giá trị tối đa trên trục Y để tăng khoảng so sánh
+                        max: 20 // Đặt giá trị tối đa trên trục Y để tăng khoảng so sánh
                     }
                 }
             }

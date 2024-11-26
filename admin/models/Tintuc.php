@@ -44,14 +44,16 @@ class Tintuc
     // Thêm tin tức
     public function createTinTuc($tieu_de, $noi_dung,  $trang_thai,$file_thumb){
         try {
-            $sql = 'INSERT INTO tin_tucs (tieu_de, noi_dung, hinh_anh, trang_thai)
-                    VALUES (:tieu_de, :noi_dung, :hinh_anh, :trang_thai)';
+            $ngay_tao =date('Y-m-d H:i:s');
+            $sql = 'INSERT INTO tin_tucs (tieu_de, noi_dung, hinh_anh,ngay_tao, trang_thai)
+                    VALUES (:tieu_de, :noi_dung, :hinh_anh,:ngay_tao, :trang_thai)';
             $stmt = $this->conn->prepare($sql);
 
             $stmt->bindParam(':tieu_de', $tieu_de);
             $stmt->bindParam(':noi_dung', $noi_dung);
             $stmt->bindParam(':hinh_anh', $file_thumb);
             $stmt->bindParam(':trang_thai', $trang_thai);
+            $stmt->bindParam(':ngay_tao', $ngay_tao);
 
             $stmt->execute();
             return true;

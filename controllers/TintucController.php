@@ -28,17 +28,11 @@ class TintucController
     {
         $id = $_GET['id'] ?? null;
 
-        if (!$id || !is_numeric($id)) {
-            echo "ID không hợp lệ.";
-            return;
-        }
+
 
         $tinTuc = $this->tinTucModel->getTinTucById($id);
 
-        if (!$tinTuc) {
-            echo "Tin tức không tồn tại.";
-            return;
-        }
+
 
         require_once 'views/tintuc/chi_tiet_tin_tuc.php';
     }

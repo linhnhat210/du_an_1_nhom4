@@ -89,9 +89,10 @@ match ($act) {
    'thanh-toan'=> (new GioHangController())->thanhToan(),
    'thanh-toan-khuyen-mai'=> (new GioHangController())->thanhToanKhuyenMai(),
    'xu-ly-thanh-toan'=> (new GioHangController())->postThanhToan(),
+   'thong-bao' => (new GioHangController())->thongBao(),
 
 
-   // đơn hàng
-   // chi tiết đơn hàng
+   // tài khoản của tôi
+   'my-account'          => (new NguoiDungController())->myAccount(),
    'chi-tiet-don-hang' => (new DonHangController())->chiTietDonHang(), 
 };

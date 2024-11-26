@@ -71,8 +71,8 @@
                                                     <div class="col-md-12">
                                                         <div class="mb-3">
                                                             <label for="noiDungInput" class="form-label">Nội Dung(*)</label>
-                                                            <textarea class="form-control" rows="5" placeholder="Nhập nội dung tin tức" name="noi_dung"></textarea>
-                                                            <span class="text-danger"><?= !empty($_SESSION["errors"]["noi_dung"]) ? $_SESSION["errors"]["noi_dung"] : '' ?></span>
+                                                            <textarea class="form-control" rows="5" placeholder="Nhập nội dung tin tức" name="noi_dung" id="noidungbaiviet"></textarea>
+                                                            <span class="text-danger"><?= !empty($_SESSION['errors']["noi_dung"]) ? $_SESSION["errors"]["noi_dung"] : '' ?></span>
                                                         </div>
                                                     </div>
 
@@ -134,5 +134,6 @@
     </div>
 
     <?php require_once "views/layouts/libs_js.php"; ?>
+
 </body>
 </html>

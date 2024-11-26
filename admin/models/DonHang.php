@@ -143,7 +143,7 @@ class donHang
     public function updateDonHang($id, $ten_nguoi_nhan, $sdt_nguoi_nhan, $email_nguoi_nhan, $dia_chi_nguoi_nhan, $ghi_chu, $trang_thai_id)
     {
         try {
-            $ngayHienTai = date('Y-m-d');
+            $ngayHienTai = date('Y-m-d H:i:s');
             if($trang_thai_id == 7){
                 $ngay_nhan = $ngayHienTai;
             }
