@@ -55,8 +55,8 @@
     }
     public function formLogin(){
             require_once './views/login/form_login_admin.php';
-        
-            deleteSessionError();
+            unset($_SESSION['error']);
+            
         
         }
         public function login() {
@@ -86,6 +86,7 @@
                             $_SESSION['user_admin'] = $user;
                             header("Location: /base_du_an_1/admin/" );
                             exit;
+                            unset($_SESSION['error']);
                         }else{
                             $_SESSION['error'] = 'Tài khoản đã bị cấm';
                             $_SESSION['flash'] = true ;

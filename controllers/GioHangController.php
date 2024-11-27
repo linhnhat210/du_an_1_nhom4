@@ -96,9 +96,9 @@ class GioHangController {
                 // Thông báo nếu chưa đăng nhập
                 echo '<script>
                     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập để tiếp tục.");
+                     window.location.href = "' . BASE_URL . '?act=login";
                 </script>';
-                header("Location: " . BASE_URL);
-                die;
+                
             }
         }
     }

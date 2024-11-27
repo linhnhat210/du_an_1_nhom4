@@ -114,7 +114,7 @@
 
                                          <div class="single-input-item">
                                             <label for="citynameInput" class="form-label">Giới tính</label>
-                                        <select name="gioi_tinh" class="form-select">
+                                        <select name="gioi_tinh">
                                                             <option selected value="Nam">Nam</option>
                                                             <option value="Nữ">Nữ</option>
                                                         </select>

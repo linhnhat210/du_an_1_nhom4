@@ -72,11 +72,13 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4">
                                         <div class="myaccount-tab-menu nav" role="tablist">
-                                            <a href="?act=my-account" class="active" data-bs-toggle="tab"><i class="fa fa-user"></i>
-                                                Thông tin cá nhân</a>
+                                            <a href="?act=my-account" class="tab"><i class="fa fa-user"></i>
+                                                Thông Tin Cá Nhân</a>
                                             <a href="?act=list-don-hang"><i class="fa fa-cart-arrow-down"></i>
-                                                Lịch sử mua hàng</a>
-                                            <a href="?act=doi-mat-khau"><i class="fa fa-user"></i> Đổi mật khẩu</a>
+                                            Lịch sử mua hàng</a>
+                                            <a href="#dashboad" class="active" data-bs-toggle="tab"><i class="fa fa-user"></i>
+                                            Đổi Mật Khẩu</a>
+                                            
                                             <a href="login-register.html"><i class="fa fa-sign-out"></i> Logout</a>
                                         </div>
                                     </div>
@@ -87,96 +89,49 @@
                                         <div class="tab-content" id="myaccountContent">
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
-                                                 <form action="?act=cap-nhat-tai-khoan" method="POST" enctype="multipart/form-data">
-                                                    <input type="hidden" name="id" id="id" value="<?= $_SESSION['user_client']['id']?>">
-            <!-- Avatar -->
-         
-                                                        <div class="mb-3 text-center">
-    <!-- Hình ảnh đại diện -->
-    <label for="avatar">
-        <img src="<?= BASE_URL . $_SESSION['user_client']['avatar'] ?>" 
-             alt="Avatar" 
-             class="avatar mb-3" 
-             style="cursor: pointer; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;"
-              onerror="this.onerror=null; this.src=' https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'">
-
-    </label>
-    <!-- Input file ẩn -->
-    <input type="file" class="form-control d-none" id="avatar" name="avatar" onchange="updateAvatarPreview(event)">
-    <p class="form-label">Thay đổi ảnh đại diện</p>
-</div>
-          
-
-            <!-- Tên -->
-            <div class="mb-3">
-                <label for="ten_nguoi_dung" class="form-label">Tên</label>
-                <input type="text" class="form-control" id="ten_nguoi_dung" name="ten_nguoi_dung" value="<?= $_SESSION['user_client']['ten_nguoi_dung']?>" required>
-                 <span class="text-danger">
-                        <?= !empty($_SESSION["errors"]["ten_nguoi_dung"]) ?  $_SESSION["errors"]["ten_nguoi_dung"] : '' ?>
-                 </span>
-            </div>
-
-            <!-- Số điện thoại -->
-            <div class="mb-3">
-                <label for="phone" class="form-label">Số điện thoại</label>
-                <input type="text" class="form-control" id="sdt" name="sdt" value="<?= $_SESSION['user_client']['sdt']?>" required>
-                 <span class="text-danger">
-                        <?= !empty($_SESSION["errors"]["sdt"]) ?  $_SESSION["errors"]["sdt"] : '' ?>
-                 </span>
-            </div>
-            
-            <!-- Địa chỉ -->
-            <div class="mb-3">
-                <label for="dia_chi" class="form-label">Địa chỉ</label>
-                <textarea class="form-control" id="dia_chi" name="dia_chi" rows="3" required><?= $_SESSION['user_client']['dia_chi'] ?></textarea>
-                 <span class="text-danger">
-                        <?= !empty($_SESSION["errors"]["dia_chi"]) ?  $_SESSION["errors"]["dia_chi"] : '' ?>
-                 </span>
-            </div>
-
-            
-            <div class="mb-3">
-                <label for="date" class="form-label">Ngày sinh</label>
-                <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" value="<?= $_SESSION['user_client']['ngay_sinh']?>" required>
-                 <span class="text-danger">
-                        <?= !empty($_SESSION["errors"]["ngay_sinh"]) ?  $_SESSION["errors"]["ngay_sinh"] : '' ?>
-                 </span>
-            </div>
-
-
-            <!-- Giới tính -->
-            <div class="mb-3">
-                <label class="form-label">Giới tính</label>
-                <div>
-                    <select name="gioi_tinh">
-                        <option value="Nam" <?= $_SESSION['user_client']['gioi_tinh'] === 'Nam' ? 'selected' : '' ?>>Nam</option>
-                        <option value="Nữ" <?= $_SESSION['user_client']['gioi_tinh'] === 'Nữ' ? 'selected' : '' ?>>Nữ</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Nút lưu -->
-             <br>
-             <br>
-             <div class="mb-3 text-end">
-                <button type="submit" class="btn btn-sqr">Lưu thông tin</button>
-            </div>
-        </form>
-               
+                                             
+                                                <form action="?act=post-edit-mat-khau" method="POST">
+                                                    <input type="hidden" name="id" id="id" value="<?= $_SESSION["user_client"]["id"] ?>">
+                                                            <fieldset>
+                                                                <legend>Đổi mật khẩu</legend>
+                                                                <div class="single-input-item">
+                                                                    <label for="current-pwd" class="required">Mật khẩu cũ</label>
+                                                                    <input type="password" name="mk_cu" placeholder="Nhập mật khẩu cũ" />
+                                                                    <span class="text-danger">
+                                                                        <?= !empty($_SESSION["errors"]["mk_cu"]) ?  $_SESSION["errors"]["mk_cu"] : '' ?>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="single-input-item">
+                                                                            <label for="new-pwd" class="required">Mật khẩu mới</label>
+                                                                            <input type="password" name="mk_moi" placeholder="Nhập mật khẩu mới" />
+                                                                            <span class="text-danger">
+                                                                            <?= !empty($_SESSION["errors"]["mk_moi"]) ?  $_SESSION["errors"]["mk_moi"] : '' ?>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="single-input-item">
+                                                                            <label for="confirm-pwd" class="required">Xác nhận mật khẩu</label>
+                                                                            <input type="password" name="mk_xn" placeholder="Xác nhận mật khẩu" />
+                                                                            <span class="text-danger">
+                                                                            <?= !empty($_SESSION["errors"]["mk_xn"]) ?  $_SESSION["errors"]["mk_xn"] : '' ?>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </fieldset>
+                                                            <div class="single-input-item">
+                                                                <button class="btn btn-sqr">Đổi mật khẩu</button>
+                                                            </div>
+                                                        </form>
                                             </div>
                                             <!-- Single Tab Content End -->
 
-                                            <!-- Single Tab Content Start -->
-                                            <div class="tab-pane fade" id="orders" role="tabpanel">
-                                              
-                                            </div>
-                                            <!-- Single Tab Content End -->
+                                       
 
-
-                                            <!-- Single Tab Content Start -->
-                                            <div class="tab-pane fade" id="account-info" role="tabpanel">
                                          
-                                            </div> <!-- Single Tab Content End -->
                                         </div>
                                     </div> <!-- My Account Tab Content End -->
                                 </div>

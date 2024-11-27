@@ -72,9 +72,9 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4">
                                         <div class="myaccount-tab-menu nav" role="tablist">
-                                            <a href="?act=my-account" class="active" data-bs-toggle="tab"><i class="fa fa-user"></i>
+                                            <a href="?act=my-account"><i class="fa fa-user"></i>
                                                 Thông tin cá nhân</a>
-                                            <a href="?act=list-don-hang"><i class="fa fa-cart-arrow-down"></i>
+                                            <a href="#orders"  class="active"><i class="fa fa-cart-arrow-down"></i>
                                                 Lịch sử mua hàng</a>
                                             <a href="?act=doi-mat-khau"><i class="fa fa-user"></i> Đổi mật khẩu</a>
                                             <a href="login-register.html"><i class="fa fa-sign-out"></i> Logout</a>
@@ -87,95 +87,49 @@
                                         <div class="tab-content" id="myaccountContent">
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
-                                                 <form action="?act=cap-nhat-tai-khoan" method="POST" enctype="multipart/form-data">
-                                                    <input type="hidden" name="id" id="id" value="<?= $_SESSION['user_client']['id']?>">
-            <!-- Avatar -->
-         
-                                                        <div class="mb-3 text-center">
-    <!-- Hình ảnh đại diện -->
-    <label for="avatar">
-        <img src="<?= BASE_URL . $_SESSION['user_client']['avatar'] ?>" 
-             alt="Avatar" 
-             class="avatar mb-3" 
-             style="cursor: pointer; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;"
-              onerror="this.onerror=null; this.src=' https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'">
-
-    </label>
-    <!-- Input file ẩn -->
-    <input type="file" class="form-control d-none" id="avatar" name="avatar" onchange="updateAvatarPreview(event)">
-    <p class="form-label">Thay đổi ảnh đại diện</p>
-</div>
-          
-
-            <!-- Tên -->
-            <div class="mb-3">
-                <label for="ten_nguoi_dung" class="form-label">Tên</label>
-                <input type="text" class="form-control" id="ten_nguoi_dung" name="ten_nguoi_dung" value="<?= $_SESSION['user_client']['ten_nguoi_dung']?>" required>
-                 <span class="text-danger">
-                        <?= !empty($_SESSION["errors"]["ten_nguoi_dung"]) ?  $_SESSION["errors"]["ten_nguoi_dung"] : '' ?>
-                 </span>
-            </div>
-
-            <!-- Số điện thoại -->
-            <div class="mb-3">
-                <label for="phone" class="form-label">Số điện thoại</label>
-                <input type="text" class="form-control" id="sdt" name="sdt" value="<?= $_SESSION['user_client']['sdt']?>" required>
-                 <span class="text-danger">
-                        <?= !empty($_SESSION["errors"]["sdt"]) ?  $_SESSION["errors"]["sdt"] : '' ?>
-                 </span>
-            </div>
-            
-            <!-- Địa chỉ -->
-            <div class="mb-3">
-                <label for="dia_chi" class="form-label">Địa chỉ</label>
-                <textarea class="form-control" id="dia_chi" name="dia_chi" rows="3" required><?= $_SESSION['user_client']['dia_chi'] ?></textarea>
-                 <span class="text-danger">
-                        <?= !empty($_SESSION["errors"]["dia_chi"]) ?  $_SESSION["errors"]["dia_chi"] : '' ?>
-                 </span>
-            </div>
-
-            
-            <div class="mb-3">
-                <label for="date" class="form-label">Ngày sinh</label>
-                <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" value="<?= $_SESSION['user_client']['ngay_sinh']?>" required>
-                 <span class="text-danger">
-                        <?= !empty($_SESSION["errors"]["ngay_sinh"]) ?  $_SESSION["errors"]["ngay_sinh"] : '' ?>
-                 </span>
-            </div>
-
-
-            <!-- Giới tính -->
-            <div class="mb-3">
-                <label class="form-label">Giới tính</label>
-                <div>
-                    <select name="gioi_tinh">
-                        <option value="Nam" <?= $_SESSION['user_client']['gioi_tinh'] === 'Nam' ? 'selected' : '' ?>>Nam</option>
-                        <option value="Nữ" <?= $_SESSION['user_client']['gioi_tinh'] === 'Nữ' ? 'selected' : '' ?>>Nữ</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Nút lưu -->
-             <br>
-             <br>
-             <div class="mb-3 text-end">
-                <button type="submit" class="btn btn-sqr">Lưu thông tin</button>
-            </div>
-        </form>
+                                                  <div class="myaccount-content">
+                                                    <h5>Đơn hàng</h5>
+                                                    <div class="myaccount-table table-responsive text-center">
+                                                        <table class="table table-bordered">
+                                                            <thead class="thead-light">
+                                                                <tr>
+                                                                    <th>STT</th>
+                                                                    <th>Mã vận đơn</th>
+                                                                    <th>Ngày đặt</th>
+                                                                    <th>Trạng thái</th>
+                                                                    <th>Thành tiền</th>
+                                                                    <th>Thao tác</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody> 
+                                                            <?php foreach ($donHang as $key => $donHang) : ?>
+                                                                <tr>
+                                                                <td><?= $key + 1 ?></td>
+                                                                <td><?= $donHang['ma_don_hang'] ?></td>
+                                                                <td><?= $donHang['ngay_dat'] ?></td>
+                                                                <td><?= $donHang['ten_trang_thai'] ?></td>
+                                                                <td><?= formatPrice($donHang['tong_don_hang']). 'đ' ?></td> 
+                                                                 <td><a href="?act=chi-tiet-don-hang&don_hang_id=<?=$donHang['id']?>" class="btn btn-sqr">View</a>
+                                                                </tr>
+                                                            <?php endforeach ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                
                                             </div>
                                             <!-- Single Tab Content End -->
 
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade" id="orders" role="tabpanel">
-                                              
+                                         
                                             </div>
                                             <!-- Single Tab Content End -->
 
 
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade" id="account-info" role="tabpanel">
-                                         
+                                             
                                             </div> <!-- Single Tab Content End -->
                                         </div>
                                     </div> <!-- My Account Tab Content End -->

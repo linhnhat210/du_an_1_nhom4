@@ -94,5 +94,10 @@ match ($act) {
 
    // tài khoản của tôi
    'my-account'          => (new NguoiDungController())->myAccount(),
+   'cap-nhat-tai-khoan'          => (new NguoiDungController())->capNhatTaiKhoan(),
+   'doi-mat-khau'          => (new NguoiDungController())->doiMatKhau(),
+   'post-edit-mat-khau'          => (new NguoiDungController())->postEditMatKhau(),
+    'list-don-hang'        => (new NguoiDungController())->listDonHang(),
+  
    'chi-tiet-don-hang' => (new DonHangController())->chiTietDonHang(), 
 };

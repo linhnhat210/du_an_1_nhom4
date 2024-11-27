@@ -80,4 +80,65 @@ class NguoiDungs {
             echo 'Lỗi: '. $e->getMessage();
         }
     }
+    public function updateNguoiDung($id,$ten_nguoi_dung,$sdt,$dia_chi,$gioi_tinh,$ngay_sinh,$new_file){
+        try {
+            //code...
+  
+
+                  // Cập nhật thông tin người dùng
+        $sql = 'UPDATE nguoi_dungs SET 
+                ten_nguoi_dung = :ten_nguoi_dung,
+                sdt = :sdt,
+                dia_chi = :dia_chi,
+                gioi_tinh = :gioi_tinh,
+                ngay_sinh = :ngay_sinh,
+                avatar = :avatar
+                WHERE id = :id';
+
+        $stmt = $this->conn->prepare($sql);
+
+        // Gắn các tham số vào câu lệnh SQL
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':ten_nguoi_dung', $ten_nguoi_dung);
+        $stmt->bindParam(':sdt', $sdt);
+        $stmt->bindParam(':dia_chi', $dia_chi);
+        $stmt->bindParam(':gioi_tinh', $gioi_tinh);
+        $stmt->bindParam(':ngay_sinh', $ngay_sinh);
+        $stmt->bindParam(':avatar', $new_file);
+
+        // Thực thi câu lệnh
+        $stmt->execute();
+
+        return true;
+            
+        } catch (PDOException $e) {
+            echo 'Lỗi: '. $e->getMessage();
+        }
+    }
+    public function updateMatKhau($id, $mk_moi){
+        try {
+            //code...
+  
+
+                  // Cập nhật thông tin người dùng
+        $sql = 'UPDATE nguoi_dungs SET 
+                mat_khau = :mat_khau
+                WHERE id = :id';
+
+        $stmt = $this->conn->prepare($sql);
+
+        // Gắn các tham số vào câu lệnh SQL
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':mat_khau', $mk_moi);
+
+
+        // Thực thi câu lệnh
+        $stmt->execute();
+
+        return true;
+            
+        } catch (PDOException $e) {
+            echo 'Lỗi: '. $e->getMessage();
+        }
+    }
 }

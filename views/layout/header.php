@@ -124,8 +124,13 @@ if (isset($_SESSION['user_client'])) {
 <?php if (isset($_SESSION['user_client'])): ?>
                         
     <a href="?act=my-account">
-        <i class="pe-7s-user"></i>
-    </a>
+       <?php if(isset($_SESSION['user_client']['avatar'])){
+       echo '<img src="' . BASE_URL . $_SESSION["user_client"]["avatar"] . '" alt="Avatar" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover;">';
+       }else{
+        echo '  <i class="pe-7s-user"></i>';
+
+       }
+       ?>
     <?php else:?>
              <a href="?act=login">
         <i class="pe-7s-user"></i>

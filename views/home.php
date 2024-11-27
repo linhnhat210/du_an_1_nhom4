@@ -306,7 +306,7 @@
     <!-- JS
 ============================================ -->
 <script>
-    let offset = 12; // Bắt đầu từ sản phẩm thứ 13 (vì đã hiển thị 12 sản phẩm đầu tiên)
+    let offset = 8; // Bắt đầu từ sản phẩm thứ 9 (vì đã hiển thị 8 sản phẩm đầu tiên)
 
     document.getElementById('load-more').addEventListener('click', function () {
         fetch('<?= BASE_URL ?>?act=load-more-products', {
