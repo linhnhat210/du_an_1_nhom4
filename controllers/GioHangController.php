@@ -1,4 +1,8 @@
 <?php 
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception; 
 class GioHangController {
     public $modelGioHang;
     public $modelNguoiDung;
@@ -194,6 +198,7 @@ class GioHangController {
                 $_SESSION["errors"] = "Vui lòng nhập mã khuyến mãi";
                 header("Location: " . BASE_URL . '?act=thanh-toan');
             }
+            
 
 
 
@@ -262,10 +267,37 @@ class GioHangController {
                 die();
             }
             $nguoi_dung_id = $userAccount['id'];
-            // var_dump($nguoi_dung_id);die;
+            
+            $san_pham_ids = $_POST["san_pham_id"];
+            $so_luongs = $_POST['so_luong'];
+            $gia_san_phams = $_POST['gia_san_pham'];
 
+            
             // Tạo mã đơn hàng
             $ma_don_hang = 'DH' . rand(1000, 9999);
+
+
+            $gio_hang_id = $this->modelGioHang->getGioHangFromId($nguoi_dung_id);
+         
+            
+            for ($i = 0; $i < count($san_pham_ids); $i++) {
+            $san_pham_id = $san_pham_ids[$i];
+            $spTrongGio[$i] = $this->modelGioHang->getDetailSanPhamGioHang($san_pham_id, $gio_hang_id['id']);
+            $so_luong_kho[$i] = $this->modelSanPham->getSoLuongSanPham($san_pham_id);
+
+
+
+            if ($spTrongGio[$i]["so_luong"] > $so_luong_kho[$i]) {
+            echo '<script>
+            alert("' . $spTrongGio[$i]["ten_san_pham"] . ' đã hết hàng, vui lòng chọn sản phẩm khác");
+            window.location.href = "' . BASE_URL . '?act=gio-hang";
+            </script>';
+            die;
+        }
+    }
+     
+            
+            
 
             // Thêm thông tin vào cơ sở dữ liệu
             $don_hang_id = $this->modelDonHang->adDonHang( $ma_don_hang,
@@ -282,20 +314,69 @@ class GioHangController {
                 $ngay_dat,
                 $trang_thai_id);
 
-            
-            $san_pham_ids = $_POST["san_pham_id"];
-            $so_luongs = $_POST['so_luong'];
-            $gia_san_phams = $_POST['gia_san_pham'];
             $this->modelDonHang->addChiTietDonHang($don_hang_id,$san_pham_ids,$so_luongs,$gia_san_phams);
 
 
-            // Xóa giỏ hàng sau khi đặt hàng thành công
-            $this->modelGioHang->clearCart($nguoi_dung_id);
+            
+            
+            // trừ số lượng sau khi đặt thành công
+            for ($i = 0; $i < count($san_pham_ids); $i++) {
+                $san_pham_id = $san_pham_ids[$i];
+                $spTrongGio[$i] = $this->modelGioHang->getDetailSanPhamGioHang($san_pham_id, $gio_hang_id['id']);
+                $so_luong_kho[$i] = $this->modelSanPham->getSoLuongSanPham($san_pham_id);
+                $so_luong_moi = $so_luong_kho[$i] - $spTrongGio[$i]['so_luong'];
+    
+            $this->modelSanPham->updateSoLuong($san_pham_id,$so_luong_moi);
+            
+            
+            
+        }
+        // Xóa giỏ hàng sau khi đặt hàng thành công
+        $this->modelGioHang->clearCart($nguoi_dung_id);
+        
+ $email_nguoi_nhan = $this->modelDonHang->getEmailNguoiNhan($don_hang_id)['email_nguoi_nhan'] ?? null;;
+            // var_dump($email_nguoi_nhan);
+            // exit;
+                $mail = new PHPMailer(true);
 
-            // Thông báo thành công và chuyển hướng về trang chủ
+            try {
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'vanvan56329@gmail.com';                     //SMTP username
+                $mail->Password   = 'mirl eyld eutu hzvv';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            
+                //Recipients
+                
+                $mail->setFrom('vanvan56329@gmail.com', 'Hệ Thống Đặt Hàng');
+                $mail->addAddress($email_nguoi_nhan); // Gửi đến email người nhận
+                
 
-            header("Location: " . BASE_URL."?act=thong-bao&id_don_hang=" . $don_hang_id  );
-            die();
+                    $title = 'Mail xác nhận đặt hàng';
+                    $content = 'Bạn vừa đặt 1 đơn hàng' . $ma_don_hang;
+
+                
+                
+            
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = $title;
+                $mail->Body    = $content;
+            
+            
+                $mail->send();
+                // Thông báo thành công và chuyển hướng về trang chủ
+
+                header("Location: " . BASE_URL."?act=thong-bao&id_don_hang=" . $don_hang_id  );
+                die();
+                echo 'Gửi mail thành công';
+            } catch (Exception $e) {
+                echo "Gửi mail thất bại. Mailer Error: {$mail->ErrorInfo}";
+            }
 
         } catch (Exception $e) {
             // Xử lý lỗi nếu xảy ra vấn đề trong quá trình xử lý
@@ -316,6 +397,17 @@ class GioHangController {
         die();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 public function thongBao(){
     $don_hang_id = $_GET["id_don_hang"] ?? 0;
     $don_hang = $this->modelDonHang->getDonHang($don_hang_id);
@@ -327,7 +419,6 @@ public function demSoSP($id){
     $soLuongSP = $this->modelGioHang->demSoSP($id);
     return $soLuongSP;
 }
-
 
 
 

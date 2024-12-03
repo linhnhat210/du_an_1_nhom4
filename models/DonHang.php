@@ -206,4 +206,33 @@ class DonHang
             echo "lỗi" . $e->getMessage();
         }
     }
+    public function updatedonHang($id,$tt){
+        
+        try {
+             $ngayHienTai = date('Y-m-d H:i:s');
+            if($tt == 7){
+                $ngay_nhan = $ngayHienTai;
+            }
+            $sql = 'UPDATE don_hangs SET trang_thai_id = :tt , ngay_nhan = :ngay_nhan WHERE id=:id';
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id',$id);
+            $stmt->bindParam(':tt',$tt);
+            $stmt->bindParam(':ngay_nhan',$ngay_nhan);
+
+            $stmt->execute();
+
+            return true;
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+
+    }
+        public function getEmailNguoiNhan($don_hang_id) {
+        $sql = "SELECT email_nguoi_nhan FROM don_hangs WHERE id = :don_hang_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':don_hang_id', $don_hang_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về mảng chứa email
+    }
 }

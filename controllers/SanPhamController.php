@@ -69,6 +69,13 @@ public function chiTietSanPham()
         exit();
     }
 }
+// serach
+       public function search()
+        {
+            
 
+            // hiển thị kết quả tìm kiếm
+            require_once "./views/sanpham/list_san_pham.php";
+        }
 
 }

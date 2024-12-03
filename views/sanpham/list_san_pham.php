@@ -94,7 +94,7 @@
                     <div class="col-lg-3 order-2 order-lg-1">
                         <aside class="sidebar-wrapper">
                             <!-- single sidebar start -->
-                            <div class="sidebar-single">
+                            <div class="sidebar-single" id='content'>
                                 <h5 class="sidebar-title">Thể Loại</h5>
                                 <div class="sidebar-body">
                                     <ul class="shop-categories">
@@ -194,10 +194,10 @@
                             <!-- product item list wrapper start -->
 
                             <!-- Display Products -->
-                            <div class="shop-product-wrap grid-view row mbn-30">
+                            <div id='content' class="shop-product-wrap grid-view row mbn-30">
                                 <?php foreach ($sanPhams as $sanPham) : ?>
                                     <div class="col-md-4 col-sm-6">
-                                        <div class="product-item">
+                                        <div class="product-item search-item">
                                             <figure class="product-thumb">
                                                 <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
                                                     <img class="pri-img" src="<?= BASE_URL . $sanPham["hinh_anh"] ?>" alt="product">
@@ -330,6 +330,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
 </body>
+<script>
+        
+    
+    
+        $(document).ready(function () {
+        console.log("jQuery đã sẵn sàng");
+    
+        // Toggle thanh tìm kiếm khi nhấn nút (mobile)
+        $('.search-trigger').on('click', function () {
+            console.log("Nút tìm kiếm được nhấn");
+            $('.header-search-box').toggleClass('active');
+        });
+    
+        // Tìm kiếm nội dung
+        $('#searchInput').on('keyup', function () {
+            let value = $(this).val().toLowerCase();
+            console.log("Giá trị nhập:", value);
+    
+            $('.search-item').filter(function () {
+                const match = $(this).text().toLowerCase().indexOf(value) > -1;
+                console.log("Đang kiểm tra:", $(this).text(), "Kết quả:", match);
+                $(this).toggle(match);
+            });
+        });
+    });
+    console.log(typeof $);
+    </script>
 
 
 <!-- Mirrored from htmldemo.net/corano/corano/shop.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jun 2024 09:53:59 GMT -->

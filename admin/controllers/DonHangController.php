@@ -4,8 +4,11 @@
 class DonHangController
 {
     public $modelDonHang;
+    public $modelSanPham;
+
     public function __construct(){
         $this->modelDonHang = new DonHang();
+        $this->modelSanPham = new SanPham();
     }
 
 
@@ -23,8 +26,11 @@ class DonHangController
         // lấy dữ liệu từ yêu cầu (request)
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $keyword = $_POST['keyword'];
+
+            
             $donHangModel = new DonHang();
             $donHang = $donHangModel->searchDonHang($keyword);
+       
 
             // var_dump($trangThai);
         }
@@ -88,8 +94,29 @@ class DonHangController
             $email_nguoi_nhan = $_POST['email_nguoi_nhan'] ?? '';
             $dia_chi_nguoi_nhan = $_POST['dia_chi_nguoi_nhan'] ?? '';
 
-            
 
+
+            
+            $sanPhamDonHangs = $this->modelDonHang->getListSpDonHang($don_hang_id);
+            if($trang_thai_id == 8){
+
+                for ($i = 0; $i < count($sanPhamDonHangs); $i++) {
+                   $san_pham_id = $sanPhamDonHangs[$i]["san_pham_id"];
+                   $so_luong_sp_don_hang = $sanPhamDonHangs[$i]["so_luong"];
+    
+                   $sp_kho[$i] = $this->modelSanPham->getDetailSanPham($san_pham_id);
+                   $so_luong_kho = $sp_kho[$i]["so_luong"];
+    
+                   $so_luong_moi = $so_luong_kho + $so_luong_sp_don_hang;
+       
+                   $this->modelSanPham->updateSoLuong($san_pham_id,$so_luong_moi);
+               
+               
+               
+               }
+            }
+
+            
             
             
 

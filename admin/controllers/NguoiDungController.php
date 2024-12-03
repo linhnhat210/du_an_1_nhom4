@@ -129,6 +129,54 @@
         
         
     }
+    public function edit()  {
+        $id_khach_hang = $_GET['id_nguoi_dung'];
+        $nguoiDung = $this->modelNguoiDung->getDetailNguoiDung($id_khach_hang);
+        require_once './views/nguoidung/update_nguoi_dung.php';
+    }
+
+    public function postEdit()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Lấy ra dữ liệu
+            // Lấy a dữ liệu cũ của sản phẩm
+            $id_nguoi_dung = $_POST['id_nguoi_dung'] ?? '';
+            $trang_thai = $_POST['trang_thai'] ?? '';
+            $vai_tro = $_POST['vai_tro'] ?? '';
+
+            // Tạo 1 mảng trống để chứa dữ liệu
+            $errors = [];
+
+            if (empty($vai_tro)) {
+                $errors['vai_tro'] = 'Vai trò của user';
+            }
+            if (empty($trang_thai)) {
+                $errors['trang_thai'] = 'Trạng thái của user';
+            }
+           
+
+            $_SESSION['error'] = $errors;
+            // var_dump($errors);die;
+
+            if (empty($errors)) {
+                // Nếu ko có lỗi thì tiến hành thêm sản phẩm
+                // var_dump('Oke');die;
+
+                $this->modelNguoiDung->updateNguoiDung($id_nguoi_dung,$vai_tro, $trang_thai);
+
+                // var_dump($san_pham_id);die;
+
+                header("Location: ?act=nguoi-dungs");
+                exit();
+            } else {
+                // Trả về form và lỗi
+                // Đặt chỉ thị xóa session sau khi hiển thị form
+                
+                header("Location: ?act=form-sua-nguoi-dung&id_nguoi_dung=" .  $id_nguoi_dung);
+                exit();
+            }
+        }
+    }
             
 }
 

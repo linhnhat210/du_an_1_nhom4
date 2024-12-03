@@ -5,6 +5,9 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 // Require file Common
 require_once './commons/env.php'; // Khai báo biến môi trường
 require_once './commons/function.php'; // Hàm hỗ trợ
+require_once './commons/Exception.php';
+require_once './commons/PHPMailer.php';
+require_once './commons/SMTP.php';
 
 // Require toàn bộ file Controllers
 require_once './controllers/HomeController.php';
@@ -44,6 +47,11 @@ match ($act) {
 
 
     'list-san-pham'         => (new SanPhamController())->index(),
+    'search-san-pham'         => (new SanPhamController())->search(),
+    // Load thêm sản phẩm
+    'load-more-products' => (new HomeController())->loadMoreProducts(),
+    // detail sản phẩm
+    'chi-tiet-san-pham' => (new SanPhamController())->chiTietSanPham(),
 
     // Liên hệ
     'form-lien-he'      => (new LienHeControler())->index(),
@@ -73,10 +81,6 @@ match ($act) {
 
 
 
-    // Load thêm sản phẩm
-    'load-more-products' => (new HomeController())->loadMoreProducts(),
-    // detail sản phẩm
-    'chi-tiet-san-pham' => (new SanPhamController())->chiTietSanPham(),
 
 
     // giỏ hàng 
@@ -96,8 +100,10 @@ match ($act) {
    'my-account'          => (new NguoiDungController())->myAccount(),
    'cap-nhat-tai-khoan'          => (new NguoiDungController())->capNhatTaiKhoan(),
    'doi-mat-khau'          => (new NguoiDungController())->doiMatKhau(),
+   
    'post-edit-mat-khau'          => (new NguoiDungController())->postEditMatKhau(),
     'list-don-hang'        => (new NguoiDungController())->listDonHang(),
-  
+    'huy-don-hang'        => (new DonHangController())->huyDonHang(),
+    'xac-nhan'        => (new DonHangController())->xacNhan(),
    'chi-tiet-don-hang' => (new DonHangController())->chiTietDonHang(), 
 };

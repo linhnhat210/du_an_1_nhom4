@@ -105,6 +105,7 @@
                                                         <th scope="col">Email</th>
                                                         <th scope="col">Số Điện Thoại</th>
                                                         <th scope="col">Vai trò</th>
+                                                        <th scope="col">Trạng thái</th>
                                                         <th scope="col">Thao Tác</th>
                                                         
                                                     </tr>
@@ -125,11 +126,14 @@
                                                             <?= $nguoiDung["vai_tro"] == 1 ? 'Admin' : 'Người dùng' ?>
                                                         </td>
                                                         <td>
+                                                            <?= $nguoiDung["trang_thai"] == 1 ? 'Hoạt động' : 'Đã Chặn' ?>
+                                                        </td>
+                                                        <td>
                                                                 <div class="hstack gap-3 flex-wrap">
                                                                     <div class="btn-group">
                                                                     <a href="<?='?act=chi-tiet-nguoi-dung&id_nguoi_dung=' . $nguoiDung['id'] ?>" class="link-success fs-15"><i class="las la-eye"></i></a>
                                                                     </div>
-                                                                     <!-- <a href="?act=form-sua-danh-muc&danh_muc_id=" class="link-success fs-15"><i class="ri-edit-2-line"></i></a> -->
+                                                                     <a href="?act=form-sua-nguoi-dung&id_nguoi_dung=<?=$nguoiDung['id'] ?>" class="link-success fs-15"><i class="ri-edit-2-line"></i></a>
                                                                     
                                                                 </div>
                                                         </td>

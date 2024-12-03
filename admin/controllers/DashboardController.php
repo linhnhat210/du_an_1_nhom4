@@ -51,6 +51,10 @@ class DashboardController {
         // Chuyển dữ liệu thành JSON để gửi tới View
         $jsonData = json_encode($data);
 
+
+        $sanPhamYeuThich = $this->modelDashboard->getSPYT();
+        
+
         
 
         

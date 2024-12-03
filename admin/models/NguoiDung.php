@@ -164,5 +164,30 @@ class NguoiDung
             return 'Lỗi khi kết nối đến cơ sở dữ liệu: ' . $e->getMessage();
         }
     }
+    public function updateNguoiDung($id_nguoi_dung,$vai_tro, $trang_thai)
+    {
+        try {
+            // var_dump($id);die;
+            $sql = 'UPDATE nguoi_dungs SET
+            trang_thai = :trang_thai,
+            vai_tro = :vai_tro
+            WHERE id = :id';
+            // var_dump($sql);die;
+
+            $stmt = $this->conn->prepare($sql);
+            // var_dump($stmt);die;
+            $stmt->bindParam(':id',$id_nguoi_dung);
+            $stmt->bindParam(':trang_thai',$trang_thai);
+            $stmt->bindParam(':vai_tro',$vai_tro);
+           
+
+            $stmt->execute();
+
+            // Lấy id đơn hàng vừa thêm
+            return true;
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
     
 }

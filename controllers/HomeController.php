@@ -3,12 +3,14 @@
 class HomeController
 {
     public $modelSanPham; 
-    public $modelNguoiDung;
+    public $tinTucModel;
+
 
     public function __construct()
     {
         $this->modelSanPham = new SanPhams();
-        $this->modelNguoiDung = new NguoiDungs();
+        $this->tinTucModel = new TinTuc();
+
     }
 
     public function index()
@@ -19,6 +21,7 @@ class HomeController
     public function home()
     {
         $listSanPham = $this->modelSanPham->getAllSanPham();
+        $tinTucs = $this->tinTucModel->getAllTinTuc();
         require_once './views/home.php';
     }
 

@@ -173,16 +173,49 @@ unset($_SESSION['errors']);
         }
     }
        public function myAccount(){
+        if (isset($_SESSION['user_client'])) {
+            $userId = $_SESSION['user_client']['id'];
+    
+            // Lấy thông tin tài khoản từ ID người dùng
+            $userAccount = $this->modelNguoiDung->getTaiKhoanFromEmail($userId);
 
         require_once './views/taikhoan/my_account.php';
         unset($_SESSION["errors"]);
+        } else {
+            // Thông báo nếu chưa đăng nhập
+            echo '<script>
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập để tiếp tục.");
+        </script>';
+        header("Location: " . BASE_URL . '?act=login');
+            die;
+        }
     }
     public function listDonHang(){
+        if (isset($_SESSION['user_client'])) {
+            $userId = $_SESSION['user_client']['id'];
+    
+            // Lấy thông tin tài khoản từ ID người dùng
+            $userAccount = $this->modelNguoiDung->getTaiKhoanFromEmail($userId);
+
                 $userId = $_SESSION['user_client']['id'];
         $donHang = $this->modelDonHang->getAllDonHang($userId);
         require_once './views/taikhoan/don_hang.php';
+        } else {
+            // Thông báo nếu chưa đăng nhập
+            echo '<script>
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập để tiếp tục.");
+        </script>';
+        header("Location: " . BASE_URL . '?act=login');
+            die;
+        }
     }
     public function capNhatTaiKhoan(){
+        if (isset($_SESSION['user_client'])) {
+            $userId = $_SESSION['user_client']['id'];
+    
+            // Lấy thông tin tài khoản từ ID người dùng
+            $userAccount = $this->modelNguoiDung->getTaiKhoanFromEmail($userId);
+
            if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                 $id = $_POST["id"];
@@ -271,13 +304,40 @@ unset($_SESSION['errors']);
             header("Location:?act=my-account");
             exit();
         }
+        } else {
+            // Thông báo nếu chưa đăng nhập
+            echo '<script>
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập để tiếp tục.");
+        </script>';
+        header("Location: " . BASE_URL . '?act=login');
+            die;
+        }
     
 }
         public function doiMatKhau(){
+            if (isset($_SESSION['user_client'])) {
+            $userId = $_SESSION['user_client']['id'];
+    
+            // Lấy thông tin tài khoản từ ID người dùng
+            $userAccount = $this->modelNguoiDung->getTaiKhoanFromEmail($userId);
+            
             require_once "views/taikhoan/doi_mat_khau.php";
                 unset($_SESSION['errors']);
+                } else {
+            // Thông báo nếu chưa đăng nhập
+            echo '<script>
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập để tiếp tục.");
+        </script>';
+        header("Location: " . BASE_URL . '?act=login');
+            die;
+        }
         }
         public function postEditMatKhau(){
+            if (isset($_SESSION['user_client'])) {
+            $userId = $_SESSION['user_client']['id'];
+    
+            // Lấy thông tin tài khoản từ ID người dùng
+            $userAccount = $this->modelNguoiDung->getTaiKhoanFromEmail($userId);
               if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $id = $_POST["id"] ;
                 $mk_cu = $_POST["mk_cu"] ;
@@ -330,6 +390,14 @@ unset($_SESSION['errors']);
             header("Location:?act=doi-mat-khau");
             exit();
             }
+            } else {
+            // Thông báo nếu chưa đăng nhập
+            echo '<script>
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập để tiếp tục.");
+        </script>';
+        header("Location: " . BASE_URL . '?act=login');
+            die;
+        }
 
         
         

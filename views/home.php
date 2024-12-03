@@ -41,6 +41,25 @@
     object-fit: cover; /* Cắt ảnh nếu cần để phù hợp với container */
     border-radius: 8px; /* (Tuỳ chọn) Bo góc để ảnh trông mượt mà */
 }
+
+        .blog-thumb {
+    position: relative;
+    width: 100%; /* Ảnh chiếm toàn bộ chiều rộng */
+    padding-bottom: 56.25%; /* Tỷ lệ 16:9 (9/16 = 0.5625) */
+    overflow: hidden;
+    background-color: #f0f0f0; /* Màu nền dự phòng */
+    border-radius: 3px; /* Bo góc nếu cần */
+}
+
+.blog-thumb img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo hình ảnh đẹp, không bị méo */
+}
+  
     </style>
 
 </head>
@@ -125,13 +144,13 @@
             <div class="col-12">
                 <div class="product-container">
                     <!-- product tab content start -->
-                    <div class="tab-content">
+                    <div class="tab-content" id="content">
                         <div class="tab-pane fade show active" id="tab1">
                             <!-- Sản phẩm được hiển thị theo dạng grid -->
                             <div class="row" id="product-list">
                                 <?php foreach (array_slice($listSanPham, 0, 8) as $key => $sanPham): ?>
                                     <div class="col-md-3 col-sm-6 mb-4 product-item">
-                                        <div class="product-item">
+                                        <div class="product-item search-item">
                                             <figure class="product-thumb">
                                                 <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
                                                     <img class="pri-img" src="<?= BASE_URL . $sanPham["hinh_anh"] ?>" alt="product">
@@ -192,94 +211,25 @@
                     <div class="col-12">
                         <div class="blog-carousel-active slick-row-10 slick-arrow-style">
                             <!-- blog post item start -->
+                             <?php foreach($tinTucs as $tt): ?>
                             <div class="blog-post-item">
                                 <figure class="blog-thumb">
-                                    <a href="blog-details.html">
-                                        <img src="assets/img/blog/tuyetthe.png" alt="blog image">
+                                    <a href="?act=chi-tiet-tin-tuc&id=<?= $tt["id"]?>">
+                                        <img src="<?= BASE_URL . $tt['hinh_anh']?>" alt="blog image">
                                     </a>
                                 </figure>
                                 <div class="blog-content">
                                     <div class="blog-meta">
-                                        <p>21/10/2024 | <a href="#">KINGMANGA</a></p>
+                                        <p><?= date("Y-m-d", strtotime($tt["ngay_tao"])) ?> | <a href="#">KINGMANGA</a></p>
                                     </div>
                                     <h5 class="blog-title">
-                                        <a href="blog-details.html">Chả Biết Nói Gì</a>
+                                        <a href="blog-details.html"><?= $tt['tieu_de']?></a>
                                     </h5>
                                 </div>
                             </div>
+                            <?php endforeach ?>
                             <!-- blog post item end -->
 
-                            <!-- blog post item start -->
-                            <div class="blog-post-item">
-                                <figure class="blog-thumb">
-                                    <a href="blog-details.html">
-                                        <img src="assets/img/blog/tuyetthe.png" alt="blog image">
-                                    </a>
-                                </figure>
-                                <div class="blog-content">
-                                    <div class="blog-meta">
-                                        <p>21/10/2024 | <a href="#">KINGMANGA</p>
-                                    </div>
-                                    <h5 class="blog-title">
-                                        <a href="blog-details.html">Chả Biết Nói Gì</a>
-                                    </h5>
-                                </div>
-                            </div>
-                            <!-- blog post item end -->
-
-                            <!-- blog post item start -->
-                            <div class="blog-post-item">
-                                <figure class="blog-thumb">
-                                    <a href="blog-details.html">
-                                        <img src="assets/img/blog/tuyetthe.png" alt="blog image">
-                                    </a>
-                                </figure>
-                                <div class="blog-content">
-                                    <div class="blog-meta">
-                                        <p>21/10/2024 | <a href="#">KINGMANGA</p>
-                                    </div>
-                                    <h5 class="blog-title">
-                                        <a href="blog-details.html">Chả Biết Nói Gì</a>
-                                    </h5>
-                                </div>
-                            </div>
-                            <!-- blog post item end -->
-
-                            <!-- blog post item start -->
-                            <div class="blog-post-item">
-                                <figure class="blog-thumb">
-                                    <a href="blog-details.html">
-                                        <img src="assets/img/blog/tuyetthe.png" alt="blog image">
-                                    </a>
-                                </figure>
-                                <div class="blog-content">
-                                    <div class="blog-meta">
-                                        <p>21/10/2024 | <a href="#">KINGMANGA</p>
-                                    </div>
-                                    <h5 class="blog-title">
-                                        <a href="blog-details.html">Chả Biết Nói Gì</a>
-                                    </h5>
-                                </div>
-                            </div>
-                            <!-- blog post item end -->
-
-                            <!-- blog post item start -->
-                            <div class="blog-post-item">
-                                <figure class="blog-thumb">
-                                    <a href="blog-details.html">
-                                        <img src="assets/img/blog/tuyetthe.png" alt="blog image">
-                                    </a>
-                                </figure>
-                                <div class="blog-content">
-                                    <div class="blog-meta">
-                                        <p>21/10/2024 | <a href="#">KINGMANGA</p>
-                                    </div>
-                                    <h5 class="blog-title">
-                                        <a href="blog-details.html">Chả Biết Nói Gì</a>
-                                    </h5>
-                                </div>
-                            </div>
-                            <!-- blog post item end -->
                         </div>
                     </div>
                 </div>
@@ -395,6 +345,33 @@
     <script src="assets/js/plugins/google-map.js"></script>
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    <script>
+        
+    
+    
+        $(document).ready(function () {
+        console.log("jQuery đã sẵn sàng");
+    
+        // Toggle thanh tìm kiếm khi nhấn nút (mobile)
+        $('.search-trigger').on('click', function () {
+            console.log("Nút tìm kiếm được nhấn");
+            $('.header-search-box').toggleClass('active');
+        });
+    
+        // Tìm kiếm nội dung
+        $('#searchInput').on('keyup', function () {
+            let value = $(this).val().toLowerCase();
+            console.log("Giá trị nhập:", value);
+    
+            $('.search-item').filter(function () {
+                const match = $(this).text().toLowerCase().indexOf(value) > -1;
+                console.log("Đang kiểm tra:", $(this).text(), "Kết quả:", match);
+                $(this).toggle(match);
+            });
+        });
+    });
+    console.log(typeof $);
+    </script>
 </body>
 
 

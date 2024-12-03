@@ -309,6 +309,53 @@ public function getAllSanPhamWithPrice($priceFrom, $priceTo, $page, $limit, $sor
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result['so_luong'] ?? 0; // Trả về 0 nếu không tìm thấy
         }
+        public function updateSoLuong($san_pham_id, $so_luong_moi) {
+    try {
+        // Chuẩn bị câu lệnh SQL
+        $sql = "UPDATE san_phams SET so_luong = :so_luong WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+
+        // Thực thi câu lệnh với các tham số
+        $stmt->execute([
+            ':id' => $san_pham_id,
+            ':so_luong' => $so_luong_moi,
+        ]);
+
+        // Kiểm tra kết quả
+        if ($stmt->rowCount() > 0) {
+            return true; // Thành công
+        } else {
+            return false; // Không có hàng nào được cập nhật
+        }
+    } catch (PDOException $e) {
+        // Ghi log lỗi hoặc xử lý lỗi nếu cần
+        error_log("Cập nhật số lượng thất bại: " . $e->getMessage());
+        return false; // Thất bại
+    }
+}
+
+public function searchSanPham($keyword)
+    {
+        $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc
+                FROM san_phams
+                LEFT JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+                WHERE san_phams.ten_san_pham LIKE ?    
+                    ORDER BY san_phams.id DESC";
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->bindValue(1, "%$keyword%");
+
+
+
+        try {
+            $stmt->execute();
+            $sanPhams = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $sanPhams;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return []; 
+        }
+            }
     
     
 }

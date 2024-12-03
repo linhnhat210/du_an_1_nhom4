@@ -46,13 +46,13 @@
                      <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                <h4 class="mb-sm-0">Quản Lý Đơn hàng</h4>
+                                <h4 class="mb-sm-0">Quản Lý Người Dùng</h4>
                                 
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
-                                        <li class="breadcrumb-item active">Đơn hàng</li>
+                                        <li class="breadcrumb-item active">Cập Nhật Người Dùng</li>
                                     </ol>
                                 </div>
 
@@ -63,101 +63,81 @@
                     
 
                     <div class="row">
-                <div class="col-12">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                        
-                                   
-                            <h3 class="card-title">Sửa thông tin đơn hàng: <?= $donHang['ma_don_hang'] ?></h3>
-                        </div>
+                        <div class="col">
 
-                        <form action="<?='?act=sua-don-hang' ?>" method="POST" enctype="multipart/form-data">
-                            <input type="text" name="id_don_hang" value="<?= $donHang['id'] ?>" hidden>
+                            <div class="h-100">
+                               <!-- Striped Rows -->
+                            <div class="card">
+                                <div class="card-header align-items-center d-flex">
+                                    <h4 class="card-title mb-0 flex-grow-1">Cập Nhật Người Dùng</h4>
+
+                                </div><!-- end card header -->
+                                <form action="<?='?act=sua-nguoi-dung' ?>" method="POST" enctype="multipart/form-data">
+                            <input type="text" name="id_nguoi_dung" value="<?= $nguoiDung['id'] ?>" hidden>
                             
 
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>Tên người nhận</label>
-                                    <input type="text" readonly class="form-control" name="ten_nguoi_nhan" value="<?= $donHang['ten_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
-                                    <?php if (isset($errors['ten_nguoi_nhan'])) { ?>
-                                        <p class="text-danger"><?= $errors['ten_nguoi_nhan'] ?></p>
+                                    <label>Tên người dùng:</label>
+                                    <input type="text" readonly class="form-control" name="ten_nguoi_dung" value="<?= $nguoiDung['ten_nguoi_dung'] ?>" placeholder="Nhập tên danh mục">
+                                    <?php if (isset($errors['ten_nguoi_dung'])) { ?>
+                                        <p class="text-danger"><?= $errors['ten_nguoi_dung'] ?></p>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Số điện thoại</label>
-                                    <input type="text" readonly class="form-control" name="sdt_nguoi_nhan" value="<?= $donHang['sdt_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
-                                    <?php if (isset($errors['sdt_nguoi_nhan'])) { ?>
-                                        <p class="text-danger"><?= $errors['sdt_nguoi_nhan'] ?></p>
+                                    <input type="text" readonly class="form-control" name="sdt" value="<?= $nguoiDung['sdt'] ?>" placeholder="Nhập tên danh mục">
+                                    <?php if (isset($errors['sdt'])) { ?>
+                                        <p class="text-danger"><?= $errors['sdt'] ?></p>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="text" readonly class="form-control" name="email_nguoi_nhan" value="<?= $donHang['email_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
-                                    <?php if (isset($errors['email_nguoi_nhan'])) { ?>
-                                        <p class="text-danger"><?= $errors['email_nguoi_nhan'] ?></p>
+                                    <input type="text" readonly class="form-control" name="email" value="<?= $nguoiDung['email'] ?>" placeholder="Nhập tên danh mục">
+                                    <?php if (isset($errors['email'])) { ?>
+                                        <p class="text-danger"><?= $errors['email'] ?></p>
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Địa chỉ</label>
-                                    <input type="text" readonly class="form-control" name="dia_chi_nguoi_nhan" value="<?= $donHang['dia_chi_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
-                                    <?php if (isset($errors['dia_chi_nguoi_nhan'])) { ?>
-                                        <p class="text-danger"><?= $errors['dia_chi_nguoi_nhan'] ?></p>
+                                    <input type="text" readonly class="form-control" name="dia_chi" value="<?= $nguoiDung['dia_chi'] ?>" placeholder="Nhập tên danh mục">
+                                    <?php if (isset($errors['dia_chi'])) { ?>
+                                        <p class="text-danger"><?= $errors['dia_chi'] ?></p>
                                     <?php } ?>
                                 </div>
-                                
+                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="ForminputState" class="form-label">Vai trò</label>
+                                                        <select name="vai_tro" class="form-select">
+                                                            <option value="1" <?= $nguoiDung['vai_tro'] == 1 ? 'selected' : ''?>>Admin</option>
+                                                            <option value="2" <?= $nguoiDung['vai_tro'] == 2 ? 'selected' : ''?>>Client</option>
+                                                        </select>
 
-                                <div class="form-group">
-                                    <label>Ghi chú</label>
-                                    <textarea readonly name="ghi_chu" id="" class="form-control" placeholder="Nhập mô tả"><?= $donHang['ghi_chu'] ?></textarea>
-                                </div>
-                                <hr>
-                                <div class="form-group">
-                                    <label for="inoutStatus">Trạng thái đơn hàng</label>
-                                    <select id="inoutStatus" name="trang_thai_id" class="form-control custom-select">
-    <?php foreach ($listTrangThaiDonHang as $trangThai) : ?>
-        <option
-            <?php
-            // Kiểm tra nếu trạng thái đơn hàng là 6
-            if ($donHang['trang_thai_id'] == 6) {
-                // Nếu trạng thái hiện tại là 6, chỉ cho phép chọn trạng thái id = 8
-                if ($trangThai['id'] != 8) {
-                    echo 'disabled';
-                }
-            } elseif ($donHang['trang_thai_id'] == 5) {
-                // Nếu trạng thái hiện tại là 5, chỉ cho phép chọn 6 hoặc 8
-              
-                    echo 'disabled';
-          
-            } else {
-                // Kiểm tra điều kiện ban đầu của bạn
-                if (
-                    $donHang['trang_thai_id'] > $trangThai['id'] ||
-                    $donHang['trang_thai_id'] == 7 ||
-                    $donHang['trang_thai_id'] == 8
-                ) {
-                    echo 'disabled';
-                }
-            }
-            ?>
-            <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?> 
-            value="<?= $trangThai['id'] ?>">
-            <?= $trangThai['ten_trang_thai'] ?>
-        </option>
-    <?php endforeach ?>
-</select>
-                                </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="ForminputState" class="form-label">Trạng thái</label>
+                                                        <select name="trang_thai" class="form-select">
+                                                            <option value="1" <?= $nguoiDung['trang_thai'] == 1 ? 'selected' : ''?>>Action</option>
+                                                            <option value="2" <?= $nguoiDung['trang_thai'] == 2 ? 'selected' : ''?>>Block</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                              
                             </div>
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
+
+                            </div> <!-- end .h-100-->
+
+                        </div> <!-- end col -->
                     </div>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-                                            
+
                 </div>
                 <!-- container-fluid -->
             </div>

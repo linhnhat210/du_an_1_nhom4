@@ -40,7 +40,7 @@ class donHang
                OR don_hangs.email_nguoi_nhan LIKE ?
                OR don_hangs.sdt_nguoi_nhan LIKE ?
                OR don_hangs.ngay_dat LIKE ?
-               OR don_hangs.tong_tien LIKE ?
+               OR don_hangs.tong_don_hang LIKE ?
                OR trang_thai_don_hangs.ten_trang_thai LIKE ?
             ORDER BY don_hangs.id DESC";
     
@@ -143,10 +143,7 @@ class donHang
     public function updateDonHang($id, $ten_nguoi_nhan, $sdt_nguoi_nhan, $email_nguoi_nhan, $dia_chi_nguoi_nhan, $ghi_chu, $trang_thai_id)
     {
         try {
-            $ngayHienTai = date('Y-m-d H:i:s');
-            if($trang_thai_id == 7){
-                $ngay_nhan = $ngayHienTai;
-            }
+           
             // var_dump($id);die;
             $sql = 'UPDATE don_hangs SET
             ten_nguoi_nhan = :ten_nguoi_nhan,
@@ -205,91 +202,6 @@ class donHang
     
 
 
-    // thêm danh mục
-//     public function createDanhMuc($ten_danh_muc,$trang_thai){
-//         try {
-//             //code...
-//             $sql = 'INSERT INTO  danh_mucs (ten_danh_muc,trang_thai)
-//                     VALUES (:ten_danh_muc, :trang_thai)';
-
-//             $stmt = $this->conn->prepare($sql);
-
-//             $stmt->bindParam(':ten_danh_muc',$ten_danh_muc);
-//             $stmt->bindParam(':trang_thai',$trang_thai);
-
-//             $stmt->execute();
-
-//             return true;
-            
-//         } catch (PDOException $e) {
-//             echo 'Lỗi: '. $e->getMessage();
-//         }
-//     }
-
-//     // xóa danh mục
-//      public function deleteDanhMuc($id){
-//         try {
-//             //code...
-//             $sql = 'DELETE FROM danh_mucs WHERE id= :id';
-
-//             $stmt = $this->conn->prepare($sql);
-            
-//             $stmt->bindParam(':id', $id);
-
-//             $stmt->execute();
-
-//             return true;
-            
-//         } catch (PDOException $e) {
-//             echo 'Lỗi: '. $e->getMessage();
-//         }
-//     }
-//     // sửa danh mục
-//     // lấy thông tin chi tiết
-//     public function getDetailData($id){
-//         try {
-//             //code...
-//             $sql = 'SELECT * FROM danh_mucs WHERE id= :id';
-
-//             $stmt = $this->conn->prepare($sql);
-            
-//             $stmt->bindParam(':id', $id);
-
-//             $stmt->execute();
-
-//             return $stmt->fetch();
-            
-//         } catch (PDOException $e) {
-//             echo 'Lỗi: '. $e->getMessage();
-//         }
-//     }
-//     public function editDanhMuc($id,$ten_danh_muc,$trang_thai){
-//         try {
-//             //code...
-//             $sql = 'UPDATE  danh_mucs SET ten_danh_muc = :ten_danh_muc , trang_thai = :trang_thai WHERE id= :id';
-
-//             $stmt = $this->conn->prepare($sql);
-
-//             $stmt->bindParam(':id',$id);
-//             $stmt->bindParam(':ten_danh_muc',$ten_danh_muc);
-//             $stmt->bindParam(':trang_thai',$trang_thai);
-
-//             $stmt->execute();
-
-//             return true;
-            
-//         } catch (PDOException $e) {
-//             echo 'Lỗi: '. $e->getMessage();
-//         }
-//     }
-
-
-
-//     // huy ket noi csdl
-//     public function  __destruct()
-//     {
-//         $this->conn = null;
-//     }
 }
 
 

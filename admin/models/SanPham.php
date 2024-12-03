@@ -300,6 +300,30 @@ public function updateSanPham($san_pham_id, $ten_san_pham, $gia_san_pham, $gia_k
             echo "lỗi" . $e->getMessage();
         }
     }
+     public function updateSoLuong($san_pham_id, $so_luong_moi) {
+    try {
+        // Chuẩn bị câu lệnh SQL
+        $sql = "UPDATE san_phams SET so_luong = :so_luong WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+
+        // Thực thi câu lệnh với các tham số
+        $stmt->execute([
+            ':id' => $san_pham_id,
+            ':so_luong' => $so_luong_moi,
+        ]);
+
+        // Kiểm tra kết quả
+        if ($stmt->rowCount() > 0) {
+            return true; // Thành công
+        } else {
+            return false; // Không có hàng nào được cập nhật
+        }
+    } catch (PDOException $e) {
+        // Ghi log lỗi hoặc xử lý lỗi nếu cần
+        error_log("Cập nhật số lượng thất bại: " . $e->getMessage());
+        return false; // Thất bại
+    }
+}
     
 
 

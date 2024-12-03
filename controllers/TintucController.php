@@ -3,7 +3,7 @@ require_once 'models/Tintuc.php';
 
 class TintucController
 {
-    private $tinTucModel;
+    public $tinTucModel;
 
     public function __construct()
     {

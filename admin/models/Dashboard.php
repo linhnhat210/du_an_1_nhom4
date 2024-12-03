@@ -361,7 +361,7 @@ public function tongTienTheoThang() {
 
         foreach ($data as $row) {
             $thangData[$row['thang']]['thang'] = $row['thang'];
-            $thangData[$row['thang']]['tong_tien'] = $row['tong_tien'] / 100000;
+            $thangData[$row['thang']]['tong_tien'] = $row['tong_tien'] / 1000000;
         }
 
         return $thangData;
@@ -403,6 +403,31 @@ public function soNguoiDungMoiTheoThang() {
         return $thangData;
 
     } catch (PDOException $e) {
+        echo 'Lỗi: ' . $e->getMessage();
+        return [];  // Trả về mảng rỗng nếu có lỗi
+    }
+}
+public function getSPYT(){
+      try {
+
+            $sql = 'SELECT sp.*, top_san_pham.sl
+FROM san_phams sp
+JOIN (
+    SELECT san_pham_id, COUNT(san_pham_id) AS sl
+    FROM chi_tiet_don_hangs
+    GROUP BY san_pham_id
+    ORDER BY sl DESC
+    LIMIT 5
+) top_san_pham ON sp.id = top_san_pham.san_pham_id;';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+
+
+        } catch (PDOException $e) {
         echo 'Lỗi: ' . $e->getMessage();
         return [];  // Trả về mảng rỗng nếu có lỗi
     }

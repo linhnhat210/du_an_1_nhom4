@@ -159,7 +159,7 @@
                                     <div class="d-flex align-items-center">
                                         <h5 class="card-title flex-grow-1 mb-0">Đơn hàng <?=$donHang["ma_don_hang"]?> </h5>
                                         <div class="flex-shrink-0">
-                                            <a href="apps-invoices-details.html" class="btn btn-success btn-sm"><i class="ri-download-2-fill align-middle me-1"></i> Invoice</a>
+                                            <a href="<?=  '?act=form-sua-don-hang&id_don_hang=' . $donHang['id'] ?>" class="btn btn-success btn-sm"><i class="ri-edit-2-line"></i> Cập nhật</a>
                                         </div>
                                     </div>
                                 </div>

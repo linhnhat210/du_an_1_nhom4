@@ -236,13 +236,16 @@
                                                     <img src="<?= BASE_URL . $SP["hinh_anh"]?>" alt="product image">
                                                 </a>
                                             </figure>
+                                            
                                             <div class="recent-post-description">
                                                 <div class="product-name">
                                                     <h6><a href="?act=chi-tiet-san-pham&id_san_pham=<?= $SP["san_pham_id"]?>">Tên :     <?= $SP["ten_san_pham"]?></a></h6>
                                                     <p>Số lượng : <?= $SP["so_luong"] ?></p>
                                                     <p>Đơn giá : <?= formatPrice($SP["don_gia"]) ?></p>
                                                     <p>Thành tiền : <?= formatPrice($SP["thanh_tien"]) ?></p>
+                                                    
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                         <?php endforeach ?>
@@ -252,7 +255,8 @@
                         
                         </div>
 
-                                    <br>    
+                                    <br> 
+                                       
 <table class="table table-bordered table-hover">    
     <tfoot>
         <tr>
@@ -267,25 +271,38 @@
             <td class="text-start">Shipping</td>
             <td class="text-end"><strong>0 đ</strong></td>
         </tr>
-        <tr>
+        <tr>x
             <td class="text-start">Tổng đơn hàng</td>
-            <td class="text-end"><strong><?= formatPrice($donHang["tong_tien_hang"]) . ' đ' ?></strong></td>
+            <td class="text-end"><strong><?= formatPrice($donHang["tong_don_hang"]) . ' đ' ?></strong></td>
         </tr>
     </tfoot>
+    
 </table>
 
 
+
+                                 <?php if($donHang['trang_thai_id'] == 1 ): ?>  
+                                    <a href="?act=huy-don-hang&don_hang_id=<?=$donHang['id']?>" class="btn btn-sqr" style="margin-left:683px;">Hủy đơn hàng</a>
+                                <?php endif; ?>
+                                 <?php if($donHang['trang_thai_id'] == 5 ): ?>  
+                                    <div class="d-flex" style="margin-left:470px;">
+
+                                        <a href="?act=xac-nhan&don_hang_id=<?=$donHang['id']?>" class="btn btn-sqr" style="margin-right:30px;">Xác nhận đơn hàng</a>
+                                        <a href="?act=huy-don-hang&don_hang_id=<?=$donHang['id']?>" class="btn btn-sqr" >Hoàn đơn hàng</a>
+                                    </div>
+                                <?php endif; ?>
+                                 
                                 </div>
-
-
+                                
+                                
                             </div>
-
+                            
                         </div>
                     </div>
                 </div>
-        
+                
+            </div>
         </div>
-    </div>
     <!-- checkout main wrapper end -->
 </main>
 

@@ -113,6 +113,8 @@ match ($act) {
     'nguoi-dungs'                               => (new NguoiDungController())->index(),
     'chi-tiet-nguoi-dung'                       => (new NguoiDungController())->getDetail(),
     'search-nguoi-dung'                         => (new NguoiDungController())->search(),
+    'form-sua-nguoi-dung'                       => (new NguoiDungController())->edit(),
+    'sua-nguoi-dung'                       => (new NguoiDungController())->postEdit(),
 
     // route  khuyến mãi
     'khuyen-mais'                               => (new KhuyenMaiController())->index(),
