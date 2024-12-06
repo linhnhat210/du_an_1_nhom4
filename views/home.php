@@ -148,7 +148,7 @@
                         <div class="tab-pane fade show active" id="tab1">
                             <!-- Sản phẩm được hiển thị theo dạng grid -->
                             <div class="row" id="product-list">
-                                <?php foreach (array_slice($listSanPham, 0, 8) as $key => $sanPham): ?>
+                                <?php foreach (array_slice($listSanPham, 0, 4) as $key => $sanPham): ?>
                                     <div class="col-md-3 col-sm-6 mb-4 product-item">
                                         <div class="product-item search-item">
                                             <figure class="product-thumb">
@@ -189,6 +189,53 @@
         </div>
     </div>
 </section>
+    <section class="related-products section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- section title start -->
+                    <div class="section-title text-center">
+                        <h2 class="title">Truyện tranh yêu thích</h2>
+                        <p class="sub-title"></p>
+                    </div>
+                    <!-- section title start -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-carousel-4 slick-row-10 slick-arrow-style">
+                        <?php foreach ($listSanPhamYeuThich as $key => $sanPham): ?>
+                            <!-- product item start -->
+                            <div class="product-item">
+                                <figure class="product-thumb">
+                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
+                                        <img class="pri-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
+                                        <img class="sec-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
+                                    </a>
+                                    
+                                    
+                                </figure>
+                                <div class="product-caption text-center">
+                                    <h6 class="product-name">
+                                        <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
+                                    </h6>
+                                    <div class="price-box">
+                                        <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                            <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ'; ?></span>
+                                            <span class="price-old"><del><?= formatPrice($sanPham['gia_ban']) . 'đ'; ?></del></span>
+                                        <?php } else { ?>
+                                            <span class="price-regular"><?= formatPrice($sanPham['gia_ban']) . 'đ' ?></span>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- product item end -->
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
         <!-- product area end -->
 
@@ -256,7 +303,7 @@
     <!-- JS
 ============================================ -->
 <script>
-    let offset = 8; // Bắt đầu từ sản phẩm thứ 9 (vì đã hiển thị 8 sản phẩm đầu tiên)
+    let offset = 4; // Bắt đầu từ sản phẩm thứ 9 (vì đã hiển thị 8 sản phẩm đầu tiên)
 
     document.getElementById('load-more').addEventListener('click', function () {
         fetch('<?= BASE_URL ?>?act=load-more-products', {

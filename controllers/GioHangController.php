@@ -334,30 +334,51 @@ class GioHangController {
         // Xóa giỏ hàng sau khi đặt hàng thành công
         $this->modelGioHang->clearCart($nguoi_dung_id);
         
- $email_nguoi_nhan = $this->modelDonHang->getEmailNguoiNhan($don_hang_id)['email_nguoi_nhan'] ?? null;;
+                $email_nguoi_nhan = $this->modelDonHang->getEmailNguoiNhan($don_hang_id)['email_nguoi_nhan'] ?? null;;
             // var_dump($email_nguoi_nhan);
             // exit;
                 $mail = new PHPMailer(true);
 
             try {
                 //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                $mail->SMTPDebug = SMTP::DEBUG_OFF; 
+                $mail->CharSet = 'UTF-8';
                 $mail->isSMTP();                                            //Send using SMTP
                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'vanvan56329@gmail.com';                     //SMTP username
-                $mail->Password   = 'mirl eyld eutu hzvv';                               //SMTP password
+                $mail->Username   = 'linhncnph49464@gmail.com';                     //SMTP username
+                $mail->Password   = 'rwqu wrsa ypwy yvah';                               //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             
                 //Recipients
                 
-                $mail->setFrom('vanvan56329@gmail.com', 'Hệ Thống Đặt Hàng');
+                $mail->setFrom('linhncnph49464@gmail.com', 'Hệ Thống Đặt Hàng');
                 $mail->addAddress($email_nguoi_nhan); // Gửi đến email người nhận
                 
 
-                    $title = 'Mail xác nhận đặt hàng';
-                    $content = 'Bạn vừa đặt 1 đơn hàng' . $ma_don_hang;
+                    $title = 'Xác nhận đơn hàng ' . htmlspecialchars($ma_don_hang) . ' từ KingManga';
+                    $content = '
+                                <p>Kính gửi <strong>' . htmlspecialchars($ten_nguoi_nhan) . '</strong>,</p>
+                                <p>Cảm ơn bạn đã đặt hàng tại <strong>KingManga</strong>! Chúng tôi xin xác nhận đơn hàng của bạn với thông tin chi tiết như sau:</p>
+                                <h3>Thông tin đơn hàng:</h3>
+                                <ul>
+                                    <li><strong>Mã đơn hàng:</strong> ' . htmlspecialchars($ma_don_hang) . '</li>
+                                    <li><strong>Ngày đặt hàng:</strong> ' . htmlspecialchars($ngay_dat) . '</li>
+                                    <li><strong>Phương thức thanh toán:</strong> Thanh toán khi nhận hàng</li>
+                                    <li><strong>Địa chỉ giao hàng:</strong> ' . htmlspecialchars($dia_chi_nguoi_nhan) . '</li>
+                                </ul>
+                                <p>Chúng tôi sẽ tiến hành xử lý đơn hàng và thông báo cho bạn ngay khi đơn hàng được giao cho đơn vị vận chuyển.</p>
+                                <p>Nếu bạn có bất kỳ câu hỏi nào về đơn hàng, vui lòng liên hệ:</p>
+                                <ul>
+                                    <li><strong>Email:</strong> <a href="mailto:linhncnph49464@gmail.com">linhncnph49464@gmail.com</a></li>
+                                    <li><strong>Số điện thoại:</strong> 0867846910</li>
+                                </ul>
+                                <p>Cảm ơn bạn đã tin tưởng và ủng hộ <strong>KingManga</strong>.</p>
+                                <p>Chúc bạn một ngày tốt lành!</p>
+                                <p>Trân trọng,</p>
+                                <p><strong>KingManga</strong></p>
+                    ';
 
                 
                 
@@ -366,7 +387,8 @@ class GioHangController {
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = $title;
                 $mail->Body    = $content;
-            
+                
+              
             
                 $mail->send();
                 // Thông báo thành công và chuyển hướng về trang chủ

@@ -43,13 +43,38 @@ class DonHangController
     }
     public function huyDonHang(){
         $id = $_GET["don_hang_id"];
+        $trangthai = $this->modelDonHang->getDonHang($id);
+        if($trangthai['trang_thai_id'] == 1){
+
+            $this->modelDonHang->updatedonHang($id,6);
+            echo '<script>
+            alert(" Hủy đơn hàng thành công");
+            window.location.href = "' . BASE_URL . '?act=chi-tiet-don-hang&don_hang_id=' . $id . '";
+            </script>';
+        }else{
+            echo '<script>
+            alert(" Đơn hàng đã xác nhận nên không thể hủy");
+            window.location.href = "' . BASE_URL . '?act=chi-tiet-don-hang&don_hang_id=' . $id . '";
+            </script>';
+        }
+        
         // var_dump($id);die;
 
-        $this->modelDonHang->updatedonHang($id,6);
-        echo '<script>
-        alert(" Hủy/ Hoàn đơn hàng thành công");
-        window.location.href = "' . BASE_URL . '?act=chi-tiet-don-hang&don_hang_id=' . $id . '";
-        </script>';
+
+    }
+    public function hoanDonHang(){
+        $id = $_GET["don_hang_id"];
+   
+
+            $this->modelDonHang->updatedonHang($id,6);
+            echo '<script>
+            alert(" Hoàn đơn hàng thành công");
+            window.location.href = "' . BASE_URL . '?act=chi-tiet-don-hang&don_hang_id=' . $id . '";
+            </script>';
+    
+        
+        // var_dump($id);die;
+
 
     }
     public function xacNhan(){

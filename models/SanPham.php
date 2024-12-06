@@ -23,6 +23,31 @@ class SanPhams
             echo "Lỗi: " . $e->getMessage();
         }
     }
+    public function getSPYeuThich()
+    {
+           try {
+
+            $sql = 'SELECT sp.*, top_san_pham.sl
+FROM san_phams sp
+JOIN (
+    SELECT san_pham_id, COUNT(san_pham_id) AS sl
+    FROM chi_tiet_don_hangs
+    GROUP BY san_pham_id
+    ORDER BY sl DESC
+) top_san_pham ON sp.id = top_san_pham.san_pham_id;';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+
+
+        } catch (PDOException $e) {
+        echo 'Lỗi: ' . $e->getMessage();
+        return [];  // Trả về mảng rỗng nếu có lỗi
+    }
+    }
     public function getTenDanhMuc($id){
         try {
             $sql = 'SELECT ten_danh_muc
@@ -334,28 +359,120 @@ public function getAllSanPhamWithPrice($priceFrom, $priceTo, $page, $limit, $sor
     }
 }
 
-public function searchSanPham($keyword)
-    {
-        $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc
-                FROM san_phams
-                LEFT JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
-                WHERE san_phams.ten_san_pham LIKE ?    
-                    ORDER BY san_phams.id DESC";
+public function searchSanPham($search, $priceFrom, $priceTo, $page, $limit, $sortby)
+{
+    try {
+        // Tính toán phân trang
+        $offset = ($page - 1) * $limit;
+
+        // Xử lý phần sắp xếp
+        $orderBy = 'sp.id DESC'; // Mặc định sắp xếp theo ID giảm dần
+        if ($sortby == 'asc') {
+            $orderBy = 'sp.gia_khuyen_mai ASC';
+        } elseif ($sortby == 'desc') {
+            $orderBy = 'sp.gia_khuyen_mai DESC';
+        } elseif ($sortby == 'newest') {
+            $orderBy = 'sp.id DESC';
+        }
+
+        // Bắt đầu câu lệnh SQL với điều kiện tìm kiếm
+        $sql = "SELECT sp.*, dm.ten_danh_muc 
+                FROM san_phams sp 
+                JOIN danh_mucs dm ON sp.danh_muc_id = dm.id 
+                WHERE sp.trang_thai = 1 AND dm.trang_thai = 1";
+
+        // Thêm điều kiện tìm kiếm (tên sản phẩm)
+        if ($search) {
+            $sql .= " AND sp.ten_san_pham LIKE :search";  // Lưu ý dấu cách ở đây
+        }
+
+        // Điều kiện lọc theo giá
+        if (!is_null($priceFrom)) {
+            $sql .= " AND sp.gia_khuyen_mai >= :price_from";
+        }
+        if (!is_null($priceTo)) {
+            $sql .= " AND sp.gia_khuyen_mai <= :price_to";
+        }
+
+        // Sắp xếp và phân trang
+        $sql .= " ORDER BY $orderBy LIMIT :offset, :limit"; // Lưu ý có dấu cách trước ORDER BY
+
+        // Chuẩn bị câu lệnh SQL
         $stmt = $this->conn->prepare($sql);
 
-        $stmt->bindValue(1, "%$keyword%");
-
-
-
-        try {
-            $stmt->execute();
-            $sanPhams = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $sanPhams;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            return []; 
+        // Gán các tham số vào câu lệnh
+        if ($search) {
+            $stmt->bindValue(':search', "%$search%", PDO::PARAM_STR);
         }
-            }
+        if (!is_null($priceFrom)) {
+            $stmt->bindValue(':price_from', $priceFrom, PDO::PARAM_INT);
+        }
+        if (!is_null($priceTo)) {
+            $stmt->bindValue(':price_to', $priceTo, PDO::PARAM_INT);
+        }
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+
+        // Thực thi câu lệnh
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+public function getTotalItemsBySearch($search, $priceFrom, $priceTo)
+{
+    try {
+        // Câu truy vấn SQL để đếm tổng số sản phẩm
+        $sql = "SELECT COUNT(*) AS total FROM san_phams WHERE ten_san_pham LIKE :search";
+        $params = [':search' => "%$search%"];
+
+        // Thêm điều kiện lọc giá
+        if ($priceFrom !== null) {
+            $sql .= " AND gia_khuyen_mai >= :priceFrom";
+            $params[':priceFrom'] = $priceFrom;
+        }
+        if ($priceTo !== null) {
+            $sql .= " AND gia_khuyen_mai <= :priceTo";
+            $params[':priceTo'] = $priceTo;
+        }
+
+        // Sử dụng PDO để thực thi truy vấn
+        $stmt = $this->conn->prepare($sql);
+
+        // Liên kết các tham số
+        $stmt->bindParam(':search', $params[':search'], PDO::PARAM_STR);
+
+        if ($priceFrom !== null) {
+            $stmt->bindParam(':priceFrom', $params[':priceFrom'], PDO::PARAM_INT);
+        }
+        if ($priceTo !== null) {
+            $stmt->bindParam(':priceTo', $params[':priceTo'], PDO::PARAM_INT);
+        }
+
+        // Thực thi câu lệnh
+        $stmt->execute();
+
+        // Lấy kết quả và trả về tổng số sản phẩm
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
+    }
+}
+
     
     
 }

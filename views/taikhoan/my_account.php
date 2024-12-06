@@ -77,7 +77,7 @@
                                             <a href="?act=list-don-hang"><i class="fa fa-cart-arrow-down"></i>
                                                 Lịch sử mua hàng</a>
                                             <a href="?act=doi-mat-khau"><i class="fa fa-user"></i> Đổi mật khẩu</a>
-                                            <a href="login-register.html"><i class="fa fa-sign-out"></i> Logout</a>
+                                            
                                         </div>
                                     </div>
                                     <!-- My Account Tab Menu End -->

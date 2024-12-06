@@ -79,7 +79,7 @@
                                             <a href="#dashboad" class="active" data-bs-toggle="tab"><i class="fa fa-user"></i>
                                             Đổi Mật Khẩu</a>
                                             
-                                            <a href="login-register.html"><i class="fa fa-sign-out"></i> Logout</a>
+                                            
                                         </div>
                                     </div>
                                     <!-- My Account Tab Menu End -->

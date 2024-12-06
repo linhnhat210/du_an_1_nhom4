@@ -47,7 +47,7 @@ match ($act) {
 
 
     'list-san-pham'         => (new SanPhamController())->index(),
-    'search-san-pham'         => (new SanPhamController())->search(),
+ 
     // Load thêm sản phẩm
     'load-more-products' => (new HomeController())->loadMoreProducts(),
     // detail sản phẩm
@@ -104,6 +104,7 @@ match ($act) {
    'post-edit-mat-khau'          => (new NguoiDungController())->postEditMatKhau(),
     'list-don-hang'        => (new NguoiDungController())->listDonHang(),
     'huy-don-hang'        => (new DonHangController())->huyDonHang(),
+    'hoan-don-hang'        => (new DonHangController())->hoanDonHang(),
     'xac-nhan'        => (new DonHangController())->xacNhan(),
    'chi-tiet-don-hang' => (new DonHangController())->chiTietDonHang(), 
 };

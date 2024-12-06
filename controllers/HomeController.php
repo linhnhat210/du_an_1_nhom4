@@ -22,6 +22,7 @@ class HomeController
     {
         $listSanPham = $this->modelSanPham->getAllSanPham();
         $tinTucs = $this->tinTucModel->getAllTinTuc();
+        $listSanPhamYeuThich = $this->modelSanPham->getSPYeuThich();
         require_once './views/home.php';
     }
 

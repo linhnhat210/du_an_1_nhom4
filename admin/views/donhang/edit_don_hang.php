@@ -117,28 +117,30 @@
     <?php foreach ($listTrangThaiDonHang as $trangThai) : ?>
         <option
             <?php
-            // Kiểm tra nếu trạng thái đơn hàng là 6
-            if ($donHang['trang_thai_id'] == 6) {
-                // Nếu trạng thái hiện tại là 6, chỉ cho phép chọn trạng thái id = 8
-                if ($trangThai['id'] != 8) {
-                    echo 'disabled';
-                }
-            } elseif ($donHang['trang_thai_id'] == 5) {
-                // Nếu trạng thái hiện tại là 5, chỉ cho phép chọn 6 hoặc 8
-              
-                    echo 'disabled';
-          
-            } else {
-                // Kiểm tra điều kiện ban đầu của bạn
-                if (
-                    $donHang['trang_thai_id'] > $trangThai['id'] ||
-                    $donHang['trang_thai_id'] == 7 ||
-                    $donHang['trang_thai_id'] == 8
-                ) {
-                    echo 'disabled';
-                }
-            }
-            ?>
+    // Kiểm tra nếu trạng thái đơn hàng là 6
+    if ($donHang['trang_thai_id'] == 6) {
+        // Nếu trạng thái hiện tại là 6, chỉ cho phép chọn trạng thái id = 8
+        if ($trangThai['id'] != 8) {
+            echo 'disabled';
+        }
+    } elseif ($donHang['trang_thai_id'] == 5) {
+        // Nếu trạng thái hiện tại là 5, chỉ cho phép chọn 6
+        
+            echo 'disabled';
+      
+    } else {
+        // Kiểm tra điều kiện ban đầu của bạn
+        if (
+            $donHang['trang_thai_id'] > $trangThai['id'] ||
+            $donHang['trang_thai_id'] == 7 ||
+            $donHang['trang_thai_id'] == 8 ||
+            $trangThai['id'] == 7 || // Không cho chọn trạng thái id = 7
+            ($trangThai['id'] == 8 && $donHang['trang_thai_id'] != 6) // Trạng thái id = 8 chỉ có thể chọn khi trạng thái là 6
+        ) {
+            echo 'disabled';
+        }
+    }
+?>
             <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?> 
             value="<?= $trangThai['id'] ?>">
             <?= $trangThai['ten_trang_thai'] ?>

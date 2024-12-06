@@ -288,7 +288,7 @@
                                     <div class="d-flex" style="margin-left:470px;">
 
                                         <a href="?act=xac-nhan&don_hang_id=<?=$donHang['id']?>" class="btn btn-sqr" style="margin-right:30px;">Xác nhận đơn hàng</a>
-                                        <a href="?act=huy-don-hang&don_hang_id=<?=$donHang['id']?>" class="btn btn-sqr" >Hoàn đơn hàng</a>
+                                        <a href="?act=hoan-don-hang&don_hang_id=<?=$donHang['id']?>" class="btn btn-sqr" >Hoàn đơn hàng</a>
                                     </div>
                                 <?php endif; ?>
                                  

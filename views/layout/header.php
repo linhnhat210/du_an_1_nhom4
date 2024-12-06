@@ -101,9 +101,14 @@ if (isset($_SESSION['user_client'])) {
                             <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                                 <div class="header-search-container">
                                     <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
-                                    <form class="header-search-box d-lg-none d-xl-block" action="?act=search-san-pham" method="POST" >
-                                        <input name="keyword" type="text" placeholder="Tìm truyện..." class="header-search-field">
-                                        <button class="header-search-btn"><i class="pe-7s-search"></i></button>
+                                    <form class="header-search-box d-lg-none d-xl-block" action="?act=list-san-pham" method="GET" >
+                                        <input type="hidden" name="act" value="list-san-pham">
+                                        <input id="search-keyword" name="search"
+                                                type="text" placeholder="Tìm truyện..." class="header-search-field"
+                                                 value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" 
+                                                 >
+                                        
+                                                <button class="header-search-btn"><i class="pe-7s-search"></i></button>
                                     </form>
                                 </div>
                                 <div class="header-configure-area">

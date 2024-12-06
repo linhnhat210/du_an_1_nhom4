@@ -113,29 +113,25 @@
                             <!-- single sidebar start -->
                             <div class="sidebar-single">
                                 <h5 class="sidebar-title">Tìm Kiếm Theo Giá</h5>
-                                <form action="#" method="get" class="row g-3">
-                                    <!-- Input Khoảng giá từ -->
+                               <form action="" method="get" class="row g-3">
                                     <div class="col-12">
                                         <label for="price-from" class="form-label">Từ giá</label>
                                         <input type="number" id="price-from" name="tu" class="form-control" value="<?= isset($_GET['tu']) ? $_GET['tu'] : '' ?>" placeholder="Nhập giá tối thiểu">
                                     </div>
 
-                                    <!-- Input Khoảng giá đến -->
                                     <div class="col-12">
                                         <label for="price-to" class="form-label">Đến giá</label>
                                         <input type="number" id="price-to" name="den" class="form-control" value="<?= isset($_GET['den']) ? $_GET['den'] : '' ?>" placeholder="Nhập giá tối đa">
                                     </div>
 
-                                    <!-- Ẩn các tham số hiện tại -->
                                     <input type="hidden" name="act" value="list-san-pham">
                                     <input type="hidden" name="danh_muc_id" value="<?= isset($_GET['danh_muc_id']) ? $_GET['danh_muc_id'] : '' ?>">
+                                    <input type="hidden" name="xep" value="<?= isset($_GET['xep']) ? $_GET['xep'] : 'newest' ?>">
+                                    <input type="hidden" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
 
-
-                                    <!-- Button tìm kiếm -->
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-cart w-100" style="background-color:#CCAC78;">Tìm kiếm</button>
-                                    </div>
+                                    <button type="submit" class="btn btn-cart w-100" style="background-color:#CCAC78;">Tìm kiếm</button>
                                 </form>
+
                             </div>
 
 
@@ -171,16 +167,21 @@
                                         <div class="top-bar-right">
                                             <div class="product-short">
                                                 <p>Sắp xếp theo: </p>
-                                                <form action="" method="get">
-                                                    <input type="hidden" name="act" value="list-san-pham">
-                                                    <input type="hidden" name="danh_muc_id" value="<?= isset($_GET['danh_muc_id']) ? $_GET['danh_muc_id'] : '' ?>">
-                                                    <input type="hidden" name="page" value="<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
-                                                    <select class="nice-select" name="xep" onchange="this.form.submit()">
-                                                        <option value="newest" <?= isset($_GET['xep']) && $_GET['xep'] == 'newest' ? 'selected' : '' ?>>Sản phẩm mới nhất</option>
-                                                        <option value="desc" <?= isset($_GET['xep']) && $_GET['xep'] == 'desc' ? 'selected' : '' ?>>Giá (Cao > Thấp)</option>
-                                                        <option value="asc" <?= isset($_GET['xep']) && $_GET['xep'] == 'asc' ? 'selected' : '' ?>>Giá (Thấp > Cao)</option>
-                                                    </select>
-                                                </form>
+                                               <form action="" method="get">
+    <input type="hidden" name="act" value="list-san-pham">
+    <input type="hidden" name="danh_muc_id" value="<?= isset($_GET['danh_muc_id']) ? $_GET['danh_muc_id'] : '' ?>">
+    <input type="hidden" name="page" value="<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
+    <!-- Thêm hidden input cho search để giữ giá trị search -->
+    <input type="hidden" name="search" value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+
+    <select class="nice-select" name="xep" onchange="this.form.submit()">
+        <option value="newest" <?= isset($_GET['xep']) && $_GET['xep'] == 'newest' ? 'selected' : '' ?>>Sản phẩm mới nhất</option>
+        <option value="desc" <?= isset($_GET['xep']) && $_GET['xep'] == 'desc' ? 'selected' : '' ?>>Giá (Cao > Thấp)</option>
+        <option value="asc" <?= isset($_GET['xep']) && $_GET['xep'] == 'asc' ? 'selected' : '' ?>>Giá (Thấp > Cao)</option>
+    </select>
+</form>
+
+
                                             </div>
                                         </div>
                                     </div>

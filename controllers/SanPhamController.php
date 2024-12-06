@@ -13,17 +13,24 @@ class SanPhamController
     public function index()
 {
     // Lấy các tham số từ URL
-    $page = isset($_GET['page']) ? $_GET['page'] : 1; // Trang hiện tại
-    $sortby = isset($_GET['xep']) ? $_GET['xep'] : 'newest'; // Mặc định là giảm dần theo giá
-    $danhMucId = isset($_GET['danh_muc_id']) ? $_GET['danh_muc_id'] : null; // Danh mục nếu có
-    $priceFrom = isset($_GET['tu']) ? $_GET['tu'] : null; // Giá từ
-    $priceTo = isset($_GET['den']) ? $_GET['den'] : null; // Giá đến
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $sortby = isset($_GET['xep']) ? $_GET['xep'] : 'newest'; 
+    $danhMucId = isset($_GET['danh_muc_id']) ? $_GET['danh_muc_id'] : null;
+    $priceFrom = isset($_GET['tu']) ? $_GET['tu'] : null;
+    $priceTo = isset($_GET['den']) ? $_GET['den'] : null;
+    $search = isset($_GET['search']) ? trim($_GET['search']) : null;
 
     // Số lượng sản phẩm trên mỗi trang
     $limit = 15;
 
     // Xử lý lọc theo danh mục và sắp xếp theo giá hoặc theo id
-    if ($danhMucId) {
+    if ($search) {
+        $sanPhams = $this->modelSanPham->searchSanPham($search, $priceFrom, $priceTo, $page, $limit, $sortby);
+        // var_dump($sanPhams);die;
+        $totalItems = $this->modelSanPham->getTotalItemsBySearch($search, $priceFrom, $priceTo);
+    } else {
+        // Nếu không có tìm kiếm, lấy sản phẩm theo các điều kiện khác
+        if ($danhMucId) {
         // Lọc theo danh mục và phân trang
         $sanPhams = $this->modelSanPham->getSanPhamByDanhMucAndPrice($danhMucId, $priceFrom, $priceTo, $page, $limit, $sortby);
         $totalItems = $this->modelSanPham->getTotalItemsByDanhMucAndPrice($danhMucId, $priceFrom, $priceTo); // Tổng số sản phẩm trong danh mục
@@ -34,6 +41,8 @@ class SanPhamController
         $totalItems = $this->modelSanPham->getTotalItemsWithPrice($priceFrom, $priceTo); // Tổng số sản phẩm
     }
 
+    }
+    
     // Tính tổng số trang
     $totalPages = ceil($totalItems / $limit);
 
@@ -70,12 +79,6 @@ public function chiTietSanPham()
     }
 }
 // serach
-       public function search()
-        {
-            
 
-            // hiển thị kết quả tìm kiếm
-            require_once "./views/sanpham/list_san_pham.php";
-        }
 
 }
