@@ -42,7 +42,7 @@
 
             $id_khach_hang = $_GET['id_nguoi_dung'];
             $nguoiDung = $this->modelNguoiDung->getDetailNguoiDung($id_khach_hang);
-        
+            
             $listDonHang = $this->modelNguoiDung->getDonHangFromKhachHang($id_khach_hang);
             // var_dump($listDonHang);die;
             $listBinhLuan = $this->modelNguoiDung->getBinhLuanFromKhachHang($id_khach_hang);

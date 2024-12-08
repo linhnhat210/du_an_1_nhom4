@@ -96,8 +96,8 @@
                                                                     <th>STT</th>
                                                                     <th>Mã đơn hàng</th>
                                                                     <th>Ngày đặt</th>
-                                                                    <th>Trạng thái</th>
                                                                     <th>Thành tiền</th>
+                                                                    <th>Trạng thái</th>
                                                                     <th>Thao tác</th>
                                                                 </tr>
                                                             </thead>
@@ -107,8 +107,24 @@
                                                                 <td><?= $key + 1 ?></td>
                                                                 <td><?= $donHang['ma_don_hang'] ?></td>
                                                                 <td><?= $donHang['ngay_dat'] ?></td>
-                                                                <td><?= $donHang['ten_trang_thai'] ?></td>
+                                                                
                                                                 <td><?= formatPrice($donHang['tong_don_hang']). 'đ' ?></td> 
+                                                                <td> <?php
+                                                            if ($donHang["trang_thai_id"] >= 1 &&  $donHang["trang_thai_id"] <= 5){
+                                                            ?>
+                                                            <span class="badge bg-primary"><?= $donHang["ten_trang_thai"]?></span>
+                                                            <?php
+                                                            }elseif($donHang["trang_thai_id"] == 6 ){
+                                                            ?>
+                                                            <span class="badge bg-danger"><?= $donHang["ten_trang_thai"]?></span>
+                                                            <?php } elseif($donHang["trang_thai_id"] == 7 ){
+                                                            ?>
+                                                            <span class="badge bg-warning"><?= $donHang["ten_trang_thai"]?></span>
+                                                            <?php }else{
+                                                            ?>
+                                                            <span class="badge bg-success"><?= $donHang["ten_trang_thai"]?></span>
+                                                            <?php } 
+                                                            ?></td>
                                                                  <td><a href="?act=chi-tiet-don-hang&don_hang_id=<?=$donHang['id']?>" class="btn btn-sqr">View</a>
                                                                 </tr>
                                                             <?php endforeach ?>

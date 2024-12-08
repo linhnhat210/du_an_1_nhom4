@@ -136,14 +136,14 @@
                     <!-- end page title -->
 
             <?php
-          if ($donHang['trang_thai_id'] == 6 ) {
+          if ($donHang['trang_thai_id'] == 6  ) {
             $colorAlerts = 'danger';
           } elseif ($donHang['trang_thai_id'] >= 1 && $donHang['trang_thai_id'] <= 5) {
             $colorAlerts = 'primary';
           } elseif ($donHang['trang_thai_id'] == 7) {
-            $colorAlerts = 'success';
-          } elseif($donHang['trang_thai_id'] =8) {
             $colorAlerts = 'warning';
+          } else {
+            $colorAlerts = 'success';
           }
           ?>
           <div class="alert alert-<?= $colorAlerts ?>" role="alert">

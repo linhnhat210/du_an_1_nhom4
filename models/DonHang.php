@@ -210,7 +210,7 @@ class DonHang
         
         try {
              $ngayHienTai = date('Y-m-d H:i:s');
-            if($tt == 7){
+            if($tt == 10){
                 $ngay_nhan = $ngayHienTai;
             }
             $sql = 'UPDATE don_hangs SET trang_thai_id = :tt , ngay_nhan = :ngay_nhan WHERE id=:id';

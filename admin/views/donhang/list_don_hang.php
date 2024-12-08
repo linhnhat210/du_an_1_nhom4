@@ -123,15 +123,15 @@
                                                             ?>
                                                             <span class="badge bg-primary"><?= $donHang["ten_trang_thai"]?></span>
                                                             <?php
-                                                            }elseif($donHang["trang_thai_id"] == 7 ){
-                                                            ?>
-                                                            <span class="badge bg-success"><?= $donHang["ten_trang_thai"]?></span>
-                                                            <?php } elseif($donHang["trang_thai_id"] == 6 ){
+                                                            }elseif($donHang["trang_thai_id"] == 6 ){
                                                             ?>
                                                             <span class="badge bg-danger"><?= $donHang["ten_trang_thai"]?></span>
-                                                            <?php }elseif($donHang["trang_thai_id"] == 8){
+                                                            <?php } elseif($donHang["trang_thai_id"] == 7 ){
                                                             ?>
                                                             <span class="badge bg-warning"><?= $donHang["ten_trang_thai"]?></span>
+                                                            <?php }else{
+                                                            ?>
+                                                            <span class="badge bg-success"><?= $donHang["ten_trang_thai"]?></span>
                                                             <?php } 
                                                             ?>
                                             </td>

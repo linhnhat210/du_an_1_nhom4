@@ -98,7 +98,7 @@ class DonHangController
 
             
             $sanPhamDonHangs = $this->modelDonHang->getListSpDonHang($don_hang_id);
-            if($trang_thai_id == 8){
+            if($trang_thai_id == 8 || $trang_thai_id == 9 ){
 
                 for ($i = 0; $i < count($sanPhamDonHangs); $i++) {
                    $san_pham_id = $sanPhamDonHangs[$i]["san_pham_id"];

@@ -124,13 +124,13 @@
                                                         <td>
                                                                 <div class="hstack gap-3 flex-wrap">
                                                                     <a href="?act=form-sua-danh-muc&danh_muc_id=<?= $danhMuc['id']?>" class="link-success fs-15 btn btn-success"  ><i class="ri-edit-2-line "style="color:white;"></i></a>
-                                                                    <form action="?act=xoa-danh-muc" method="POST"
+                                                                    <!-- <form action="?act=xoa-danh-muc" method="POST"
                                                                      onsubmit="return confirm('Bạn có đồng ý xóa không')">
                                                                     <input type="hidden" name="danh_muc_id" value="<?= $danhMuc['id'] ?>">
                                                                     <button type="submit" class="link-danger fs-15" style="border:none;background:none;">
                                                                         <i class="ri-delete-bin-line"></i>
                                                                     </button>
-                                                                    </form>
+                                                                    </form> -->
                                                                 </div>
                                                         </td>
                                                     </tr>

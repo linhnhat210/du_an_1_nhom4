@@ -142,8 +142,25 @@
                                                                                 <td><?= $donHang['ten_nguoi_nhan'] ?></td>
                                                                                 <td><?= $donHang['sdt_nguoi_nhan'] ?></td>
                                                                                 <td><?= $donHang['ngay_dat'] ?></td>
-                                                                                <td><?= $donHang['tong_tien'] ?></td>
-                                                                                <td><?= $donHang['ten_trang_thai'] ?></td>
+                                                                                <td><?= $donHang['tong_don_hang'] ?></td>
+                                                                                <td>
+                                                                                    <?php
+                                                            if ($donHang["trang_thai_id"] >= 1 &&  $donHang["trang_thai_id"] <= 5){
+                                                            ?>
+                                                            <span class="badge bg-primary"><?= $donHang["ten_trang_thai"]?></span>
+                                                            <?php
+                                                            }elseif($donHang["trang_thai_id"] == 6 ){
+                                                            ?>
+                                                            <span class="badge bg-danger"><?= $donHang["ten_trang_thai"]?></span>
+                                                            <?php } elseif($donHang["trang_thai_id"] == 7 ){
+                                                            ?>
+                                                            <span class="badge bg-warning"><?= $donHang["ten_trang_thai"]?></span>
+                                                            <?php }else{
+                                                            ?>
+                                                            <span class="badge bg-success"><?= $donHang["ten_trang_thai"]?></span>
+                                                            <?php } 
+                                                            ?>
+                                                                                </td>
                                                                                 <td>
                                                                                     <div class="btn-group">
                                                                                        <a style="margin-right:15px;" href="<?= '?act=chi-tiet-don-hang&id_don_hang=' . $donHang['id'] ?>" class="link-success fs-15"><i class="las la-eye"></i></a>

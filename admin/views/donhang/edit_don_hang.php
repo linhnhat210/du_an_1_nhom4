@@ -117,29 +117,21 @@
     <?php foreach ($listTrangThaiDonHang as $trangThai) : ?>
         <option
             <?php
-    // Kiểm tra nếu trạng thái đơn hàng là 6
-    if ($donHang['trang_thai_id'] == 6) {
-        // Nếu trạng thái hiện tại là 6, chỉ cho phép chọn trạng thái id = 8
-        if ($trangThai['id'] != 8) {
-            echo 'disabled';
-        }
-    } elseif ($donHang['trang_thai_id'] == 5) {
-        // Nếu trạng thái hiện tại là 5, chỉ cho phép chọn 6
-        
-            echo 'disabled';
-      
-    } else {
-        // Kiểm tra điều kiện ban đầu của bạn
-        if (
-            $donHang['trang_thai_id'] > $trangThai['id'] ||
-            $donHang['trang_thai_id'] == 7 ||
-            $donHang['trang_thai_id'] == 8 ||
-            $trangThai['id'] == 7 || // Không cho chọn trạng thái id = 7
-            ($trangThai['id'] == 8 && $donHang['trang_thai_id'] != 6) // Trạng thái id = 8 chỉ có thể chọn khi trạng thái là 6
-        ) {
-            echo 'disabled';
-        }
-    }
+ 
+if (
+    $donHang['trang_thai_id'] > $trangThai['id'] ||
+    // Kiểm tra nếu trạng thái đơn hàng từ 1 đến 5 không được chọn vào trạng thái từ 6 đến 10
+    ($donHang['trang_thai_id'] >= 1 && $donHang['trang_thai_id'] <= 5 && $trangThai['id'] >= 6 && $trangThai['id'] <= 10) ||
+    // Trạng thái đơn hàng = 6 chỉ có thể chọn vào 8
+    ($donHang['trang_thai_id'] == 6 && $trangThai['id'] != 8) ||
+    // Trạng thái đơn hàng = 7 chỉ có thể chọn vào 9
+    ($donHang['trang_thai_id'] == 7 && $trangThai['id'] != 9) ||
+    // Trạng thái đơn hàng = 8 hoặc 9 không thể chuyển đi đâu nữa
+    ($donHang['trang_thai_id'] == 8 || $donHang['trang_thai_id'] == 9)
+) {
+    echo 'disabled';
+}
+    
 ?>
             <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?> 
             value="<?= $trangThai['id'] ?>">

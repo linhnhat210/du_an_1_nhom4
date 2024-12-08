@@ -63,10 +63,13 @@ class DonHangController
 
     }
     public function hoanDonHang(){
-        $id = $_GET["don_hang_id"];
+            
+        
+            $id = $_GET["don_hang_id"];
+            
    
 
-            $this->modelDonHang->updatedonHang($id,6);
+            $this->modelDonHang->updatedonHang($id,7);
             echo '<script>
             alert(" Hoàn đơn hàng thành công");
             window.location.href = "' . BASE_URL . '?act=chi-tiet-don-hang&don_hang_id=' . $id . '";
@@ -81,7 +84,7 @@ class DonHangController
         $id = $_GET["don_hang_id"];
         // var_dump($id);die;
 
-        $this->modelDonHang->updatedonHang($id,7);
+        $this->modelDonHang->updatedonHang($id,10);
         echo '<script>
         alert("Xác nhận đơn hàng thành công");
         window.location.href = "' . BASE_URL . '?act=chi-tiet-don-hang&don_hang_id=' . $id . '";

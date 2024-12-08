@@ -19,7 +19,7 @@ class Dashboard
             $ngayHienTai = date('Y-m-d'); // Lấy ngày hiện tại
             $sql = "SELECT SUM(tong_don_hang) AS tong_thu_nhap 
                     FROM don_hangs 
-                    WHERE ngay_nhan = :ngay_hien_tai AND trang_thai_id = 7";
+                    WHERE ngay_nhan = :ngay_hien_tai AND trang_thai_id = 10";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(['ngay_hien_tai' => $ngayHienTai]);
@@ -145,7 +145,7 @@ class Dashboard
              
             $sql = "SELECT COUNT(*) AS tong_so_luong_don_hang 
             FROM don_hangs 
-            WHERE trang_thai_id = 7 ";
+            WHERE trang_thai_id = 10 ";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
@@ -165,7 +165,7 @@ class Dashboard
              
             $sql = "SELECT COUNT(*) AS tong_so_luong_don_hang 
             FROM don_hangs 
-            WHERE trang_thai_id = 8";
+            WHERE trang_thai_id = 8 OR trang_thai_id = 9";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
@@ -207,8 +207,8 @@ class Dashboard
         try {
             $nam = date('Y'); 
             $sql = "SELECT SUM(tong_don_hang) AS hoan_tien
-            FROM don_hangs 
-            WHERE YEAR(ngay_dat) = :nam AND trang_thai_id = 8";
+FROM don_hangs 
+WHERE YEAR(ngay_dat) = :nam AND (trang_thai_id = 8 OR trang_thai_id = 9)";
             
                     
 
@@ -307,7 +307,7 @@ class Dashboard
                 COUNT(DISTINCT dh.id) AS tong_so_don_hang
             FROM 
                 don_hangs AS dh
-            WHERE YEAR(dh.ngay_nhan) = :nam AND dh.trang_thai_id = 7
+            WHERE YEAR(dh.ngay_nhan) = :nam AND dh.trang_thai_id = 10
             GROUP BY MONTH(dh.ngay_nhan)
             ORDER BY thang;
         ";
@@ -347,7 +347,7 @@ public function tongTienTheoThang() {
                 COALESCE(SUM(dh.tong_don_hang), 0) AS tong_tien
             FROM 
                 don_hangs AS dh
-            WHERE YEAR(dh.ngay_nhan) = :nam AND dh.trang_thai_id = 7
+            WHERE YEAR(dh.ngay_nhan) = :nam AND dh.trang_thai_id = 10
             GROUP BY MONTH(dh.ngay_nhan)
             ORDER BY thang;
         ";

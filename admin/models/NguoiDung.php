@@ -56,7 +56,7 @@ class NguoiDung
                         don_hangs.sdt_nguoi_nhan, 
                         don_hangs.dia_chi_nguoi_nhan, 
                         don_hangs.ngay_dat, 
-                        don_hangs.tong_tien, 
+                        don_hangs.tong_don_hang, 
                         don_hangs.ghi_chu, 
                         don_hangs.phuong_thuc_thanh_toan_id, 
                         don_hangs.trang_thai_id, 
