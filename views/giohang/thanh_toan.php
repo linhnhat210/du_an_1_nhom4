@@ -221,7 +221,7 @@
                                                         $giam_gia = $khuyen_mai["giam_phan_tram"] * $tongGioHang / 100;
                                                     }
                                                     ?>
-                                                    <strong><?=$giam_gia . ' đ'?></strong>
+                                                    <strong><?=formatPrice($giam_gia) . ' đ'?></strong>
                                                 </td>
                                             </tr>
                                             <?php endif; ?>
